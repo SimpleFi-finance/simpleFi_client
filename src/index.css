@@ -1,0 +1,20 @@
+@import "./CSS/variables.css";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: unset;
+  background-color: var(--lilac);
+  font-family: -apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+  position: relative;
+}
+
+a, button, input {
+  all: unset;
+}
+
+h1, h2, h3, p {
+  all: unset;
+}
