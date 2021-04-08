@@ -1,5 +1,5 @@
 import gecko from './currentPrice';
-import supportedCurrencies from './supportedCurrencies';
+import { supportedCurrencies } from './geckoEndPoints';
 
 async function getTokenPrices(userTokens, userFields, trackedTokens) {
 

@@ -5,8 +5,9 @@ import DetailsBarChart from '../../components/DetailsBarChart/DetailsBarChart';
 import MaxiToggle from '../../components/MaxiToggle/MaxiToggle';
 import MiniToggle from '../../components/MiniToggle/MiniToggle';
 import helpers from '../../helpers';
+import { withRouter } from "react-router";
 
-export default function EarningFieldDetails ({name, userFields, history}) {
+const EarningFieldDetails = ({name, userFields, history}) => {
   const [currentField] = useState(userFields.find(field => field.name === name));
   const [farmingFields, setFarmingFields] = useState([]);
   const [combinedfields, setCombinedFields] = useState({currentField: null, farmingFields: []});
@@ -177,3 +178,6 @@ export default function EarningFieldDetails ({name, userFields, history}) {
     </div>
   )
 }
+
+
+export default withRouter(EarningFieldDetails);

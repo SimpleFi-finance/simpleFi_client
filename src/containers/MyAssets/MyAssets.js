@@ -4,8 +4,9 @@ import OverviewCard from '../../components/OverViewCard/OverviewCard';
 import SummaryBox from '../../components/SummaryBox/SummaryBox';
 import helpers from '../../helpers/index';
 import { holdingHeaders, holdingCurrencyCells, farmingHeaders, farmingCurrencyCells, earningHeaders, earningCurrencyCells } from '../../data/summaryHeaders';
+import { connect } from 'react-redux'
 
-export default function MyAssets ({userTokens, userFields, userAccount, userTokenPrices, setCurrentDetail, allLoadedFlag, setSplash, setChangedAddress, setUserAccount, history}) {
+const MyAssets = ({ userTokens, userFields, userTokenPrices, setCurrentDetail, allLoadedFlag }) => {
   const [holdingHeadlines, setHoldingHeadlines] = useState({totalInvested: 0, totalUnclaimed: 0, totalValue: 0});
   const [farmingHeadlines, setFarmingHeadlines] = useState(['Loading', 'Loading']);
   const [earningHeadlines, setEarningHeadlines] = useState(['Loading', 'Loading']);
@@ -13,15 +14,6 @@ export default function MyAssets ({userTokens, userFields, userAccount, userToke
   const [farmingValues, setFarmingValues] = useState([]);
   const [earningValues, setEarningValues] = useState([]);
   const [totalROI, setTotalROI] = useState({farmingROI: 0, earningROI: 0});
-
-  useEffect (() => {
-    if (!userAccount[0] && window.ethereum.selectedAddress) {
-      setChangedAddress(true);
-      setUserAccount([window.ethereum.selectedAddress]);
-    } else if (!userAccount[0] && !window.ethereum.selectedAddress) {
-      history.push('/')
-    }
-  })
   
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,9 +34,7 @@ export default function MyAssets ({userTokens, userFields, userAccount, userToke
       setFarmingValues(farmingFields);
       setEarningValues(earningFields);
       setTotalROI(totalROI);
-    } else {
-      setSplash(true)
-    }
+    } 
     // eslint-disable-next-line react-hooks/exhaustive-deps  
   }, [allLoadedFlag])
 
@@ -77,3 +67,15 @@ export default function MyAssets ({userTokens, userFields, userAccount, userToke
     </div>
   )
 }
+const mapState = state => {
+  return {
+    userAccount: state.App.userAccounts
+  }
+}
+
+const mapDispatch = dispatch => {
+  return {
+
+  }
+}
+export default connect(mapState, mapDispatch)(MyAssets)

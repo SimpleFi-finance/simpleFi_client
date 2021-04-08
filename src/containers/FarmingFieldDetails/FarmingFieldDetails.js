@@ -4,10 +4,11 @@ import DetailsPieChart from '../../components/DetailsPieChart/DetailsPieChart';
 import DetailsTable from '../../components/DetailsTable/DetailsTable';
 import MiniToggle from '../../components/MiniToggle/MiniToggle';
 import helpers from '../../helpers';
+import { withRouter } from "react-router";
 
 //TODO: identify joint components with EarningFieldDetails container
 
-export default function FarmingFieldDetails({name, userFields, history}) {
+const FarmingFieldDetails = ({name, userFields, history}) => {
 
   const [currentField] = useState(userFields.find(field => field.name === name));
   const [underlyingTokens, setUnderlyingTokens] = useState([]);
@@ -111,3 +112,5 @@ export default function FarmingFieldDetails({name, userFields, history}) {
     </div>
   )
 }
+
+export default withRouter(FarmingFieldDetails)

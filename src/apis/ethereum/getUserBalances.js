@@ -8,11 +8,10 @@ import provider from './ethProvider';
  * @returns {string} account balance
  */
 //TODO: memoize - some tokens and fields fetch balances from same contract
-async function getOneAccountBalance (account, targetContract) {
+async function _getOneAccountBalance (account, targetContract) {
   if (!targetContract) {
     const balance = await provider.getBalance(account);
     return Number(ethers.utils.formatEther(balance));
-
   } else {
     /* @dev: the || is necessary because fields have several contract types, incl. balanceContract,
     while tokens only have one - this function is used to get the user balance of both tokens and fields */
@@ -32,31 +31,27 @@ async function getOneAccountBalance (account, targetContract) {
  * @dev this function is used for both tracked tokens and fields
  */
   //CHECK: consider one call to Etherscan for token balances
-  function getAllUserBalances (account, fieldOrTokenArr) {
+function getAllUserBalances(account, collection) {
     const balancePromises = Promise.all(
-      fieldOrTokenArr.map(
+      collection.map(
         async fieldOrToken => {
-          let contract;
-          if (fieldOrToken.tokenId) {
-            contract = fieldOrToken.tokenContract;
-          } else {
-            //TODO: destructure one further so only contract is passed to getOneAccountBalance and avoid ||
-            contract = fieldOrToken.fieldContracts;
-          }
-          const userBalance = await getOneAccountBalance(account, contract);
-          if(userBalance) {
-            return { ...fieldOrToken, userBalance }
-          }
+          const contract = fieldOrToken.tokenId
+            ? fieldOrToken.tokenContract
+            : fieldOrToken.fieldContracts;
+
+          const userBalance = await _getOneAccountBalance(account, contract);
+          if (userBalance) return { ...fieldOrToken, userBalance }
         }
       )
     )
-      //filter undefined value from map
-      .then(tokensWithBalances => tokensWithBalances.filter(token => token))
+    .then(tokensWithBalances =>
+      tokensWithBalances.filter(token => token)
+    )
+
     return balancePromises;
-    }
+  }
 
 export {
-  getOneAccountBalance,
   getAllUserBalances,
 }
 
