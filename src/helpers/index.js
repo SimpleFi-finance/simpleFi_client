@@ -4,7 +4,8 @@ import {
   addUnclaimedBalances,
   addFieldSuppliesAndReserves,
   addStakedFieldBalances,
-  addFieldInvestmentValues
+  addFieldInvestmentValues,
+  amendModal
 } from './appHelpers'
 import extractSummaryHoldingValues from './myAssetsHelpers/tokenHelpers';
 import { extractSummaryFieldValues } from './myAssetsHelpers/fieldHelpers';
@@ -41,6 +42,7 @@ export default {
   addFieldSuppliesAndReserves,
   addStakedFieldBalances,
   addFieldInvestmentValues,
+  amendModal,
   extractSummaryHoldingValues,
   extractSummaryFieldValues,
   toggleDropdown,

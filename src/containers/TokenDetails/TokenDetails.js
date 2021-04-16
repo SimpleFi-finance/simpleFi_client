@@ -2,9 +2,8 @@ import React, {useState, useEffect} from 'react';
 import './TokenDetails.css';
 import DetailsPieChart from '../../components/DetailsPieChart/DetailsPieChart';
 import helpers from '../../helpers';
-import { withRouter } from 'react-router';
 
-const TokenDetails = ({name, userTokens, userTokenPrices, history}) => {
+export default function TokenDetails({name, userTokens, userTokenPrices, history}) {
 
   const [currentToken] = useState(userTokens.find(userToken=> userToken.name === name));
   const [totalBalance, setTotalBalance] = useState(0);
@@ -55,5 +54,3 @@ const TokenDetails = ({name, userTokens, userTokenPrices, history}) => {
     </div>
     )
 }
-
-export default withRouter(TokenDetails)

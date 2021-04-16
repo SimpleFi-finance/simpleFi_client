@@ -17,7 +17,7 @@ async function getAaveLiquidityHistory (receiptToken, userReceiptTokenTxs, userA
   if (rawDataFilteredByReceiptToken.length) {
     const fieldBalanceHistory = rawDataFilteredByReceiptToken[0].aTokenBalanceHistory;
     
-    /*@dev: this await s the getHistoricalPrice cache and ensures only
+    /*@dev: this await initialises the getHistoricalPrice cache and ensures only
           one call is made to Coingecko. It assumes that Etherscan always returns
           userReceiptTokenTxs ordered by ascending date (earliest at index [0])
     */

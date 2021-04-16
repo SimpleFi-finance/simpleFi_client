@@ -1,15 +1,19 @@
-import axios from '../../helpers/axios-general'
-import { baseUrl, priceEP, manyPriceEP, currencyString } from './geckoEndPoints';
+import fetchRequest from '../fetchRequest';
+import supportedCurrencies from './supportedCurrencies'
+
+const baseUrl = 'https://api.coingecko.com/api/v3';
+const priceEP = '/coins/';
+const manyPriceEP = '/simple/price?ids=';
+const currencyString = "&vs_currencies=" + supportedCurrencies.join('%2C');
 
 function currentPrice (tokenId) {
-  return axios.get(baseUrl + priceEP + tokenId)
-    .then(response => response.data.market_data.current_price.usd)
+  return fetchRequest(baseUrl + priceEP + tokenId)
+    .then(token => token.market_data.current_price.usd)
 }
 
 function manyPrices (tokenIds) {
   tokenIds = tokenIds.replace(/,/g, '%2C')
-  return axios.get(baseUrl + manyPriceEP + tokenIds + currencyString)
-    .then(response => response.data)
+  return fetchRequest(baseUrl + manyPriceEP + tokenIds + currencyString);
 }
 
 //eslint-disable-next-line import/no-anonymous-default-export

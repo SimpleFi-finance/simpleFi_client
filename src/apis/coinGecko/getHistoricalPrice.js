@@ -1,4 +1,4 @@
-import axios from '../../helpers/axios-general'
+import fetchRequest from '../fetchRequest';
 import {baseUrl, priceEP, historyDaysString} from './geckoEndPoints';
 
 async function getHistoricalPrice (tokenApi, txDate) {
@@ -7,7 +7,9 @@ async function getHistoricalPrice (tokenApi, txDate) {
   const target = pricesByDate.find(priceDateRecord => formattedTimestamp === new Date(priceDateRecord[0]).setHours(0,0,0));
   !target && console.error(' ---> price at date not found'); 
   return target ? target[1] : null;
+
 }
+
 
 const dayRangePriceCache = {}
 
@@ -22,9 +24,9 @@ function getHistoricalPriceFromFirstTx (tokenApi, firstTxTimestamp) {
 
   if (!cachedStartDate || startDate < cachedStartDate) {
     const daysAgo = Math.ceil((Date.now() - startDate) / 86400000);
-    return axios.get(baseUrl + priceEP + tokenApi + historyDaysString + daysAgo + '&interval=daily')
-      .then(response => {
-        const tokenPriceHist = response.data.prices;
+    return fetchRequest(baseUrl + priceEP + tokenApi + historyDaysString + daysAgo + '&interval=daily')
+      .then(histData => {
+        const tokenPriceHist = histData.prices;
         dayRangePriceCache[tokenApi] = tokenPriceHist;
         return dayRangePriceCache[tokenApi];
       })

@@ -1,4 +1,5 @@
-const supportedCurrencies = ["usd", "eur", "gbp"];
+import supportedCurrencies from './supportedCurrencies';
+
 const baseUrl = 'https://api.coingecko.com/api/v3';
 const priceEP = '/coins/';
 const manyPriceEP = '/simple/price?ids=';
@@ -12,6 +13,5 @@ export {
   manyPriceEP,
   currencyString,
   history,
-  historyDaysString,
-  supportedCurrencies
+  historyDaysString
 }

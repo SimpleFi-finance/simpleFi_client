@@ -1,4 +1,4 @@
-import {getAllUserBalances} from './getUserBalances';
+import {getOneAccountBalance, getAllUserBalances} from './getUserBalances';
 import getUnclaimedRewards from './getUnclaimedRewards';
 import createBalanceContracts from './balanceContractCreator';
 import getTotalFieldSupply from './getTotalFieldSupply';
@@ -15,6 +15,7 @@ import {
 
 export {
   createBalanceContracts,
+  getOneAccountBalance,
   getAllUserBalances,
   getUnclaimedRewards,
   getTotalFieldSupply,

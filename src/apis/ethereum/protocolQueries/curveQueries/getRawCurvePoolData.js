@@ -1,5 +1,6 @@
 import curveEPs from './curveRawStatsEPs';
-import axios from '../../../../helpers/axios-general'
+import fetchRequest from '../../../fetchRequest';
+
 
 const { curveMainEP, apyEP, indivPoolEPs, indivPoolConcat } = curveEPs
 let apyCache;
@@ -11,9 +12,8 @@ const poolCache ={};
  */
 async function getAllCurvePoolRawAPY() {
   if (!apyCache) {
-    return axios.get(curveMainEP + apyEP).then(response => {
-      return response.data
-    })
+    apyCache = await fetchRequest(curveMainEP + apyEP);
+    return apyCache
   }
   return apyCache;
 }
@@ -28,7 +28,7 @@ async function getOneCurvePoolRawData(name) {
     return poolCache[name]
   } else {
     const path = indivPoolEPs[name] + indivPoolConcat;
-    poolCache[name] = await axios.get(curveMainEP + path).then(response => response.data)
+    poolCache[name] = await fetchRequest(curveMainEP + path);
     return poolCache[name];
   }
 }
