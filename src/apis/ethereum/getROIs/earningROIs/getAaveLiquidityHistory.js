@@ -21,6 +21,8 @@ async function getAaveLiquidityHistory (receiptToken, userReceiptTokenTxs, userA
           one call is made to Coingecko. It assumes that Etherscan always returns
           userReceiptTokenTxs ordered by ascending date (earliest at index [0])
     */
+    
+    // TODO: Move this to the redux store when querying the token prices from backend
     await getHistoricalPrice(receiptToken.priceApi, userReceiptTokenTxs[0].timeStamp);
   
     liquidityHistory = userReceiptTokenTxs.map(async tx => {

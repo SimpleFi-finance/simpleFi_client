@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components'
 import { GlobalStyles } from './components/GlobalStyles'
@@ -9,13 +10,14 @@ import { ModalProvider } from './components/Modal/ModalContext'
 import Layout from './HOC/layout'
 // pages
 import Welcome from './containers/Homepage';
-import MyAssets from './containers/MyAssets/MyAssets';
+import Portfolio from './containers/Portfolio';
 import TokenDetails from './containers/TokenDetails/TokenDetails';
 import FarmingFieldDetails from './containers/FarmingFieldDetails/FarmingFieldDetails';
 import EarningFieldDetails from './containers/EarningFieldDetails/EarningFieldDetails';
 import Careers from './containers/Careers';
 import About from './containers/AboutUs'
 import DataLoading from './containers/DataLoading'
+import { withRouter } from 'react-router-dom'
 
 const StyledApp = styled.div`
   height: 100vh;
@@ -24,6 +26,13 @@ const StyledApp = styled.div`
 `;
 
 const App = (props) => {
+  useEffect(() => {
+    if (!props.RoiCalculated) {
+      if (props.history.location.pathname !== '/' && props.history.location.pathname !== '/loading') {
+        props.history.push('/loading')
+      }
+    }
+  }, [props.RoiCalculated, props.userAccounts])
 
   return (
     <ThemeProvider theme={props.themeUI === 'colour' ? colourTheme : darkTheme} >
@@ -33,14 +42,10 @@ const App = (props) => {
             <Switch>
               <Route path='/' exact render={() => <Welcome />} />
               <Route path='/loading' exact render={() => <DataLoading />} />
-              {/* <Route path='/dashboard' exact render={() => <MyAssets userTokens={userTokens} userFields={userFields} userAccount={props.userAccounts} userTokenPrices={userTokenPrices} setCurrentDetail={setCurrentDetail} allLoadedFlag={allLoadedFlag} />}/> */}
-              <Route path='/dashboard' exact render={() => <MyAssets />}/>
+              <Route path='/dashboard' exact render={() => <Portfolio />} />
               <Route path='/token/:tokenName' exact render={() => <TokenDetails />}/>
-              {/* <Route path='/token/:tokenName' exact render={() => <TokenDetails name={currentDetail} userTokens={userTokens} userTokenPrices={userTokenPrices} />}/> */}
               <Route path='/farming/:fieldName' exact render={() => <FarmingFieldDetails />}/>
-              {/* <Route path='/farming/:fieldName' exact render={() => <FarmingFieldDetails name={currentDetail} userFields={userFields} />}/> */}
               <Route path='/earning/:fieldName' exact render={() => <EarningFieldDetails />}/>
-              {/* <Route path='/earning/:fieldName' exact render={() => <EarningFieldDetails name={currentDetail} userFields={userFields} />}/> */}
               <Route path='/careers' exact render={() => <Careers />} />
               <Route path='/about' exact render={() =>  <About />} />
             </Switch> 
@@ -55,7 +60,8 @@ const App = (props) => {
 const mapStateToProps = (state) => {
   return {
     themeUI: state.UI.theme,
-    userAccounts: state.App.userAccounts
+    userAccounts: state.App.userAccounts,
+    RoiCalculated:  state.App.userData.hasROI
   }
 }
 
@@ -65,4 +71,4 @@ const mapDispatch = dispatch => {
   }
 } 
 
-export default connect(mapStateToProps, mapDispatch)(App);
+export default connect(mapStateToProps, mapDispatch)(withRouter(App));

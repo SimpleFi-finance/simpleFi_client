@@ -69,6 +69,11 @@ export const _setRewoundFlag = (type) => {
   }
 }
 
+export const _setRoiCalculated = () => {
+  return {
+    type: actionTypes.SET_ROI_CALCULATED
+  }
+}
 export const _setUserDataPrices = (type, collection) => {
   return {
     type: actionTypes.SET_USER_DATA_PRICES,
@@ -286,7 +291,9 @@ export const _getUserReturns = (userInvestments, userTokensRewound, userTokenPri
       ).then(investmentsWithROI => {
         Promise.all([
           dispatch(_setUserData('tokens', userTokensRewound)),
-          dispatch(_setUserData('investments', investmentsWithROI))
+          dispatch(_setUserData('investments', investmentsWithROI)),
+          dispatch(_setUserData('tokenPrices', userTokenPrices)),
+          dispatch(_setRoiCalculated())
         ])
       })
     })

@@ -13,4 +13,5 @@ export const SET_USER_INVESTMENTS = 'SET_USER_INVESTMENTS'
 export const SET_USER_DATA = 'SET_USER_DATA'
 export const SET_REWOUND = 'SET_REWOUND'
 export const SET_USER_DATA_PRICES = 'SET_USER_DATA_PRICES'
+export const SET_ROI_CALCULATED = 'SET_ROI_CALCULATED'
 // --------------------------------------

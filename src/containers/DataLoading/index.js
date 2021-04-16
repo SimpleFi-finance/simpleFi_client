@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import * as S from './DataLoading.style'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions'
+import { withRouter } from 'react-router-dom'
 /**
  * 
  * @dev This page is only used when a user changes accounts or enters the dashboard for first time to compute all needed data. Data will then be updated dynamically
@@ -20,6 +21,7 @@ const _completeFetchingData = (collection) => {
 const DataLoading = (props) => {
 
   const {
+    history,
     trackedData,
     rewindHoldings,
     userAccounts,
@@ -36,41 +38,77 @@ const DataLoading = (props) => {
     if (_completeFetchingData(trackedData) && !userData.tokens.rewound) {
       getUserData();
     }
-  }, [trackedData.tokens.fetched, trackedData.investments.fetched])
+  }, [
+    trackedData.tokens.fetched,
+    trackedData.investments.fetched
+  ])
 
-  // get underlying holdings of user from fields
   useEffect(() => {
+    // get underlying holdings of user from fields
     if (_completeFetchingData(userData) && !userData.tokens.rewound) {
       rewindHoldings()
     }
-  }, [userData.tokens.fetched, userData.investments.fetched, userData.unclaimed.fetched, userData.transactions.fetched])
+  }, [
+    userData.tokens.fetched,
+    userData.investments.fetched,
+    userData.unclaimed.fetched,
+    userData.transactions.fetched
+  ])
+
+  useEffect(() => {
+    if (_completeFetchingData(userData)) {
+      setTimeout(() => history.push('/dashboard'), 3000)
+    }
+  }, [userData.hasROI])
 
   return (
     <S.Container>
-      <div>
+      <div style={{display: 'flex', flexDirection: 'column'}}>
         <p> Preparing dApplication </p>
-        <p>
-          Loading tracked Tokens
-        </p>
-        <p> Loading tracked Fields</p>
-        <p> Creating contract interfaces </p>
+        {trackedData.tokens.loading && !trackedData.tokens.fetched &&
+          <p>
+            Loading tracked Tokens
+          </p>
+        }
+        {trackedData.investments.loading && !trackedData.investments.fetched &&
+          <>
+            <p>
+              Loading tracked Fields
+            </p>
+            <p> Creating contract interfaces </p>
+          </>
+        }
       </div>
-      <div>
-        <p> Loading balances </p>
-        <p> Fetching Token and farming balances </p>
-        <p> Fetching transactions history</p>
-        <p> Fetching unclaimed rewards</p>
+      <div style={{display: 'flex', flexDirection: 'column'}}>
+        <p> Loading User Balances </p>
+        {userData.tokens.loading && !userData.tokens.fetched &&
+          <p> Fetching Token and farming balances </p>
+        }
+        {userData.transactions.loading && !userData.transactions.fetched &&
+          <p> Fetching transactions history</p>
+        }
+        {userData.unclaimed.loading && !userData.unclaimed.fetched &&
+          <p> Fetching unclaimed rewards</p>
+        }
       </div>
-      <div>
-        <p> Rewinding invested balances </p>
-        <p> Rewinding underlying farming investments </p>
-        <p> Rewinding underlying tokens </p>
+      <div style={{display: 'flex', flexDirection: 'column'}}>
+        <p> Calcualting underlying investments </p>
+        {!userData.tokens.rewound && 
+          <p> Rewinding underlying tokens </p>
+        }
+        {!userData.tokens.rewound && 
+          <p> Rewinding underlying farming investments </p>
+        }
       </div>
-      <div>
+      <div style={{display: 'flex', flexDirection: 'column'}}>
         <p> Calculating APYs and ROIs </p>
-        <p> Fetching token and field prices </p>
-        <p> Calculating APYs </p>
-        <p> Calculating ROIs </p>
+        {!userData.hasROI &&
+          <>
+            <p> Fetching token and field prices </p>
+            <p> Calculating APYs </p>
+            <p> Calculating ROIs </p>
+          </>
+        }
       </div>
     </S.Container>
   )
@@ -80,7 +118,7 @@ const mapState = state => {
   return {
     userAccounts: state.App.userAccounts,
     trackedData:  state.App.trackedData,
-    userData: state.App.userData
+    userData: state.App.userData,
   }
 }
 
@@ -92,4 +130,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(DataLoading);
+export default connect(mapState, mapDispatch)(withRouter(DataLoading));

@@ -1,15 +1,17 @@
 import axios from '../../helpers/axios-general'
 import {baseUrl, priceEP, historyDaysString} from './geckoEndPoints';
+const dayRangePriceCache = {}
 
-async function getHistoricalPrice (tokenApi, txDate) {
+async function getHistoricalPrice(tokenApi, txDate) {
+  // TODO: Move this to the redux store when querying the token prices from backend
+  // receive the token priceApi name and the timestamp of transaction and returns the price from beginning of tx
+  console.log(tokenApi)
   const pricesByDate = await getHistoricalPriceFromFirstTx(tokenApi, txDate);
   const formattedTimestamp = new Date(txDate * 1000).setHours(0,0,0);
   const target = pricesByDate.find(priceDateRecord => formattedTimestamp === new Date(priceDateRecord[0]).setHours(0,0,0));
   !target && console.error(' ---> price at date not found'); 
   return target ? target[1] : null;
 }
-
-const dayRangePriceCache = {}
 
 function getHistoricalPriceFromFirstTx (tokenApi, firstTxTimestamp) {
   

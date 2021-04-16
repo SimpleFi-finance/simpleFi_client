@@ -42,7 +42,11 @@ const initialState = {
       error: null,
       fetched: false,
       data: []
-    }
+    },
+    tokenPrices: {
+      data: []
+    },
+    hasROI: false
   }
 }
 
@@ -88,9 +92,9 @@ const setTracked = (state, action) => {
   const updatedState = {
     ...state.trackedData,
     [collection]: {
+      ...state.trackedData[collection],
       loading: false,
       fetched: true,
-      error: undefined,
       data: data
     }
   }
@@ -139,7 +143,15 @@ const setUserDataPrices = (state, action) => {
   }
 
   return updateObject(state, { userData: updatedState })
-} 
+}
+
+const setRoiCalculated = (state, action) => {
+  return updateObject(state, {
+    userData: {
+      ...state.userData, hasROI: true
+    }
+  })
+}
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.SET_ACCOUNTS:
@@ -155,7 +167,9 @@ const reducer = (state = initialState, action) => {
     case actionTypes.SET_REWOUND:
       return setRewoundFlag(state, action);
     case actionTypes.SET_USER_DATA_PRICES:
-      return setUserDataPrices(state, action)
+      return setUserDataPrices(state, action);
+    case actionTypes.SET_ROI_CALCULATED:
+      return setRoiCalculated(state, action);
     default:
       return state;
   }

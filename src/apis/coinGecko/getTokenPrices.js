@@ -27,7 +27,6 @@ async function getTokenPrices(userTokens, userFields, trackedTokens) {
   })
 
   const baseTokenPrices = await gecko.manyPrices(apiList.join());
-
   // change api response to token name, not priceApi for easy look-up in addFieldInvestmentValues
   const revertToName = Object.entries(baseTokenPrices).map(token => {
     const targetToken = trackedTokens.find(trackedToken => trackedToken.priceApi === token[0]);
