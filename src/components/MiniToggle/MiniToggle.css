@@ -1,4 +1,3 @@
-@import '../../CSS/variables.css';
 
 .mini-toggle-container {
   display: flex;
@@ -7,7 +6,6 @@
 .mini-toggle-container p {
   font-size: 0.7em;
   font-weight: normal;
-  color: var(--offwhite);
 }
 
 .mini-toggle {
@@ -22,7 +20,6 @@
   position: relative;
   margin: 0 5px 0 5px;
   border: 1px solid #474755;
-  background: linear-gradient(180deg, var(--dark-grey-font) 0%, var(--darkest-grey-font) 100%);
 }
 .mini-toggle:focus {
   outline: 0;
@@ -40,7 +37,6 @@
   transition: all cubic-bezier(0.5, 0.1, 0.75, 1.35);
 }
 .mini-toggle:checked {
-  border-color: var(--periwinkle);
 }
 .mini-toggle:checked:after {
   transform: translatex(10px);

@@ -37,7 +37,7 @@ const Footer = ({ showLogos }) => {
     <S.Footer>
       <S.FooterGroup style={{marginRight: !showLogos ? '0' : ''}}>
         {socialIcons.map((el) => (
-          <S.FooterElement key={el.link} href={el.link} target="_blank" rel="noreferrer" >
+          <S.FooterElement key={el.link} href={el.link} target="_blank" rel="noreferrer noopener">
             <el.el fill={'white'} style={{height: '100%', width: '100%'}}/>
           </S.FooterElement>
           ))

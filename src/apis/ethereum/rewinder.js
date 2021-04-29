@@ -27,6 +27,17 @@ let localTrackedFields = [];
               * fieldSeedReserveCache (passed onto getFieldSeedReserves())
 */
 //TODO: add explainer on why totalFieldSupplyCache is passed to getFieldSeedReserve: to get Aave token supply which is = reserve of underlying and that operation is prob unnecessary 
+function _combineFieldSuppliesAndReserves (supplies, reserves) {
+  let combinedBalances = [...supplies];
+
+  for (let field of combinedBalances) {
+    const findFieldReserves = reserves.filter(reserve => reserve.fieldName === field.fieldName)[0];
+    field.seedReserves = findFieldReserves.seedReserves;
+  }
+
+  return combinedBalances;
+}
+
 async function _tokenBalanceExtractor(token, investment, share, via) {
   const { tokenId, isBase, tokenContract } = token;
   //get total reserve of token within the pool
@@ -98,7 +109,7 @@ async function rewinder(investmentCollection, trackedTokens, trackedFields) {
     }
   }
 
-  const fieldBalances = helpers.combineFieldSuppliesAndReserves(totalFieldSupplyCache, fieldSeedReserveCache);
+  const fieldBalances = _combineFieldSuppliesAndReserves(totalFieldSupplyCache, fieldSeedReserveCache);
 
   return {
     userTokenBalances,

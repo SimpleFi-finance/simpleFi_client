@@ -3,10 +3,16 @@ import './FarmingFieldDetails.css';
 import DetailsPieChart from '../../components/DetailsPieChart/DetailsPieChart';
 import DetailsTable from '../../components/DetailsTable/DetailsTable';
 import MiniToggle from '../../components/MiniToggle/MiniToggle';
-import helpers from '../../helpers';
 import { withRouter } from "react-router";
 
 //TODO: identify joint components with EarningFieldDetails container
+function _findUnderlyingFarmingTokens (currentField, userFields) {
+  if (currentField.seedTokens[0].isBase) {
+    return currentField.seedTokens;
+  } else {
+    return userFields.find(userField => userField.receiptToken === currentField.seedTokens[0].tokenId).seedTokens;
+  }
+}
 
 const FarmingFieldDetails = ({name, userFields, history}) => {
 
@@ -22,7 +28,7 @@ const FarmingFieldDetails = ({name, userFields, history}) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (name) {
-      setUnderlyingTokens(helpers.findUnderlyingFarmingTokens (currentField, userFields));
+      setUnderlyingTokens(_findUnderlyingFarmingTokens (currentField, userFields));
       setMainAPY(currentField.farmingAPY.primaryAPY ? `${(currentField.farmingAPY.primaryAPY.APY * 100).toFixed(2)}% (${currentField.farmingAPY.primaryAPY.name})` : `${(currentField.farmingAPY * 100).toFixed(2)}% (${currentField.cropTokens[0].name})`);
       const tempSecondaryFarmingTokens = currentField.farmingAPY.secondaryAPYs ? currentField.farmingAPY.secondaryAPYs : null;
       if (tempSecondaryFarmingTokens) {

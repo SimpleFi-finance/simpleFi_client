@@ -38,7 +38,7 @@ const Nav = ({ userAccount, history }) => {
       {history.location.pathname !== '/' && history.location.pathname !== '/careers'
       ?
         <>
-          <p> {title}</p>
+          {/* <p> {title}</p> */}
           <UserWallet userAccount={userAccount} style={style} />
         </>
         :

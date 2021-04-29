@@ -7,16 +7,17 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 import InvertColorsIcon from '@material-ui/icons/InvertColors';
 import Tooltip from '@material-ui/core/Tooltip'
 import SideBarItems from './SideBarItems'
+import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined'
 
 //TODO: fix styling of logo and spread of items in sidebar
 const Sidebar = (props) => {
   return (
-    <>
-      <S.Sidebar>
-        <S.LogoContainer onClick={() => props.history.push('/')}>
-          <Logo type='icon'/>
-        </S.LogoContainer>
-        <SideBarItems />
+    <S.Sidebar>
+      <S.LogoContainer onClick={() => props.history.push('/')}>
+        <Logo type='icon'/>
+      </S.LogoContainer>
+      <SideBarItems style={{ 'grid-row': '2 / 3' }} />
+      <S.BottomControls>
         <S.ThemeControl style={{ margin: '0 auto' }}>
           {props.themeUI === 'colour' ?
             <Tooltip title="Dark Theme">
@@ -26,7 +27,7 @@ const Sidebar = (props) => {
               />
             </Tooltip>
           :
-            <Tooltip title="Color Theme">
+            <Tooltip title="Colour Theme">
               <InvertColorsIcon
                 style={{height: '100%', width: '100%'}}
                 color="inherit"
@@ -34,10 +35,21 @@ const Sidebar = (props) => {
               />
             </Tooltip>
           }
-          
         </S.ThemeControl>
-      </S.Sidebar>
-    </>
+        <Tooltip title="Docs" >
+          <a
+            href="https://docs.simplefi.finance"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{ margin: 'auto' }}
+          >
+            <DescriptionOutlinedIcon
+              style={{width: '100%', height: '30px', color: 'white'}}
+            />
+          </a>
+        </Tooltip>
+      </S.BottomControls>
+    </S.Sidebar>
   )
 }
     

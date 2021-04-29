@@ -1,5 +1,5 @@
 import curveEPs from './curveRawStatsEPs';
-import axios from '../../../../helpers/axios-general'
+import axios from '../../../../utils/axios-general'
 
 const { curveMainEP, apyEP, indivPoolEPs, indivPoolConcat } = curveEPs
 let apyCache;

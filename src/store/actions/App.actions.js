@@ -1,14 +1,15 @@
 import * as actionTypes from './actionTypes.actions';
-import axios from '../../helpers/axios-simplefi'
+import axios from '../../utils/axios-simplefi'
 import apis from '../../apis';
 import helpers from '../../helpers'
 // TODO: add notifications
 // ---------------- Generic actions ------------------
+
 const _metaMaskConnect = async () => {
   try {
     return await window.ethereum.request({ method: 'eth_requestAccounts' });
   } catch (err) {
-    console.error(err)
+    console.error('metamask connect',err)
     return { err }
   }
 }
@@ -83,14 +84,13 @@ export const _setUserDataPrices = (type, collection) => {
     }
   }
 }
-// ---------------------------------------------------
-
 export const _setAccountSuccess = (accounts) => {
   return {
     type: actionTypes.SET_ACCOUNTS,
     payload: accounts
   }
 }
+// ---------------------------------------------------
 
 export const setAccounts = (inputAccount = []) => {
   return dispatch => {
@@ -98,7 +98,6 @@ export const setAccounts = (inputAccount = []) => {
       dispatch(_setAccountSuccess(inputAccount))
     } else {
       if (window.ethereum && window.ethereum.isMetaMask) {
-        window.ethereum.autoRefreshOnNetworkChange = false;
         window.ethereum.on('accountsChanged', function (accounts) {
           dispatch(_setAccountSuccess(accounts))
         });
@@ -113,16 +112,19 @@ export const connectMetaMaskWallet = (history) => {
       const newAccount = await _metaMaskConnect();
       if (newAccount.error) {
         if (newAccount.error.code === 4001) {
+          alert('Please Connect to Metamask')
           dispatch(_setError('Please connect to Metamask'))
         } else {
-          dispatch(_setError('Oops, something went wrong - please refresh the page'))
+          alert('Oops, something went wrong - page will reload')
+          dispatch(_setError('Oops, something went wrong - page will reload'))
+          window.location.reload();
         }
       } else if (newAccount.length) {
         dispatch(setAccounts(newAccount))
         history.push('/loading');
       }
-      } else {
-        dispatch(_setError('Please install Metamask to use SimpleFi (https://metamask.io/)'))
+    } else {
+      dispatch(_setError('Please install Metamask to use SimpleFi (https://metamask.io/)'))
     }
   }
 }
@@ -144,7 +146,7 @@ export const getTrackedTokens = () => {
 export const getTrackedInvestments = () => {
   return dispatch => {
     dispatch(_setLoading('trackedData', 'investments', true))
-    axios.get('/fields').then(response => {
+    axios.get('/investments').then(response => {
       dispatch(_attachContracts('investments', response.data))
     })
     .catch(err => {
@@ -152,8 +154,7 @@ export const getTrackedInvestments = () => {
     })
   }
 }
-// general controller function for initData
-//TODO: handle response and handle error
+
 export const getTrackedData = () => {
   return dispatch => {
     Promise.all([dispatch(getTrackedTokens()), dispatch(getTrackedInvestments())])
@@ -162,10 +163,9 @@ export const getTrackedData = () => {
 }
 // -------------------USER data---------------------
 
-// TODO: modify to accept multiple addresses
 export const getUserTransactions = (addresses) => {
   return dispatch => {
-    axios.get(`/userTransactions/${addresses[0]}`)
+    axios.get(`/users/transactions/${addresses[0]}`)
     .then(response => {
       dispatch(_setUserData('transactions', response.data))
     })
@@ -246,7 +246,6 @@ export const rewindHoldings = () => {
         const investmentsWithSuppliesAndReserves = helpers.addFieldSuppliesAndReserves(underlyingInvestments.fieldBalances, stakedInvestments)
 
         Promise.all([
-          // dispatch(_setUserData('tokens', tokensWithUnclaimedBalance)),
           dispatch(_setRewoundFlag('tokens'))
         ]).then(() => {
           dispatch(_getTokenPrices(tokensWithUnclaimedBalance, investmentsWithSuppliesAndReserves))
@@ -263,7 +262,7 @@ export const _getTokenPrices = (userTokensRewound, investmentsWithSuppliesAndRes
     apis.getTokenPrices(userTokensRewound, investmentsWithSuppliesAndReserves, trackedTokens.data)
       .then(tokenPrices => {
         const investmentsWithValues = helpers.addFieldInvestmentValues(investmentsWithSuppliesAndReserves, tokenPrices)
-        
+
         dispatch(_getUserReturns(investmentsWithValues, userTokensRewound, tokenPrices));
     })
   }
@@ -275,7 +274,6 @@ export const _getUserReturns = (userInvestments, userTokensRewound, userTokenPri
     const accounts = state.App.userAccounts;
     const trackedData = state.App.trackedData;
     const userTransactions = state.App.userData.transactions.data
-
     apis.getAPYs(userInvestments, userTokensRewound, userTokenPrices)
       .then(investmentsWithAPYs => {
       const accountsNew = accounts.map(el => el.toLowerCase())

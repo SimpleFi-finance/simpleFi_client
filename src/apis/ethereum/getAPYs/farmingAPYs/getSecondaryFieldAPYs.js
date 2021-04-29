@@ -1,5 +1,6 @@
 import getFarmingAPYs from './getFarmingAPYs';
-import provider from '../../ethProvider';
+
+import provider from '../../../../utils/ethProvider';
 import { ethers } from 'ethers';
 
 

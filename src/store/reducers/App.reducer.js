@@ -15,7 +15,7 @@ const initialState = {
       error: null,
       fetched: false,
       data: []
-    }
+    },
   },
   userData: {
     tokens: {

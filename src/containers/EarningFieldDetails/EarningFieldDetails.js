@@ -4,9 +4,18 @@ import DetailsTable from '../../components/DetailsTable/DetailsTable';
 import DetailsBarChart from '../../components/DetailsBarChart/DetailsBarChart';
 import MaxiToggle from '../../components/MaxiToggle/MaxiToggle';
 import MiniToggle from '../../components/MiniToggle/MiniToggle';
-import helpers from '../../helpers';
 import { withRouter } from "react-router";
 
+function _calcCombinedROI(combinedFields) {
+  const {earningField, farmingFields} = combinedFields;
+  const investmentValue = earningField.earningROI.histInvestmentValue;
+  const earningReturnValue = earningField.earningROI.absReturnValue;
+  const farmingReturnValue = farmingFields.reduce((acc, curr) => acc + curr.farmingROI.absReturnValue, 0);
+  const absReturnValue = earningReturnValue + farmingReturnValue;
+  const combinedROI = absReturnValue / investmentValue;
+
+  return ({roi: combinedROI, abs: absReturnValue})
+}
 const EarningFieldDetails = ({name, userFields, history}) => {
   const [currentField] = useState(userFields.find(field => field.name === name));
   const [farmingFields, setFarmingFields] = useState([]);
@@ -68,7 +77,7 @@ const EarningFieldDetails = ({name, userFields, history}) => {
       const targetFarms = userFields.filter(field => !field.isEarning && field.seedTokens[0].tokenId === currentField.receiptToken)
       setFarmingFields(targetFarms);
       setCombinedFields({earningField: currentField, farmingFields: targetFarms});
-      setCombinedROI(helpers.calcCombinedROI({earningField: currentField, farmingFields: targetFarms}));
+      setCombinedROI(_calcCombinedROI({earningField: currentField, farmingFields: targetFarms}));
 
       //FIXME: remove this hard-coded restriction
       if (currentField.contractAddresses[0].contractInterface.name === 'uniswap V2 earn') {

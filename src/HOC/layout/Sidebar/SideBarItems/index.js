@@ -1,9 +1,9 @@
 import React from 'react'
 import Tooltip from '@material-ui/core/Tooltip'
 import styled from 'styled-components'
-import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
+// import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
+// import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+// import ShowChartIcon from '@material-ui/icons/ShowChart';
 import SideBarItem from './SideBarItem'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 const NavigationItemsSt = styled.ul`
@@ -24,33 +24,33 @@ const SideBarItems = (props) => {
 
   const items = [
     {
-      title: 'All Tokens',
+      title: 'Dashboard',
       link: '/dashboard',
-      view: <Tooltip title="Portfolio">
-        <AllInclusiveIcon color='inherit'/>
-      </Tooltip>
-    },
-    {
-      title: 'Holding',
-      link: '/holdings',
-      view: <Tooltip title="Holdings">
+      view: <Tooltip title="Dashboard">
         <AccountBalanceIcon color='inherit'/>
       </Tooltip>
     },
-    {
-      title: 'Earning',
-      link: '/earnings',
-      view: <Tooltip title="Earnings">
-        <ShowChartIcon color='inherit'/>
-      </Tooltip>
-    },
-    {
-      title: 'Farming',
-      link: '/farming',
-      view: <Tooltip title="Farming">
-        <MonetizationOnIcon color='inherit'/>
-      </Tooltip>
-    }
+    // {
+    //   title: 'Holding',
+    //   link: '/holdings',
+    //   view: <Tooltip title="Holdings">
+    //     <AccountBalanceIcon color='inherit'/>
+    //   </Tooltip>
+    // },
+    // {
+    //   title: 'Earning',
+    //   link: '/earnings',
+    //   view: <Tooltip title="Earnings">
+    //     <ShowChartIcon color='inherit'/>
+    //   </Tooltip>
+    // },
+    // {
+    //   title: 'Farming',
+    //   link: '/farming',
+    //   view: <Tooltip title="Farming">
+    //     <MonetizationOnIcon color='inherit'/>
+    //   </Tooltip>
+    // }
   ]
   return (
     <NavigationItemsSt>

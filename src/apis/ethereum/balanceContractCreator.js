@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import provider from './ethProvider';
+import provider from './../../utils/ethProvider';
 
 /**
  * @func createContract creates an instance of a new ethers contract interface

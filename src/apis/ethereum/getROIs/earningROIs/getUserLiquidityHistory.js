@@ -22,7 +22,7 @@ import helpers from '../../../../helpers';
  *    userBalanceAfterTx: only for certain fields that continuously update user token balances (e.g. aTokens)
  *  }
  */
-async function getUserLiquidityHistory(trackedFields, field, trackedTokens, userTokenTransactions, userAccount) {
+const getUserLiquidityHistory = async (trackedFields, field, trackedTokens, userTokenTransactions, userAccount) => {
 
   const receiptToken = trackedTokens.find(trackedToken => trackedToken.tokenId === field.receiptToken);
   const userReceiptTokenTxs = userTokenTransactions.filter(tx => tx.contractAddress === receiptToken.address.toLowerCase());
@@ -30,27 +30,16 @@ async function getUserLiquidityHistory(trackedFields, field, trackedTokens, user
   const whitelist = helpers.createWhitelist(trackedFields, field);
   
   let liquidityHistory;
-
-  switch (field.protocol.name) {
-
-    case "Curve":
-      /* @dev: this function contains a array.map of multiple calls to coinGecko,
-               hence the use of a promise.all in the parent func (getROIs)
-      */
-      liquidityHistory = await getCurveLiquidityHistory(field, receiptToken, userReceiptTokenTxs, relatedFarmReceiptTokenTxs, userAccount, whitelist);
-      break;
-      
-    case "Uniswap":
-      liquidityHistory = await getUniswapLiquidityHistory(field, userReceiptTokenTxs, userAccount, whitelist);
-      break;
-
-    case "Aave":
-      liquidityHistory = await getAaveLiquidityHistory(receiptToken, userReceiptTokenTxs, userAccount, whitelist);
-      break;
-
-    default:
-      break;
+  const protocol = field.protocol.name
+  
+  if (protocol === 'Curve') {
+    liquidityHistory = await getCurveLiquidityHistory(field, receiptToken, userReceiptTokenTxs, relatedFarmReceiptTokenTxs, userAccount, whitelist);
+  } else if (protocol === 'Uniswap') {
+    liquidityHistory = await getUniswapLiquidityHistory(field, userReceiptTokenTxs, userAccount, whitelist);
+  } else if (protocol === 'Aave') {
+    liquidityHistory = await getAaveLiquidityHistory(receiptToken, userReceiptTokenTxs, userAccount, whitelist);
   }
+
   return liquidityHistory;
 }
 

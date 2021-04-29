@@ -14,12 +14,16 @@ export const Layout = (props) => {
     <>
       <S.Layout>
         {!noSidebar && <Sidebar history={props.history} />}
-        <S.Main location={props.history.location.pathname}>
-          <Navbar userAccount={props.userAccounts} history={props.history} />
+        <S.Main location={props.history.location.pathname} noSidebar={noSidebar}>
+          {props.history.location.pathname !== '/loading' &&
+            <Navbar userAccount={props.userAccounts} history={props.history} />
+          }
           <S.Content location={props.history.location.pathname} noSidebar={noSidebar}>
             {props.children}
           </S.Content>
-          <Footer showLogos={!!noSidebar}/>
+          {props.history.location.pathname !== '/loading' &&
+            <Footer showLogos={!!noSidebar}/>
+          }
         </S.Main>
       </S.Layout>
     </>

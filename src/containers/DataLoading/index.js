@@ -4,8 +4,11 @@ import * as S from './DataLoading.style'
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions'
 import { withRouter } from 'react-router-dom'
+import ProgressBar from '../../components/UI/ProgressBar'
+import { SwitchTransition } from 'react-transition-group'
+import Background from '../../components/UI/BackgroundLoading'
+import Logo from '../../components/UI/Logo'
 /**
- * 
  * @dev This page is only used when a user changes accounts or enters the dashboard for first time to compute all needed data. Data will then be updated dynamically
  */
 
@@ -30,13 +33,25 @@ const DataLoading = (props) => {
     userData
   } = props
 
+  const [fetchStage, setFetchStage] = useState('trackedData')
+  const [progress, setProgress] = useState(0)
+
+  const displayHelper = {
+    trackedData: 'Gathering Protocols Data',
+    userData: 'Collecting User Portfolio and activity',
+    userBalances: 'Rewinding Balances',
+    userROI: 'Calculating ROI and APY'
+  }
   useEffect(() => {
     //get tracked fields and tokens with contracts and user data
-    if (userAccounts.length && !trackedData.tokens.fetched && !userData.tokens.rewound) {
+    if (userAccounts.length && !trackedData.tokens.fetched && !userData.tokens.rewound && !trackedData.tokens.loading) {
       getTrackedData();
+      setProgress(progress + 1)
     }
     if (_completeFetchingData(trackedData) && !userData.tokens.rewound) {
+      setFetchStage('userData')
       getUserData();
+      setProgress(progress + 1)
     }
   }, [
     trackedData.tokens.fetched,
@@ -46,7 +61,9 @@ const DataLoading = (props) => {
   useEffect(() => {
     // get underlying holdings of user from fields
     if (_completeFetchingData(userData) && !userData.tokens.rewound) {
+      setFetchStage('userBalances')
       rewindHoldings()
+      setProgress(progress + 1)
     }
   }, [
     userData.tokens.fetched,
@@ -56,68 +73,45 @@ const DataLoading = (props) => {
   ])
 
   useEffect(() => {
-    if (_completeFetchingData(userData)) {
+    if (_completeFetchingData(userData) && userData.hasROI) {
+      setFetchStage('userROI')
+      setProgress(progress + 1)
       setTimeout(() => history.push('/dashboard'), 3000)
     }
   }, [userData.hasROI])
 
   return (
-    <S.Container>
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <p> Preparing dApplication </p>
-        {trackedData.tokens.loading && !trackedData.tokens.fetched &&
-          <p>
-            Loading tracked Tokens
-          </p>
-        }
-        {trackedData.investments.loading && !trackedData.investments.fetched &&
-          <>
-            <p>
-              Loading tracked Fields
-            </p>
-            <p> Creating contract interfaces </p>
-          </>
-        }
-      </div>
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <p> Loading User Balances </p>
-        {userData.tokens.loading && !userData.tokens.fetched &&
-          <p> Fetching Token and farming balances </p>
-        }
-        {userData.transactions.loading && !userData.transactions.fetched &&
-          <p> Fetching transactions history</p>
-        }
-        {userData.unclaimed.loading && !userData.unclaimed.fetched &&
-          <p> Fetching unclaimed rewards</p>
-        }
-      </div>
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <p> Calcualting underlying investments </p>
-        {!userData.tokens.rewound && 
-          <p> Rewinding underlying tokens </p>
-        }
-        {!userData.tokens.rewound && 
-          <p> Rewinding underlying farming investments </p>
-        }
-      </div>
-      <div style={{display: 'flex', flexDirection: 'column'}}>
-        <p> Calculating APYs and ROIs </p>
-        {!userData.hasROI &&
-          <>
-            <p> Fetching token and field prices </p>
-            <p> Calculating APYs </p>
-            <p> Calculating ROIs </p>
-          </>
-        }
-      </div>
-    </S.Container>
+    <>
+      <Background />
+      <S.Container>
+        <S.LoadingTextContainer>
+          <SwitchTransition mode={'out-in'}>
+            <S.TransitionSt
+              key={fetchStage}
+              timeout={500}
+            >
+              <p>
+                {displayHelper[fetchStage]}
+              </p>
+            </S.TransitionSt>
+          </SwitchTransition>
+        </S.LoadingTextContainer>
+        <S.LogoSpinner>
+          <Logo type={'icon'} />
+        </S.LogoSpinner>
+        <S.ProgressBar>
+          <ProgressBar value={progress / Object.keys(displayHelper).length * 100} max={100} />
+        </S.ProgressBar>
+      </S.Container>
+    </>
   )
 }
+
 
 const mapState = state => {
   return {
     userAccounts: state.App.userAccounts,
-    trackedData:  state.App.trackedData,
+    trackedData: state.App.trackedData,
     userData: state.App.userData,
   }
 }

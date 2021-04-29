@@ -3,22 +3,28 @@ import styled from 'styled-components'
 export const Sidebar = styled.div`
   height: 100%;
   width: 70px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 150px auto 150px;
   border-right: 1px solid white;
 `
 
 export const ThemeControl = styled.div`
-  margin: 2px auto;
+  margin: auto;
   color: ${({ theme }) => theme.accent};
-  height: 30px;
+  height: 40px;
   width: 30px;
 `;
 
 export const LogoContainer = styled.button`
-  height: 60px;
-  padding: 5px 2px;
-  margin-top: 15px;
-  margin-bottom: 60px;
+  grid-row: 1 / span 1;
+  margin: 2px;
   cursor: pointer;
 `
+
+export const BottomControls = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  grid-row: 3 / 4;
+`;

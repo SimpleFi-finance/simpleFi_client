@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Content = styled.div`
-  height: calc(100vh - 150px);
+  height: ${({ location }) => location === '/loading' ? '100%' : 'calc(100% - 150px)'};
   width: 100%;
 	display: flex;
 	overflow-y: auto;
@@ -15,10 +15,10 @@ export const Layout = styled.div`
 
 export const Main = styled.div`
   margin: 0px;
-  padding: 10px;
+	padding: ${({ location }) => location !== '/loading' ? '10px' : '0px'};
   height: 100%;
-  width: ${({location})=> location !== '/' ? 'calc(100% - 70px)' : '100%'};
-	background-color: transparent;
+  width: ${({ noSidebar }) => !noSidebar ? 'calc(100% - 70px)' : '100%'};
+	background-color: ${({ location }) => location !== '/loading' ? 'transparent' : 'white'};
 	position: fixed;
 	top: 0;
   right: 0;

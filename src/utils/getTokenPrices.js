@@ -1,5 +1,5 @@
-import gecko from './currentPrice';
-import { supportedCurrencies } from './geckoEndPoints';
+import manyPrices from '../apis/coinGecko/currentPrice';
+import { supportedCurrencies } from './generalData';
 
 async function getTokenPrices(userTokens, userFields, trackedTokens) {
 
@@ -26,15 +26,13 @@ async function getTokenPrices(userTokens, userFields, trackedTokens) {
     }
   })
 
-  const baseTokenPrices = await gecko.manyPrices(apiList.join());
-  // change api response to token name, not priceApi for easy look-up in addFieldInvestmentValues
+  const baseTokenPrices = await manyPrices(apiList.join());
   const revertToName = Object.entries(baseTokenPrices).map(token => {
     const targetToken = trackedTokens.find(trackedToken => trackedToken.priceApi === token[0]);
     token[0] = targetToken.name;
     return token;
   })
   const tokenPrices = Object.fromEntries(revertToName);
-    
   // determine composite price of non-base tokens
   nonBaseTokens.forEach(token => {
     //NOTE: recursion may be required in edge cases where field's seeds are not base
@@ -54,21 +52,19 @@ async function getTokenPrices(userTokens, userFields, trackedTokens) {
       }
       return seedReserveValues;
     });
-
     const combinedTokenPrices = parentSeedValues.reduce((acc, curr) => {
       for (let currencyVal in curr) {
         acc[currencyVal] += curr[currencyVal];
       }
       return acc;
     },{...currencyModel})
-
     for (let currencyVal in combinedTokenPrices) {
       combinedTokenPrices[currencyVal] = combinedTokenPrices[currencyVal]/totalSupply;
     }
 
     tokenPrices[token.name] = combinedTokenPrices;
   })
-
+  //{[token.name]: {eur: x, gbp: y, usd: z}, ....}
   return tokenPrices;
   
 }

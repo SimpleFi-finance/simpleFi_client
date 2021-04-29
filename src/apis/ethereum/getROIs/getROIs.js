@@ -11,12 +11,12 @@ import helpers from '../../../helpers';
  * @param {Array} trackedTokens all tracked tokens
  * @return {Array} userFields with added ROI, user transaction history and current value of investment
  */
-//TODO: refactor tx sorters to show when (un)staking and txIn/Out are made in the same tx
-async function getROIs(userAccount, userFields, trackedFields, userTokenTransactions, userNormalTransactions, trackedTokens, userTokens, tokenPrices) {
+
+const getROIs = async (userAccount, userFields, trackedFields, userTokenTransactions, userNormalTransactions, trackedTokens, userTokens, tokenPrices) => {
 
   const fieldsWithROI = [...userFields];
   
-  for (let field of fieldsWithROI) {
+  for await (let field of fieldsWithROI) {
 
     let currInvestmentValue = 0;
     if (field.unstakedUserInvestmentValue) {
@@ -27,7 +27,6 @@ async function getROIs(userAccount, userFields, trackedFields, userTokenTransact
     }
 
     if (field.isEarning) {
-
       const userLiquidityHistoryPromises = await getUserLiquidityHistory(trackedFields, field, trackedTokens, userTokenTransactions, userAccount);
       if (userLiquidityHistoryPromises) {
         const userLiquidityHistory = await Promise.all(userLiquidityHistoryPromises);

@@ -1,4 +1,4 @@
-import getTokenPrices from './coinGecko/getTokenPrices';
+import getTokenPrices from '../utils/getTokenPrices';
 import * as ethereumApis from './ethereum/index';
 
 //eslint-disable-next-line import/no-anonymous-default-export

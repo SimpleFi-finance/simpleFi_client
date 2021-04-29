@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useRef} from 'react';
-import './DetailsBarChart.css';
 import helpers from '../../helpers';
 const Chart = require('chart.js');
 

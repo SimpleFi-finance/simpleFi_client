@@ -1,6 +1,6 @@
 import { getOneCurveHistReceiptPrice } from './getCurveFarmingPriceHistory';
 import getOneUniswapHistReceiptPrice from './getUniswapFarmingPriceHistory';
-import { getHistoricalPrice } from '../../../coinGecko/getHistoricalPrice';
+import getHistoricalPrice from '../../../../utils/getHistoricalPrices'
 import helpers from '../../../../helpers';
 
 /**
@@ -46,7 +46,7 @@ async function getUserFarmingHistory(field, userTokenTransactions, userNormalTra
   
       // default is for cases when the farm seed token is a simple base token (e.g. 1inch)
       default: 
-        const pricePerToken = await getHistoricalPrice(farmSeedToken.priceApi, txTimestamp);
+        const pricePerToken = await getHistoricalPrice(farmSeedToken, txTimestamp);
         const txDate = new Date(Number(txTimestamp) * 1000);
         farmSeedTokenPriceAndDate = {pricePerToken, txDate}
     }
@@ -55,7 +55,7 @@ async function getUserFarmingHistory(field, userTokenTransactions, userNormalTra
        condition), and differentiate from receipt token price for proper calc of historical balances in fieldDetails page
     */
     if (tx.cropToken) {
-      const histTokenPrice = await getHistoricalPrice (tx.priceApi, tx.tx.timeStamp);
+      const histTokenPrice = await getHistoricalPrice (tx, tx.tx.timeStamp);
       tx.txDate = new Date(Number(tx.tx.timeStamp) * 1000);
       tx.pricePerToken = histTokenPrice;
       tx.pricePerFarmSeedToken = farmSeedTokenPriceAndDate.pricePerToken;

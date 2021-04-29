@@ -1,6 +1,5 @@
-import { getHistoricalPrice } from '../../../coinGecko/getHistoricalPrice';
 import { getOneCurvePoolRawData } from '../../protocolQueries';
-
+import getHistoricalPrice from '../../../../utils/getHistoricalPrices'
 /**
  * 
  * @param {Object} token - the target token for which the historical price is required
@@ -23,7 +22,7 @@ async function getOneCurveHistReceiptPrice(token, timestamp, trackedFields) {
   let fieldHistReserveValue = 0;
 
   for (let seed of targetEarnField.seedTokens) {
-    const histSeedValue = await getHistoricalPrice(seed.priceApi, timestamp);
+    const histSeedValue = await getHistoricalPrice(seed, timestamp);
     //CHECK: handle error in case no seed index (some seeds only added later to contract and are not present in old raw stats)
     const seedDecimalDivisor = Number(`1e${seed.decimals}`);
     const decimaledReserve = historicalStat.balances[seed.seedIndex]/seedDecimalDivisor;
@@ -49,7 +48,7 @@ async function getCurveHistReceiptPrices (field, receiptToken, userReceiptTokenT
     let fieldHistReserveValue = 0;
 
     for (let seed of field.seedTokens) {
-      const histSeedValue = await getHistoricalPrice(seed.priceApi, geckoDateformat);
+      const histSeedValue = await getHistoricalPrice(seed, geckoDateformat);
       const decimaledReserve = historicalStat.balances[seed.seedIndex]/Number(`1e${seed.tokenContract.decimals}`);
       fieldHistReserveValue += histSeedValue * decimaledReserve;
     }

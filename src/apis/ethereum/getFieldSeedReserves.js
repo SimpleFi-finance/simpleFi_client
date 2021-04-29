@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import provider from './ethProvider';
+import provider from './../../utils/ethProvider';
 import getTotalFieldSupply from './getTotalFieldSupply';
 import helpers from '../../helpers'
 

@@ -5,7 +5,7 @@
  * @return {Number} - user ROI to date with regards to the analysed field, defined as:
  *                    (current investment value + sum of realised exits [txOut]) / sum of historical investments [txIn]
  */
-function calcEarningROI (currInvestmentValue, txHistory, field, tokenPrices) {
+function calcEarningROI(currInvestmentValue, txHistory, field, tokenPrices) {
   let valueInvested = 0;
   let valueRealised = 0;
   //NOTE: histFieldReserves, feeData and realisedRelativeProfitValue only valid for Uniswap for now

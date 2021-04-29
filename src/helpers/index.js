@@ -11,8 +11,6 @@ import { extractSummaryFieldValues } from './myAssetsHelpers/fieldHelpers';
 import toggleDropdown from './myAssetsHelpers/dropdownHelper';
 import {
   findFieldAddressType,
-  findUnclaimedBalanceType,
-  combineFieldSuppliesAndReserves,
   sortLiquidityTxs,
   sortFarmingTxs,
   createWhitelist,
@@ -22,16 +20,12 @@ import {
   calcFarmingROI
 } from './ethHelpers';
 import extractTempFieldDetailsCells from './detailsTableHelper';
-import urlStringSanitiser from './urlStringSanitiser';
 import formatHeadlines from './summaryBoxHelper';
-import {extractTotalTokenBalance} from './tokenDetailsHelper';
 import {
   extractDetailsPieChartValues,
   extractDetailsBarChartValues,
   chartCallbacks
 } from './detailsChartHelpers';
-import calcCombinedROI from './earningFieldDetailsHelpers';
-import findUnderlyingFarmingTokens from './farmingFieldDetailsHelpers';
 
 //eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -45,8 +39,6 @@ export default {
   extractSummaryFieldValues,
   toggleDropdown,
   findFieldAddressType,
-  findUnclaimedBalanceType,
-  combineFieldSuppliesAndReserves,
   sortLiquidityTxs,
   sortFarmingTxs,
   createWhitelist,
@@ -55,12 +47,8 @@ export default {
   calcEarningROI,
   calcFarmingROI,
   extractTempFieldDetailsCells,
-  urlStringSanitiser,
   formatHeadlines,
-  extractTotalTokenBalance,
   extractDetailsPieChartValues,
   extractDetailsBarChartValues,
-  chartCallbacks,
-  calcCombinedROI,
-  findUnderlyingFarmingTokens
+  chartCallbacks
 }

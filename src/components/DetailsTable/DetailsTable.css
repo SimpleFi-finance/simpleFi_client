@@ -1,5 +1,3 @@
-@import '../../CSS/variables.css';
-
 .field-details-tx-table {
   display: grid;
   grid-template-columns: 1fr;

@@ -1,8 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import './TokenDetails.css';
 import DetailsPieChart from '../../components/DetailsPieChart/DetailsPieChart';
-import helpers from '../../helpers';
 import { withRouter } from 'react-router';
+
+function _extractTotalTokenBalance(token) {
+  const unlockedBalance = token.userBalance ? token.userBalance : 0;
+  const lockedBalance = token.lockedBalance ? token.lockedBalance.reduce((acc, lockedBalance) => acc + lockedBalance.balance, 0) : 0;
+  const unclaimedBalance = token.unclaimedBalance ? token.unclaimedBalance.reduce((acc, unclaimedBalance) => acc + unclaimedBalance.balance, 0) : 0;
+  return unlockedBalance + lockedBalance + unclaimedBalance;
+}
 
 const TokenDetails = ({name, userTokens, userTokenPrices, history}) => {
 
@@ -13,7 +19,7 @@ const TokenDetails = ({name, userTokens, userTokenPrices, history}) => {
   useEffect(() => {
     window.scrollTo(0, 0);
     if (name) {
-      const totalTokenBalance = helpers.extractTotalTokenBalance(currentToken);
+      const totalTokenBalance = _extractTotalTokenBalance(currentToken);
       setTotalBalance(totalTokenBalance);
       setTotalValue(totalTokenBalance * userTokenPrices[name].usd);
     }

@@ -1,6 +1,3 @@
-@import '../../CSS/variables.css';
-@import '../../CSS/animations.css';
-
 .box-container-headline {
   display: flex;
   justify-content: space-between;
@@ -34,21 +31,12 @@
 }
 
 .container-headline-data h3, .container-headline-data-loading h3 {
-  color: var(--almost-white);
   padding-right: 35px;
   font-size: 1.2em;
 }
 
 .container-headline-data h3:last-child {
   padding-right: 0;
-}
-
-.container-headline-data .headline-performance-green {
-  color: var(--performance-green);
-}
-
-.container-headline-data .headline-performance-red {
-  color: var(--performance-red);
 }
 
 .dropdown-button-wrapper {
