@@ -25,15 +25,16 @@ function addLockedTokenBalances (rewoundTokens, userTokens) {
 
   rewoundTokens.forEach(rewoundToken => {
     //identify if user already has a balance for curr token
+
     const existingUserToken = updatedUserTokens.find(userToken => userToken.tokenId === rewoundToken.token.tokenId);
     //if so, add rewound token balance to the token's locked balance
     if (existingUserToken && existingUserToken.lockedBalance) {
-      const lockedBalanceObj = {balance: rewoundToken.userTokenBalance, field: rewoundToken.field};
+      const lockedBalanceObj = {balance: rewoundToken.userTokenBalance, field: rewoundToken.investment};
       if (rewoundToken.via) lockedBalanceObj.via = rewoundToken.via;
       existingUserToken.lockedBalance.push(lockedBalanceObj);
     }
     else if (existingUserToken) {
-      const lockedBalanceObj = {balance: rewoundToken.userTokenBalance, field: rewoundToken.field};
+      const lockedBalanceObj = {balance: rewoundToken.userTokenBalance, field: rewoundToken.investment};
       if (rewoundToken.via) lockedBalanceObj.via = rewoundToken.via;
       existingUserToken.lockedBalance = [lockedBalanceObj];
     }
@@ -41,7 +42,7 @@ function addLockedTokenBalances (rewoundTokens, userTokens) {
     else {
       //CHECK: check this is necessary
       const newUserToken = JSON.parse(JSON.stringify(rewoundToken.token));
-      const lockedBalanceObj = {balance: rewoundToken.userTokenBalance, field: rewoundToken.field};
+      const lockedBalanceObj = {balance: rewoundToken.userTokenBalance, field: rewoundToken.investment};
       if (rewoundToken.via) lockedBalanceObj.via = rewoundToken.via;
       newUserToken.lockedBalance = [lockedBalanceObj]
       updatedUserTokens.push(newUserToken);

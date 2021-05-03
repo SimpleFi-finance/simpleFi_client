@@ -5,10 +5,14 @@ export const Nav = styled.div`
   height: 60px;
   grid-template-columns: repeat(10, 1fr);
   margin: 5px 40px;
-
+  border-bottom: 2px solid ${({ theme }) => theme.lightpurple};
+  
   p {
     margin: auto;
-    grid-column: 1 / 4;
+    margin-left: 15px;
+    font-size: 30px;
+    letter-spacing: 2px;
+    grid-column: 1 / 7;
   }
 `;
 

@@ -3,6 +3,7 @@ import UserWallet from '../../../components/UI/WalletDetails'
 import Logo from '../../../components/UI/Logo'
 
 import * as S from './navbar.style'
+import { HistoryTwoTone } from '@material-ui/icons';
 
 const Nav = ({ userAccount, history }) => {
   const style = {
@@ -11,34 +12,36 @@ const Nav = ({ userAccount, history }) => {
   let title = 'SimpleFi'
   switch (history.location.pathname) {
     case '/dashboard':
-      title = 'Portfolio';
+      title = 'Account Overview';
       break;
-    case '/holdings':
-      title = 'Holdings';
+    case '/tokens':
+      title = 'Tokens';
       break
-    case '/earnings':
+    case '/earning':
       title = 'Invested'
       break
     case '/farming':
       title = 'Staked positions'
       break
-    case '/careers':
-      title = 'Careers';
-      break
-    case '/about':
-      title = 'Our Aim';
-      break
     default:
-      title = 'SimpleFi.finance';
+      title = '';
+      break
   }
 
+  const backButton = (type) => {
+    return (
+      <>
+        <button onClick={() => history.push(`/${type}`)}> {'<'} Back to ${type}</button>
+      </>
+    )
+  }
 
   return (
     <S.Nav>
       {history.location.pathname !== '/' && history.location.pathname !== '/careers'
       ?
         <>
-          {/* <p> {title}</p> */}
+          <p> {title} </p>
           <UserWallet userAccount={userAccount} style={style} />
         </>
         :

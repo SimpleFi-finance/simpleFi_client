@@ -1,16 +1,18 @@
 import React from 'react'
 import Tooltip from '@material-ui/core/Tooltip'
 import styled from 'styled-components'
-// import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
-// import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
-// import ShowChartIcon from '@material-ui/icons/ShowChart';
+import AppsIcon from '@material-ui/icons/Apps';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
 import SideBarItem from './SideBarItem'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+
 const NavigationItemsSt = styled.ul`
     margin: 0 auto;
     padding: 0px;
-    list-style: none;
+    padding-top: 40px;
     display: flex;
+    list-style-type: none;
     flex-direction: column;
     height: 80%;
     cursor: pointer;
@@ -26,31 +28,31 @@ const SideBarItems = (props) => {
     {
       title: 'Dashboard',
       link: '/dashboard',
-      view: <Tooltip title="Dashboard">
+      view: <Tooltip title="Overview">
+        <AppsIcon color='inherit'/>
+      </Tooltip>
+    },
+    {
+      title: 'Tokens',
+      link: '/tokens',
+      view: <Tooltip title="Tokens">
         <AccountBalanceIcon color='inherit'/>
       </Tooltip>
     },
-    // {
-    //   title: 'Holding',
-    //   link: '/holdings',
-    //   view: <Tooltip title="Holdings">
-    //     <AccountBalanceIcon color='inherit'/>
-    //   </Tooltip>
-    // },
-    // {
-    //   title: 'Earning',
-    //   link: '/earnings',
-    //   view: <Tooltip title="Earnings">
-    //     <ShowChartIcon color='inherit'/>
-    //   </Tooltip>
-    // },
-    // {
-    //   title: 'Farming',
-    //   link: '/farming',
-    //   view: <Tooltip title="Farming">
-    //     <MonetizationOnIcon color='inherit'/>
-    //   </Tooltip>
-    // }
+    {
+      title: 'Earning',
+      link: '/earning',
+      view: <Tooltip title="Earnings">
+        <ShowChartIcon color='inherit'/>
+      </Tooltip>
+    },
+    {
+      title: 'Farming',
+      link: '/farming',
+      view: <Tooltip title="Farming">
+        <MonetizationOnIcon color='inherit'/>
+      </Tooltip>
+    }
   ]
   return (
     <NavigationItemsSt>

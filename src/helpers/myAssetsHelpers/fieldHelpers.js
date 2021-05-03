@@ -9,13 +9,8 @@ function extractSummaryFieldValues (userFields) {
     farmingROI: 0,
     earningROI: 0
   }
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: 'percent',
-    minimumFractionDigits: 2
-  });
 
   userFields.forEach(field => {
-
     const { stakedPercent } = combineFieldBalances(field);
     //CHECK: quid using investmentValue and allTimeROI when a field has both farming and earning returns
     const { name, cropTokens, isEarning, investmentValue, earningROI, farmingROI } = field;
@@ -28,11 +23,18 @@ function extractSummaryFieldValues (userFields) {
       totalROI.farmingROI += farmingROI.allTimeROI * investmentValue;
       totalInvested.farmingInv += investmentValue;
       
-      const APY = field.farmingAPY?.combinedAPY ? formatter.format(field.farmingAPY.combinedAPY) : formatter.format(field.farmingAPY);
-      const ROI = formatter.format(farmingROI.allTimeROI);
-      const invested = Number(investmentValue?.toFixed(2)).toLocaleString();
+      const APY = field.farmingAPY?.combinedAPY ? field.farmingAPY.combinedAPY : field.farmingAPY;
+      const ROI = farmingROI.allTimeROI;
+      const invested = Number(investmentValue?.toFixed(2));
 
-      farmingFields.push([name, invested, farming, ROI, APY])
+      farmingFields.push({
+        id: field.fieldId,
+        name: name,
+        investedValue: invested,
+        farmingField: farming,
+        ROI: ROI,
+        APY: APY
+      })
     }
     
     if (isEarning) {
@@ -40,11 +42,18 @@ function extractSummaryFieldValues (userFields) {
       totalROI.earningROI += earningROI.allTimeROI * investmentValue;
       totalInvested.earningInv += investmentValue;
       
-      const APY = formatter.format(field.earningAPY);
-      const ROI = formatter.format(earningROI.allTimeROI);
-      const invested = Number(investmentValue?.toFixed(2)).toLocaleString();
+      const APY = field.earningAPY;
+      const ROI = earningROI.allTimeROI;
+      const invested = Number(investmentValue?.toFixed(2));
       
-      earningFields.push([name, invested, stakedPercent, ROI, APY]);
+      earningFields.push({
+        id: field.fieldId,
+        name: name,
+        investedValue: invested,
+        stakedValue: stakedPercent,
+        ROI: ROI,
+        APY: APY
+      });
     }
   })
 
@@ -64,7 +73,6 @@ function combineFieldBalances(field){
       let stakedBalance = 0;
       let combinedBalance = 0;
       let stakedPercent = 0;
-      const formatter = new Intl.NumberFormat("en-US", {style: 'percent'});
       
       if (field.stakedBalance) {
         stakedBalance = field.stakedBalance.reduce((acc, curr) => acc + curr.balance, 0);
@@ -72,10 +80,10 @@ function combineFieldBalances(field){
 
       if (field.userBalance) {
         combinedBalance = field.userBalance + stakedBalance;
-        stakedPercent = formatter.format(stakedBalance / combinedBalance);
+        stakedPercent = stakedBalance / combinedBalance;
       } else {
         combinedBalance = stakedBalance;
-        stakedPercent = formatter.format(1);
+        stakedPercent = 1;
       }
       
   return {

@@ -8,7 +8,6 @@ import {
 } from './appHelpers'
 import extractSummaryHoldingValues from './myAssetsHelpers/tokenHelpers';
 import { extractSummaryFieldValues } from './myAssetsHelpers/fieldHelpers';
-import toggleDropdown from './myAssetsHelpers/dropdownHelper';
 import {
   findFieldAddressType,
   sortLiquidityTxs,
@@ -20,7 +19,6 @@ import {
   calcFarmingROI
 } from './ethHelpers';
 import extractTempFieldDetailsCells from './detailsTableHelper';
-import formatHeadlines from './summaryBoxHelper';
 import {
   extractDetailsPieChartValues,
   extractDetailsBarChartValues,
@@ -37,7 +35,6 @@ export default {
   addFieldInvestmentValues,
   extractSummaryHoldingValues,
   extractSummaryFieldValues,
-  toggleDropdown,
   findFieldAddressType,
   sortLiquidityTxs,
   sortFarmingTxs,
@@ -47,7 +44,6 @@ export default {
   calcEarningROI,
   calcFarmingROI,
   extractTempFieldDetailsCells,
-  formatHeadlines,
   extractDetailsPieChartValues,
   extractDetailsBarChartValues,
   chartCallbacks

@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import './TokenDetails.css';
 import DetailsPieChart from '../../components/DetailsPieChart/DetailsPieChart';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 function _extractTotalTokenBalance(token) {
@@ -10,31 +11,27 @@ function _extractTotalTokenBalance(token) {
   return unlockedBalance + lockedBalance + unclaimedBalance;
 }
 
-const TokenDetails = ({name, userTokens, userTokenPrices, history}) => {
-
-  const [currentToken] = useState(userTokens.find(userToken=> userToken.name === name));
-  const [totalBalance, setTotalBalance] = useState(0);
-  const [totalValue, setTotalValue] = useState(0);
+const TokenDetails = (props) => {
+  const {
+    tokens,
+    prices,
+    history,
+    id
+  } = props;
   
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    if (name) {
-      const totalTokenBalance = _extractTotalTokenBalance(currentToken);
-      setTotalBalance(totalTokenBalance);
-      setTotalValue(totalTokenBalance * userTokenPrices[name].usd);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps  
-  }, [currentToken]);
-
-  if (!name) {
+  let totalBalance, totalValue
+  const currentToken = tokens.find(userToken => userToken.tokenId === id);
+  if (!currentToken) {
     history.push('/dashboard');
-    return (<></>)
+  } else {
+    totalBalance = currentToken && _extractTotalTokenBalance(currentToken);
+    totalValue = currentToken && totalBalance * prices[currentToken.name].usd;
   }
 
   return(
     <div className="token-details">
       <div className="token-details-titles">
-        <h2>{name}</h2>
+        <h2>{currentToken?.name || '--'}</h2>
         <p><span className='token-title-header'>Contract address</span>: <a href={`https://etherscan.io/token/${currentToken.address}`} target="_blank" rel="noreferrer">{currentToken.address}</a></p>
       </div>
 
@@ -62,4 +59,11 @@ const TokenDetails = ({name, userTokens, userTokenPrices, history}) => {
     )
 }
 
-export default withRouter(TokenDetails)
+const mapState = state => {
+  return {
+    tokens: state.App.userData.tokens.data,
+    prices: state.App.userData.tokenPrices.data
+  }
+}
+
+export default connect(mapState)(withRouter(TokenDetails))

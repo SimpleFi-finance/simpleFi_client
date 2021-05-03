@@ -10,19 +10,22 @@ import { ModalProvider } from './components/Modal/ModalContext'
 import Layout from './HOC/layout'
 // pages
 import Welcome from './containers/Homepage';
-import Portfolio from './containers/Portfolio';
+import Dashboard from './containers/Dashboard';
 import TokenDetails from './containers/TokenDetails/TokenDetails';
 import FarmingFieldDetails from './containers/FarmingFieldDetails/FarmingFieldDetails';
 import EarningFieldDetails from './containers/EarningFieldDetails/EarningFieldDetails';
 import Careers from './containers/Careers';
 import About from './containers/AboutUs'
 import DataLoading from './containers/DataLoading'
+import TableViews from './containers/Tables'
+
 import { withRouter } from 'react-router-dom'
 
 const StyledApp = styled.div`
   height: 100vh;
   width: 100vw;
   position: relative;
+  background-color: ${({theme}) => theme.background};
 `;
 
 const App = (props) => {
@@ -32,8 +35,10 @@ const App = (props) => {
         props.history.push('/loading')
       }
     }
-  }, [props.RoiCalculated, props.userAccounts])
+  }, [props.RoiCalculated, props.userAccounts, props.history.location])
 
+  const hasId = props.history.location.pathname.split('/').pop()
+  
   return (
     <ThemeProvider theme={props.themeUI === 'colour' ? colourTheme : darkTheme} >
       <ModalProvider>
@@ -42,10 +47,13 @@ const App = (props) => {
             <Switch>
               <Route path='/' exact render={() => <Welcome />} />
               <Route path='/loading' exact render={() => <DataLoading />} />
-              <Route path='/dashboard' exact render={() => <Portfolio />} />
-              <Route path='/token/:tokenName' exact render={() => <TokenDetails />}/>
-              <Route path='/farming/:fieldName' exact render={() => <FarmingFieldDetails />}/>
-              <Route path='/earning/:fieldName' exact render={() => <EarningFieldDetails />}/>
+              <Route path='/dashboard' exact render={() => <Dashboard />} />
+              <Route path='/tokens' exact render={() => <TableViews />} />
+              <Route path='/tokens/:id' render={() => <TokenDetails id={hasId}/>} />
+              <Route path='/earning' exact render={() => <TableViews />} />
+              <Route path='/earning/:id' render={() => <EarningFieldDetails id={hasId}/>} />
+              <Route path='/farming' exact render={() => <TableViews />} />
+              <Route path='/farming/:id' render={() => <FarmingFieldDetails id={hasId}/>} />
               <Route path='/careers' exact render={() => <Careers />} />
               <Route path='/about' exact render={() =>  <About />} />
             </Switch> 

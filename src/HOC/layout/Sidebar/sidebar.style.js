@@ -5,7 +5,7 @@ export const Sidebar = styled.div`
   width: 70px;
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 150px auto 150px;
+  grid-template-rows: 80px auto 150px;
   border-right: 1px solid white;
 `
 
