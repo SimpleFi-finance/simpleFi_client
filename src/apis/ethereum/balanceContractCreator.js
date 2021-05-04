@@ -1,11 +1,6 @@
 import { ethers } from 'ethers';
 import provider from './../../utils/ethProvider';
 
-/**
- * @func createContract creates an instance of a new ethers contract interface
- * @param {collection} array of tracked tokens or fields
- * @returns {object} collection with new contract interfaces
- */
 function createBalanceContracts (collection) {
   const collectionWithContracts = [];
   

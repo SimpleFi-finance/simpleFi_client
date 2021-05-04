@@ -2,16 +2,6 @@ import getUserLiquidityHistory from './earningROIs/getUserLiquidityHistory';
 import getUserFarmingHistory from './farmingROIs/getUserFarmingHistory';
 import helpers from '../../../helpers';
 
-/**
- * 
- * @param {String} userAccount user's Eth account
- * @param {Array} userFields user's earning and farming fields
- * @param {Array} trackedFields all tracked fields
- * @param {Array} userTokenTransactions all user ERC20 transactions (pulled from Etherscan)
- * @param {Array} trackedTokens all tracked tokens
- * @return {Array} userFields with added ROI, user transaction history and current value of investment
- */
-
 const getROIs = async (userAccount, userFields, trackedFields, userTokenTransactions, userNormalTransactions, trackedTokens, userTokens, tokenPrices) => {
 
   const fieldsWithROI = [...userFields];
@@ -33,8 +23,6 @@ const getROIs = async (userAccount, userFields, trackedFields, userTokenTransact
         //TODO: rename variable to totalCurrInvValue
         field.investmentValue = currInvestmentValue;
         field.userTxHistory = userLiquidityHistory;
-        //@dev: {allTimeROI, absReturnValue, histInvestmentValue}
-        //NOTE: adding field is only relevant for Uniswap at the moment
         field.earningROI = helpers.calcEarningROI(currInvestmentValue, userLiquidityHistory, field, tokenPrices);
       }
     }

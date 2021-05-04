@@ -1,5 +1,52 @@
 import * as actionTypes from '../actions/actionTypes.actions'
 import { updateObject } from '../utils.store'
+const baseState = {
+  trackedData: {
+    tokens: {
+      fetched: false,
+      loading: false,
+      error: null,
+      data: [],
+    },
+    investments: {
+      loading: false,
+      error: null,
+      fetched: false,
+      data: []
+    },
+  },
+  userData: {
+    tokens: {
+      fetched: false,
+      error: null,
+      loading: false,
+      rewound: false,
+      data: []
+    },
+    investments: {
+      loading: false,
+      error: null,
+      fetched: false,
+      data: []
+    },
+    unclaimed: {
+      loading: false,
+      error: null,
+      fetched: false,
+      data: []
+    },
+    transactions: {
+      loading: false,
+      error: null,
+      fetched: false,
+      data: []
+    },
+    tokenPrices: {
+      data: []
+    },
+    hasROI: false
+  }
+}
 
 const initialState = {
   userAccounts: [],
@@ -85,7 +132,7 @@ const setError = (state, action) => {
 const setAccounts = (state, action) => {
 
   const newState = {
-    ...initialState,
+    ...baseState,
     userAccounts: action.payload
   }
   return updateObject(state, newState )

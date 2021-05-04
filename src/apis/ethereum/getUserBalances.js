@@ -1,12 +1,6 @@
 import { ethers } from 'ethers';
 import provider from './../../utils/ethProvider';
 
-/**
- * @func getOneAccountBalance retrieves balance of an ethereum account's tokens and stakes
- * @param {account} string user account address for which balance is requested
- * @param {contract} string token contract (optional - defaults to Eth, which does not have a contract)
- * @returns {string} account balance
- */
 async function _getOneAccountBalance (account, targetContract) {
   if (!targetContract) {
     const balance = await provider.getBalance(account);
@@ -22,14 +16,6 @@ async function _getOneAccountBalance (account, targetContract) {
   }
 }
 
-/**
- * 
- * @param {String} account - Ethereum address of the token or field for which the user's balance is being sought
- * @param {Array} fieldOrTokenArr - array of tracked tokens or tracked fields
- * @returns {Array} - balances added to each field or token in the arry
- * @dev this function is used for both tracked tokens and fields
- */
-  //CHECK: consider one call to Etherscan for token balances
 function getAllUserBalances(account, collection) {
     const balancePromises = Promise.all(
       collection.map(

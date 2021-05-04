@@ -1,16 +1,8 @@
 import { getOneCurvePoolRawData } from '../../protocolQueries';
 import helpers from '../../../../helpers';
 import getHistoricalPrice from '../../../../utils/getHistoricalPrices'
-/**
- * 
- * @param {Object} field - current Curve earning (liquidity pool) field
- * @param {Object} receiptToken - fields receipt token, used to track user holding changes
- * @param {Array} userReceiptTokenTxs - all transactions involving user's receipt token
- * @param {Array} relatedFarmReceiptTokenTxs - all transactions involving the receipt token of farming fields related to the currently analysed earning field
- * @param {String} userAccount - user's Ethereum account
- * @param {Array} whitelist - array of staking addresses, to avoid staking/unstaking receipt tokens being counted as a realised profit/loss or new investment
- * @dev - sortReceiptAndRelatedTxs() will merge and order userReceiptTokenTxs and relatedFarmReceiptTokenTxs by block/date number
- */
+
+
 async function getCurveLiquidityHistory(field, receiptToken, userReceiptTokenTxs, relatedFarmReceiptTokenTxs, userAccount, whitelist) {
   // assumes that at least one of userReceiptTokenTxs or relatedFarmReceiptTokenTxs will have a length
   const sortedReceiptAndRelatedTxs = helpers.sortReceiptAndRelatedTxs (userReceiptTokenTxs, relatedFarmReceiptTokenTxs);

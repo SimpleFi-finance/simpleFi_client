@@ -1,16 +1,3 @@
-/**
- * 
- * @param {Object} tx - currently analysed tx (filtered from Etherscan fetch of user ERC20 transfer history)
- * @param {String} userAccount user Ethereum address
- * @param {Array} whitelist - list of seed token staking addresses to or from which
- *                            transactions don't change the user's underlying holding
- * @dev - the whitelist is essentially a list of related farming field addresses in which the user will either stake or unstake
- *        receipt tokens of the currently analysed earning field.
- *      - the directRelatedFarmReceiptTx flag indicates when the user was sent related farm field receipt tokens directly, without having 
- *        to stake or unstake the earning field's receipt token directly.
- *                            
- */
-//FIXME: provide for txIn/Out and (un)Stake are done in the same tx
 function sortLiquidityTxs (tx, userAccount, whitelist) {
   let txIn, txOut;
   let staked, unstaked;

@@ -8,11 +8,7 @@ import ProgressBar from '../../components/UI/ProgressBar'
 import { SwitchTransition } from 'react-transition-group'
 import Background from '../../components/UI/BackgroundLoading'
 import Logo from '../../components/UI/Logo'
-/**
- * @dev This page is only used when a user changes accounts or enters the dashboard for first time to compute all needed data. Data will then be updated dynamically
- */
 
-// all data fetching methods go here, all laoding props go here, visualise what the app is fetching 
 const _completeFetchingData = (collection) => {
   const dataSetsCondition = []
   for (const el in collection) {

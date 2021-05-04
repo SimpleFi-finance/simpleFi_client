@@ -2,14 +2,6 @@ import { ethers } from 'ethers';
 import provider from './../../utils/ethProvider';
 import unclaimedBalanceInterfaceTypes from '../../data/fieldData/unclaimedBalanceTypes';
 
-/**
- * 
- * @param {UUID} fieldId - id of the currently analysed field
- * @param {UUID} tokenId - id of the currently analysed token
- * @dev - this check is necessary due to the myriad different methods used by protocol smart contracts
- *        to check unclaimed reward balances, particularly when there are multiple crop tokens
- * @returns {String || null} - the specific type of the unclaimedBalance method
- */
 function _findUnclaimedBalanceType (fieldId, tokenId) {
   for (const type in unclaimedBalanceInterfaceTypes) {
     const targetInterface = unclaimedBalanceInterfaceTypes[type].find(contractInt => contractInt.tokenId === tokenId && contractInt.fieldId === fieldId)
@@ -20,19 +12,6 @@ function _findUnclaimedBalanceType (fieldId, tokenId) {
   return null;
 }
 
-
-/**
- * 
- * @param {String} userAccount - currently analysed user account
- * @param {Array} trackedFields - all fields tracked by SimpleFi
- * @dev - we assume that the same contract address is used to check the balance of multiple
- *        crop tokens (albeit with different methods saved in the cropToken DB table)
- *      - most methods to check unclaimed balances will only require one argument (the userAccount)
- *        but others will require more (e.g. the token address), hence the necessity of the switch statement
- *      - note that the method name for checking balances varies from contract to contract
- *        (and/or token to token when multiple crops) and is stored in the SimpleFi DB
- * @returns {Array} - array of objects containing the field, tokenId, and unclaimedBalance
- */
 async function getUnclaimedRewards(userAccount, trackedFields) {
   const unclaimedCropBalances = [];
   const farmFields = trackedFields.filter(field => field.cropTokens.length)

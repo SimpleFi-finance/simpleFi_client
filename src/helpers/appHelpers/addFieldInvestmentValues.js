@@ -1,10 +1,3 @@
-/**
- * 
- * @param {Array} userFields - all fields the user has invested in 
- * @param {Object} tokenPrices - prices of all user tokens
- * @return {Array} user fields updated with the value of the user's investment in them
- */
-
 function addFieldInvestmentValues(userFields, tokenPrices) {
   const updatedFields = [...userFields];
   

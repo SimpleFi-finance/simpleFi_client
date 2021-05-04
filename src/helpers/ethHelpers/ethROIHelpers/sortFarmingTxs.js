@@ -1,17 +1,3 @@
-/**
- * 
- * @param {Object} field currently analysed farming field
- * @param {Array} userTokenTransactions all user ERC20 transactions
- * @param {Array} userNormalTransactions all user "normal" transactions
- * @param {Array} trackedTokens all tokens tracked by SimpleFi
- * @param {String} userAccount currently analysed user's address
- * @return {Array} - user farming transactions sorted by type: staking, unstaking or claim
- *                   type is deduced from the [staking | unstaking | reward]Amount property
- * @dev - note that the farmSeedToken property is added to all transactions, even reward claims
- *        this is because for reward claims it will be used to get an accurate read of the historical 
- *        balance in the Farming details page transaction table
- */       
-
 function sortFarmingTxs(field, userTokenTransactions, userNormalTransactions, trackedTokens, userAccount) {
   const rewardDepositContract = field.contractAddresses.find(contractAddress => contractAddress.addressTypes.includes('deposit'));
   const rewardWithdrawalContract = field.contractAddresses.find(contractAddress => contractAddress.addressTypes.includes('withdraw'));

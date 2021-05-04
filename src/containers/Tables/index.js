@@ -1,5 +1,4 @@
-import React from 'react'
-import * as S from './tables.style'
+import React, { useEffect } from 'react'
 import TokensTable from './TokensTable'
 import EarningsTable from './EarningsTable'
 import FarmingTable from './FarmingTable'
@@ -42,7 +41,11 @@ const TableView = (props) => {
   const sendToDetails = (id, type) => {
     return history.push(`/${type}/${id}`)
   }
-  
+  useEffect(() => {
+    return () => {
+      console.log("cleaned up");
+    };
+  }, []);
   return (
     <TableContainerSt>
       {pathname === '/tokens' &&

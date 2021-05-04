@@ -1,14 +1,5 @@
 import { getOneCurvePoolRawData } from '../../protocolQueries';
 import getHistoricalPrice from '../../../../utils/getHistoricalPrices'
-/**
- * 
- * @param {Object} token - the target token for which the historical price is required
- * @param {Timestamp} timestamp - historical date on which the hist. price is sought
- * @param {Array} trackedFields - all SimpleFi tracked fields
- * @dev - this getter fetches the full history of daily balances and supplies from the Curve API
- *        
- * @return {Object} - returns a historical price per token and a formatted txDate (important for display in field details tx table)
- */
 
 async function getOneCurveHistReceiptPrice(token, timestamp, trackedFields) {
   //@dev: assumes that Curve staking/farming fields only have one seed token
