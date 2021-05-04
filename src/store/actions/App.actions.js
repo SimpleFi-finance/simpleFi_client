@@ -9,6 +9,7 @@ const _metaMaskConnect = async () => {
   try {
     return await window.ethereum.request({ method: 'eth_requestAccounts' });
   } catch (err) {
+    alert('Metamask Error - Please refresh')
     console.error('metamask connect',err)
     return { err }
   }
@@ -94,15 +95,7 @@ export const _setAccountSuccess = (accounts) => {
 
 export const setAccounts = (inputAccount = []) => {
   return dispatch => {
-    if (inputAccount.length) {
-      dispatch(_setAccountSuccess(inputAccount))
-    } else {
-      if (window.ethereum && window.ethereum.isMetaMask) {
-        window.ethereum.on('accountsChanged', function (accounts) {
-          dispatch(_setAccountSuccess(accounts))
-        });
-      }
-    }
+    dispatch(_setAccountSuccess(inputAccount))
   }
 }
 
@@ -124,6 +117,7 @@ export const connectMetaMaskWallet = (history) => {
         history.push('/loading');
       }
     } else {
+      alert('Please install Metamask to use SimpleFi (https://metamask.io/)')
       dispatch(_setError('Please install Metamask to use SimpleFi (https://metamask.io/)'))
     }
   }

@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/actionTypes.actions'
 import { updateObject } from '../utils.store'
 
 const initialState = {
-  userAccounts: ['0x6A634f1Bec0E530C41cb81241aCC74fD0E3acB11'],
+  userAccounts: [],
   trackedData: {
     tokens: {
       fetched: false,
@@ -83,7 +83,12 @@ const setError = (state, action) => {
 }
 
 const setAccounts = (state, action) => {
-  return updateObject(state, { userAccounts: action.payload || []})
+
+  const newState = {
+    ...initialState,
+    userAccounts: action.payload
+  }
+  return updateObject(state, newState )
 }
 
 const setTracked = (state, action) => {

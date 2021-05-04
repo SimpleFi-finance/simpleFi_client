@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components'
 import { GlobalStyles } from './components/GlobalStyles'
 import { colourTheme, darkTheme } from './components/GlobalStyles/themes'
@@ -31,32 +31,55 @@ const StyledApp = styled.div`
 const App = (props) => {
   useEffect(() => {
     if (!props.RoiCalculated) {
-      if (props.history.location.pathname !== '/' && props.history.location.pathname !== '/loading') {
+      if (!props.userAccounts.length) {
+        props.history.push('/')
+      } else if (props.history.location.pathname !== '/loading') {
         props.history.push('/loading')
       }
     }
-  }, [props.RoiCalculated, props.userAccounts, props.history.location])
+  }, [props.RoiCalculated, props.userAccounts])
 
   const hasId = props.history.location.pathname.split('/').pop()
-  
+
+  window.ethereum.on('accountsChanged', function (accounts) {
+    if (props.userAccounts !== accounts && accounts.length) {
+      console.log('accounts changed')
+      if (props.userAccounts.length) {
+        props.setAccounts(accounts)
+      }
+    } else {
+      props.setAccounts([])
+      props.history.push('/')
+    }
+  });
+
   return (
     <ThemeProvider theme={props.themeUI === 'colour' ? colourTheme : darkTheme} >
       <ModalProvider>
         <StyledApp>
           <Layout>
-            <Switch>
-              <Route path='/' exact render={() => <Welcome />} />
-              <Route path='/loading' exact render={() => <DataLoading />} />
-              <Route path='/dashboard' exact render={() => <Dashboard />} />
-              <Route path='/tokens' exact render={() => <TableViews />} />
-              <Route path='/tokens/:id' render={() => <TokenDetails id={hasId}/>} />
-              <Route path='/earning' exact render={() => <TableViews />} />
-              <Route path='/earning/:id' render={() => <EarningFieldDetails id={hasId}/>} />
-              <Route path='/farming' exact render={() => <TableViews />} />
-              <Route path='/farming/:id' render={() => <FarmingFieldDetails id={hasId}/>} />
-              <Route path='/careers' exact render={() => <Careers />} />
-              <Route path='/about' exact render={() =>  <About />} />
-            </Switch> 
+            {props.userAccounts.length ?
+              <Switch>
+                <Route path='/' exact render={() => <Welcome />} />
+                <Route path='/loading' exact render={() => <DataLoading />} />
+                <Route path='/dashboard' exact render={() => <Dashboard />} />
+                <Route path='/tokens' exact render={() => <TableViews />} />
+                <Route path='/tokens/:id' render={() => <TokenDetails id={hasId} />} />
+                <Route path='/earning' exact render={() => <TableViews />} />
+                <Route path='/earning/:id' render={() => <EarningFieldDetails id={hasId} />} />
+                <Route path='/farming' exact render={() => <TableViews />} />
+                <Route path='/farming/:id' render={() => <FarmingFieldDetails id={hasId} />} />
+                <Route path='/careers' exact render={() => <Careers />} />
+                <Route path='/about' exact render={() => <About />} />
+              </Switch>
+              :
+              <Switch>
+                <Route path='/' exact render={() => <Welcome />} />
+                <Route path="*" >
+                  <Redirect to="/"/>
+                </Route>
+              </Switch>
+            }
           </Layout>
           <GlobalStyles />
         </StyledApp>

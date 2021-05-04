@@ -31,10 +31,9 @@ const Welcome = (props) => {
       props.setAccount([accountValue.toLowerCase()]);
       props.history.push('/loading');
     } else {
-      console.log('Please enter a valid Ethereum address  ----- homepage')
+      alert('Please enter a valid Ethereum address  ----- homepage')
     }
   }
-
   return (
     <>
       <S.Container id={'container'}>
@@ -90,8 +89,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     setAccount: (accounts) => dispatch(actions.setAccounts(accounts)),
-    connectAccount: (history, currentAccounts) => dispatch(actions.connectMetaMaskWallet(history, currentAccounts))
-
+    connectAccount: (history) => dispatch(actions.connectMetaMaskWallet(history))
   }
 }
+
 export default connect(mapState, mapDispatch)(withRouter(Welcome));
