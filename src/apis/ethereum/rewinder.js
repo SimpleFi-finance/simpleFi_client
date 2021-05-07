@@ -11,20 +11,20 @@ function _combineFieldSuppliesAndReserves(supplies, reserves) {
 
   return combinedBalances;
 }
-async function rewinder (userFields, trackedTokens, trackedFields) {
+async function rewinder (investmentCollection, trackedTokens, trackedInvestments) {
   const userTokenBalances = [];
   const userFeederFieldBalances = [];
   const totalFieldSupplyCache = []; // { fieldName, totalFieldSupply }
   const fieldSeedReserveCache = []; // { fieldName, seedReserves: [{tokenName, fieldReserve}] }
 
-  for (const mainField of userFields) {
-    const { contract, decimals } = mainField.fieldContracts.balanceContract;
-    const totalMainFieldSupply = await getTotalFieldSupply(mainField.name, contract, decimals, totalFieldSupplyCache);
-    const userShareOfMainField = mainField.userBalance / totalMainFieldSupply;
+  for (const investment of investmentCollection) {
+    const { contract, decimals } = investment.fieldContracts.balanceContract;
+    const totalMainFieldSupply = await getTotalFieldSupply(investment.name, contract, decimals, totalFieldSupplyCache);
+    const userShareOfMainField = investment.userBalance / totalMainFieldSupply;
     
     //@dev: will extract the balance of underlying seed tokens owned by the user
-    for (const token of mainField.seedTokens) {
-      await tokenBalanceExtractor(token, mainField, userShareOfMainField)
+    for (const token of investment.seedTokens) {
+      await tokenBalanceExtractor(token, investment, userShareOfMainField)
     }
   }
 
@@ -36,19 +36,19 @@ async function rewinder (userFields, trackedTokens, trackedFields) {
     fieldBalances
   };
 
-  async function tokenBalanceExtractor (token, field, share, via) {
+  async function tokenBalanceExtractor (token, investment, share, via) {
     const { tokenId, isBase, tokenContract } = token;
     
-    let fieldSeedReserve = await getFieldSeedReserves(field, token, tokenContract, fieldSeedReserveCache, totalFieldSupplyCache);
+    let fieldSeedReserve = await getFieldSeedReserves(investment, token, tokenContract, fieldSeedReserveCache, totalFieldSupplyCache);
 
     const userTokenBalance = fieldSeedReserve * share;
-    const balanceObj = {token, userTokenBalance, field};
-
+    const balanceObj = {token, userTokenBalance, investment};
     if (via) balanceObj.via = via;
     userTokenBalances.push(balanceObj);
+    
     if (!isBase) {
-      let feederField = trackedFields.find(field => field.receiptToken === tokenId);
-      const parentField = field;
+      let feederField = trackedInvestments.find(field => field.receiptToken === tokenId);
+      const parentField = investment;
 
       [feederField] = helpers.populateFieldTokensFromCache([feederField], trackedTokens);
 
@@ -57,7 +57,7 @@ async function rewinder (userFields, trackedTokens, trackedFields) {
       const userFieldBalance = fieldSeedReserve * share;
       const userFeederShare = userFieldBalance / totalFeederSupply;
 
-      const excludeFeeder = field.isEarning ? true : false;
+      const excludeFeeder = investment.isEarning ? true : false;
 
       userFeederFieldBalances.push({feederField, userFieldBalance, parentField, excludeFeeder});
       

@@ -20,7 +20,7 @@ function addUnclaimedBalances(unclaimedBalances, userTokens, trackedTokens) {
   return updatedUserTokens;
 }
 
-function addLockedTokenBalances (rewoundTokens, userTokens) {
+function addLockedTokenBalances(rewoundTokens, userTokens) {
   const updatedUserTokens = [...userTokens];
 
   rewoundTokens.forEach(rewoundToken => {

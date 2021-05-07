@@ -9,14 +9,14 @@ export const Container = styled.div`
 `;
 
 export const Landing = styled.div`
-  max-height: 60%;
+  height: 70%;
   max-width: 80%;
   display: flex;
   flex-direction: row;
   margin: auto;
 
   img {
-    max-width: 30%;
+    max-width: 50%;
     max-height: 80%;
     object-fit: contain;
   }
@@ -34,7 +34,7 @@ export const Landing = styled.div`
 `;
 
 export const Section = styled.div`
-  height: calc(100vh - 140px);
+  min-height: calc(100vh - 140px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -42,19 +42,16 @@ export const Section = styled.div`
   align-items: center;
 `;
 
-export const TitleText = styled.div`
+export const TitleText = styled.h2`
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
   margin: auto;
-
-  h2 {
-    all: unset;
-    margin: auto;
-    color: ${({theme}) => theme.text};
-    font-size: 1.8em;
-    line-height: 2em;
-  }
+  all: unset;
+  margin: auto;
+  color: ${({theme}) => theme.text};
+  font-size: 1.8em;
+  line-height: 2em;
 
   @media (max-width: 950px) {
     width: 100%;
@@ -68,7 +65,7 @@ export const LogoContainer = styled.div`
 `;
 
 
-export const ConnectData = styled.div`
+export const ConnectWallet = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -80,7 +77,7 @@ export const ConnectData = styled.div`
   }
 `;
 
-export const ConnectDataButton = styled(Button)`
+export const ConnectWalletButton = styled(Button)`
     justify-content: center;
 `;
 
@@ -98,36 +95,42 @@ export const AltConnect = styled(Button)`
   }
 `;
 
-export const AltConnectForm = styled.form`
-  display: none;
+export const CheckAddressForm = styled.form`
   justify-content: center;
   align-items: center;
   position:relative;
   margin: 10px;
-
-  input {
-    font-weight: 300;
-    padding: 5px 20px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5);
+  div {
+    width: 100%;
+    padding: 5px 15px;
     background-color: white;
-    font-size: 0.9em;
-    font-weight: 350;
+    border-radius: 20px;
+    display: flex;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5);
+  }
+  input {
+    border-radius: 10px;
+    background-color: white;
+    font-size: 1.1em;
+    margin: auto 2px;
     color: ${({theme})=> theme.darkGrey};
   }
 
   button {
-    background-color: ${({theme})=> theme.activeItem};
-    color: white;
-    font-weight: 300;
-    margin-left: 10px;
-    padding: 5px 20px;
-    border-radius: 10px;
-    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5);
+    color: ${({theme})=> theme.activeItem};
+    margin-left: 5px;
+    padding: 5px;
     cursor: pointer;
   }
 `;
 
-export const Title = styled.div`
-  height
+export const CheckAddress = styled.div`
+  display: flex;
+  transform: 300ms ease-in-out;
+`;
+
+export const Fade = styled.div`
+  display: flex;
+  transition: 0.5s;
+  opacity: ${({ entered }) => entered ? 1 : 0};
 `;

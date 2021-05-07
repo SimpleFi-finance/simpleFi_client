@@ -1,6 +1,6 @@
+
 function addFieldInvestmentValues(userFields, tokenPrices) {
   const updatedFields = [...userFields];
-  
   updatedFields.forEach(field => {
     let totalFieldValue = 0;
     field.seedTokens.forEach(token => {

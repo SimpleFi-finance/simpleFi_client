@@ -48,7 +48,7 @@ const FarmingFieldDetails = ({id, investments, history}) => {
 
   return (
     <S.Container>
-      {!!currentField &&
+      {currentField ?
         <>
           <S.SectionTitle>
             <h2>{currentField?.name} (farming)</h2>
@@ -100,6 +100,10 @@ const FarmingFieldDetails = ({id, investments, history}) => {
           <DetailsTable txHistory={currentField.userFarmingTxHistory} name={currentField.name}/>
         
         </>
+        :
+        <div>
+          Loading...
+        </div>
       }
     </S.Container>
   )

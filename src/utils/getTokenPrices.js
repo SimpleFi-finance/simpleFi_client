@@ -1,4 +1,4 @@
-import manyPrices from '../apis/coinGecko/currentPrice';
+import axios from '../utils/axios-simplefi'
 import { supportedCurrencies } from './generalData';
 
 async function getTokenPrices(userTokens, userFields, trackedTokens) {
@@ -25,9 +25,9 @@ async function getTokenPrices(userTokens, userFields, trackedTokens) {
       })
     }
   })
-
-  const baseTokenPrices = await manyPrices(apiList.join());
-  const revertToName = Object.entries(baseTokenPrices).map(token => {
+  // TODO: handle possible request error
+  const baseTokenPrices = await axios.get('/prices')
+  const revertToName = Object.entries(baseTokenPrices.data.data).map(token => {
     const targetToken = trackedTokens.find(trackedToken => trackedToken.priceApi === token[0]);
     token[0] = targetToken.name;
     return token;

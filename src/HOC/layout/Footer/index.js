@@ -24,7 +24,7 @@ const Footer = ({ showLogos }) => {
       el: TelegramLogo  
     },
     {
-      link: "https://discord.gg/EMcKxx69",
+      link: "https://discord.gg/3PtdMwpCGK",
       el: DiscordLogo 
     },
     {

@@ -6,7 +6,7 @@ const extractHistoricalPrices = async (token, firstTransaction) => {
   const priceApi = token.priceApi || token.cropTokens[0].priceApi
 
   if (!localCache[priceApi]) {
-    await axios.get(`/prices`)
+    await axios.get(`/prices/historic`)
       .then(response => {
         if (response.status >= 200 && response.status < 300) {
           localCache = { ...response.data }
@@ -16,7 +16,7 @@ const extractHistoricalPrices = async (token, firstTransaction) => {
   }
 
   const timestamp = new Date((firstTransaction * 1000)).setHours(0, 0, 0, 0)
-
+  
   let transactionPriceHist = localCache[priceApi].find(el => el.timestamp === timestamp)
 
   if (!transactionPriceHist) {

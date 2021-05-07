@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes.actions';
 import axios from '../../utils/axios-simplefi'
 import apis from '../../apis';
+import getTokenPrices from '../../utils/getTokenPrices';
 import helpers from '../../helpers'
 // TODO: add notifications
 // ---------------- Generic actions ------------------
@@ -253,7 +254,7 @@ export const _getTokenPrices = (userTokensRewound, investmentsWithSuppliesAndRes
     const state = getState();
     const trackedTokens = state.App.trackedData.tokens;
 
-    apis.getTokenPrices(userTokensRewound, investmentsWithSuppliesAndReserves, trackedTokens.data)
+    getTokenPrices(userTokensRewound, investmentsWithSuppliesAndReserves, trackedTokens.data)
       .then(tokenPrices => {
         const investmentsWithValues = helpers.addFieldInvestmentValues(investmentsWithSuppliesAndReserves, tokenPrices)
 

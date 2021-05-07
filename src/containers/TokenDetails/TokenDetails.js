@@ -27,34 +27,42 @@ const TokenDetails = (props) => {
     totalBalance = currentToken && _extractTotalTokenBalance(currentToken);
     totalValue = currentToken && totalBalance * prices[currentToken.name].usd;
   }
-
+  
   return(
     <div className="token-details">
-      <div className="token-details-titles">
-        <h2>{currentToken?.name || '--'}</h2>
-        <p><span className='token-title-header'>Contract address</span>: <a href={`https://etherscan.io/token/${currentToken.address}`} target="_blank" rel="noreferrer">{currentToken.address}</a></p>
-      </div>
-
-      <div className="token-details-overviews">
-        <div className="token-details-numbers">
-          <div className="token-overview token-roi">
-            <h2>Total balance</h2>
-            <p>{Number(totalBalance.toFixed(2)).toLocaleString()}</p>
+      {currentToken ?
+        <>
+          <div className="token-details-titles">
+            <h2>{currentToken?.name || '--'}</h2>
+            <p><span className='token-title-header'>Contract address</span>: <a href={`https://etherscan.io/token/${currentToken?.address}`} target="_blank" rel="noreferrer">{currentToken?.address}</a></p>
           </div>
 
-          <div className="token-overview token-invested">
-            <h2>Current value</h2>
-            <p>${Number(totalValue.toFixed(2)).toLocaleString()}</p>
+          <div className="token-details-overviews">
+            <div className="token-details-numbers">
+              <div className="token-overview token-roi">
+                <h2>Total balance</h2>
+                <p>{Number(totalBalance.toFixed(2))}</p>
+              </div>
+
+              <div className="token-overview token-invested">
+                <h2>Current value</h2>
+                <p>{Number(totalValue).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
+              </div>
+            </div>
+
+            <div className="token-source-container">
+                <h2>Source of funds</h2>
+              <div className="token-source-chart">
+                <DetailsPieChart data={currentToken} type='token'/>
+              </div>
+            </div>
           </div>
+        </>
+        :
+        <div>
+          Loading...
         </div>
-
-        <div className="token-source-container">
-            <h2>Source of funds</h2>
-          <div className="token-source-chart">
-            <DetailsPieChart data={currentToken} type='token'/>
-          </div>
-        </div>
-      </div>
+      }
     </div>
     )
 }

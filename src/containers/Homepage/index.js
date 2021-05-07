@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import simpleFiSplash from '../../assets/images/simpleFi-splash-blue-sun.svg';
 import { connect } from 'react-redux'
@@ -6,20 +6,13 @@ import * as actions from '../../store/actions'
 import { withRouter } from 'react-router'
 import * as S from './homepage.style'
 import About from '../AboutUs'
+import SearchIcon from '@material-ui/icons/Search';
+import ClearIcon from '@material-ui/icons/Clear';
+import Tooltip from '@material-ui/core/Tooltip';
+
 const Welcome = (props) => {
-
+  const [checkAccount, setCheckAccount] = useState(false)
   const [accountValue, setAccountValue] = useState('');
-  const accountFormRef = useRef(null);
-  const accountButtonRef = useRef(null);
-
-  function toggleForm(e, formRef, buttonRef) {
-    e.preventDefault();
-    const form = formRef.current.style;
-    const button = buttonRef.current.style;
-    form.display = 'flex';
-    form.animation = 'growDown 300ms ease-in-out forwards';
-    button.display = 'none';
-  }
 
   function handleChange(e) {
     setAccountValue(e.target.value)
@@ -27,6 +20,7 @@ const Welcome = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
+    checkAccount && setCheckAccount(false)
     if (ethers.utils.isAddress(accountValue)) {
       props.setAccount([accountValue.toLowerCase()]);
       props.history.push('/loading');
@@ -37,42 +31,70 @@ const Welcome = (props) => {
   return (
     <>
       <S.Container id={'container'}>
-        <S.Section>
+        <S.Section id={'section-home'}>
           <S.Landing>
             <S.TitleText>
-              <h2>Making decentralized finance accessible to everyone</h2>
+              Making decentralized finance accessible to everyone
             </S.TitleText>
             <img src={simpleFiSplash} alt="Welcome to SimpleFi"/>
           </S.Landing>
-          <S.ConnectData>
-            <S.ConnectDataButton
+          <S.ConnectWallet>
+            <S.ConnectWalletButton
               onClick={() =>
                 props.connectAccount(props.history)}
             >
               {props.userAccounts.length
-                ? 'View dashboard'
+                ? 'Enter dashboard'
                 : 'Connect wallet'
               }
-            </S.ConnectDataButton>
-            <S.AltConnect ref={accountButtonRef} onClick={(e) => toggleForm(e, accountFormRef, accountButtonRef)}>check account instead</S.AltConnect>
-            <S.AltConnectForm ref={accountFormRef} type="text" value={accountValue} onSubmit={handleSubmit}>
-              <input type="text"  placeholder="e.g. 0xf147b...a133934" name="name" onFocus={e => e.target.placeholder = ''} onBlur={e => e.target.placeholder = 'e.g. 0xf147b...a133934'} onChange={handleChange}/>
-              <button type="submit" value="Submit">Check</button>
-            </S.AltConnectForm>
-          </S.ConnectData>
+            </S.ConnectWalletButton>
+            <S.CheckAddress>
+              {checkAccount ?
+                <S.CheckAddressForm type="text" value={accountValue} onSubmit={handleSubmit}>
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="e.g. 0xf147b...a133934"
+                      name="name"
+                      onChange={handleChange}
+                    />
+                    <Tooltip title='Lookup'>
+                      <button
+                        type="submit"
+                        value="Submit">
+                        <SearchIcon />
+                      </button>
+                    </Tooltip>
+                    <Tooltip title='Close'>
+                      <button
+                        type="cancel"
+                        color={'red'}
+                        onClick={() => setCheckAccount(false)}
+                        style={{ color: 'red' }}
+                      >
+                        <ClearIcon />
+                      </button>
+                    </Tooltip>
+                  </div>
+                </S.CheckAddressForm>
+                :
+                <S.AltConnect onClick={(e) => setCheckAccount(true)}>check account instead</S.AltConnect> 
+              }
+            </S.CheckAddress>
+          </S.ConnectWallet>
         </S.Section>
-        <S.Section>
+        <S.Section id={'section-about'}>
           <About />
         </S.Section>
-        <S.Section>
+        <S.Section id={'section-holders'}>
           <p> Stakeholders</p>
           <div> insert logos </div>
         </S.Section>
-        <S.Section>
+        <S.Section id={'section-simpefi'}>
           <p> What we do </p>
           <div> insert dapp </div>
         </S.Section>
-        <S.Section>
+        <S.Section id={'section-partners'}>
           <p> Our Partners </p>
           <div> insert logos </div>
         </S.Section>

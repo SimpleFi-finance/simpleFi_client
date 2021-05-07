@@ -41,11 +41,13 @@ const TableView = (props) => {
   const sendToDetails = (id, type) => {
     return history.push(`/${type}/${id}`)
   }
+  
   useEffect(() => {
     return () => {
       console.log("cleaned up");
     };
   }, []);
+
   return (
     <TableContainerSt>
       {pathname === '/tokens' &&
