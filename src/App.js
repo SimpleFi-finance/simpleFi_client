@@ -11,7 +11,7 @@ import Layout from './HOC/layout'
 // pages
 import Welcome from './containers/Homepage';
 import Dashboard from './containers/Dashboard';
-import TokenDetails from './containers/TokenDetails/TokenDetails';
+import TokenDetails from './containers/TokenDetails';
 import FarmingFieldDetails from './containers/FarmingFieldDetails/FarmingFieldDetails';
 import EarningFieldDetails from './containers/EarningFieldDetails/EarningFieldDetails';
 import Careers from './containers/Careers';

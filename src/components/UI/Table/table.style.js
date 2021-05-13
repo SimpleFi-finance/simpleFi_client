@@ -2,7 +2,6 @@ import styled, {css} from 'styled-components'
 
 export const TableContainer = styled.div`
   width: calc(100% - 8px);
-  height: calc(100% - 8px);
   padding: 0px;
   background-color: transparent;
   clear: both;
@@ -16,6 +15,7 @@ export const TableContainer = styled.div`
     background-color: transparent;
     z-index: 1;
     border-collapse: collapse;
+
     thead {
       z-index: 3;
       height: min-content;
@@ -52,6 +52,11 @@ export const TableContainer = styled.div`
       tr {
         align-items: center;
         z-index: 1;
+        &:nth-child(odd){
+          & > td {
+            background-color: ${({theme}) => theme.lightBackground};
+          }
+        }
         &:hover {
           & > td {
             border-bottom: 1px solid white;

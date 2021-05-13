@@ -9,8 +9,8 @@ import About from '../../components/AboutUs'
 import Partners from '../../components/Partners';
 import useVisibility from '../../hooks/useVisibility.hook'
 import MailchimpSubscriber from 'react-mailchimp-subscribe'
-import WaitingListForm from '../../components/WaitingListForm'
-import { Input } from '../../components/Forms'
+import WaitingListForm from '../../components/UI/WaitingListForm'
+import { Input } from '../../components/UI/Forms'
 import ClearIcon from '@material-ui/icons/Clear';
 import Tooltip from '@material-ui/core/Tooltip';
 

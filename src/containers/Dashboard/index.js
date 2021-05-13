@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import OverviewCard from '../../components/OverviewCard';
-import SummaryBox from '../../components/SummaryBox/SummaryBox';
+import OverviewCard from '../../components/UI/OverviewCard';
+import SummaryBox from '../../components/UI/SummaryBox';
 import helpers from '../../helpers';
 import { connect } from 'react-redux'
 import * as S from './dashboard.style'
@@ -29,7 +29,7 @@ const MyAssets = (props) => {
     <S.Container>
       <S.OverflowEl>
         <S.HorizontalContainer>
-          <OverviewCard title='Total assets' amount={userData.hasROI ? Number(holdingHeadlines.totalValue.toFixed()).toLocaleString() : '--'}/>
+          <OverviewCard title='Total assets' amount={userData.hasROI ? Number(holdingHeadlines.totalValue.toFixed()).toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '--'}/>
           <OverviewCard title='Total ROI' numType='percent' amount={userData.hasROI ? (Number((totalROI.farmingROI + totalROI.earningROI) * 100).toFixed(2)).toLocaleString() : '--'}/>
         </S.HorizontalContainer>
         <S.Title>

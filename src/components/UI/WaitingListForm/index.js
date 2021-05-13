@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { Input } from '../Forms'
-import Button from '../../components/UI/Button'
+import Button from '../Button'
 import styled from 'styled-components'
 
 const FormSt = styled.div`

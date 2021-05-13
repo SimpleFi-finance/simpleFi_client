@@ -4,10 +4,9 @@ import styled from 'styled-components'
 
 const TrSt = styled.tr`
   td {
-    height: 45px;
+    height: 55px;
     z-index: 1;
     cursor: ${({ clickable }) => clickable ? 'pointer' : ''};
-    
     .visible-on-hover {
       visibility: hidden;
     }

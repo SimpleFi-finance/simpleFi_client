@@ -1,8 +1,9 @@
 import React from 'react';
-import './TokenDetails.css';
+import * as S from './TokenDetails.style'
 import DetailsPieChart from '../../components/DetailsPieChart/DetailsPieChart';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import OverviewCard from '../../components/UI/OverviewCard'
 
 function _extractTotalTokenBalance(token) {
   const unlockedBalance = token.userBalance ? token.userBalance : 0;
@@ -29,41 +30,43 @@ const TokenDetails = (props) => {
   }
   
   return(
-    <div className="token-details">
+    <S.Container>
       {currentToken ?
         <>
-          <div className="token-details-titles">
-            <h2>{currentToken?.name || '--'}</h2>
-            <p><span className='token-title-header'>Contract address</span>: <a href={`https://etherscan.io/token/${currentToken?.address}`} target="_blank" rel="noreferrer">{currentToken?.address}</a></p>
-          </div>
-
-          <div className="token-details-overviews">
-            <div className="token-details-numbers">
-              <div className="token-overview token-roi">
-                <h2>Total balance</h2>
-                <p>{Number(totalBalance.toFixed(2))}</p>
+          <S.TokenHeader>
+            <h2>{currentToken.name || '--'}</h2>
+            {currentToken.address &&
+              <div>
+                <p>Contract address</p>
+                <a href={`https://etherscan.io/token/${currentToken?.address}`} target="_blank" rel="noreferrer">{currentToken?.address}</a>
               </div>
-
-              <div className="token-overview token-invested">
-                <h2>Current value</h2>
-                <p>{Number(totalValue).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
-              </div>
-            </div>
-
-            <div className="token-source-container">
-                <h2>Source of funds</h2>
-              <div className="token-source-chart">
+            }
+          </S.TokenHeader>
+          <S.TokenContent>
+            <S.OverviewToken>
+              <OverviewCard
+                title='Total Balance'
+                amount={totalBalance.toFixed(2)}
+              />
+              <OverviewCard
+                title='Current Value'
+                amount={Number(totalValue).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
+              />
+            </S.OverviewToken>
+            <S.TokenBreakdown>
+              <h3>Breakdown of funds</h3>
+              <div>
                 <DetailsPieChart data={currentToken} type='token'/>
               </div>
-            </div>
-          </div>
+            </S.TokenBreakdown>
+          </S.TokenContent>
         </>
         :
         <div>
           Loading...
         </div>
       }
-    </div>
+    </S.Container>
     )
 }
 

@@ -103,13 +103,25 @@ export const FieldDetails = styled.div`
   margin: 20px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-evenly;
+
+  @media (max-width: 750px) {
+    flex-direction: column;
+    width: 100%;
+    margin: 20px 2px;
+    gap: 20px;
+  }
+
   div {
     display: flex;
-    margin: auto;
+    margin: 10px;
     flex-direction: column-reverse;
-    min-width: 150px;
-    max-width: 250px;
+    min-width: 250px;
+    max-width: 350px;
+    @media (max-width: 750px) {
+      margin: auto;  
+    }
     & > p {
       &:first-child {
         font-size: 0.7em;

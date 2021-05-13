@@ -8,11 +8,17 @@ export const Nav = styled.div`
   border-bottom: 2px solid ${({ theme }) => theme.lightpurple};
   
   p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin: auto;
     margin-left: 15px;
     font-size: 30px;
     letter-spacing: 2px;
     grid-column: 2 / 8;
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 
   button {

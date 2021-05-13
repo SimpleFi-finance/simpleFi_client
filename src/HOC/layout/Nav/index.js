@@ -8,8 +8,12 @@ const Nav = ({ userAccount, history }) => {
   const style = {
     gridColumn: '8 / 11'
   }
-  let title = 'SimpleFi'
-  switch (history.location.pathname) {
+  
+  const currentLocation = history.location.pathname;
+  
+  let title = 'SimpleFi';
+
+  switch (currentLocation) {
     case '/dashboard':
       title = 'Account Overview';
       break;
@@ -27,15 +31,24 @@ const Nav = ({ userAccount, history }) => {
       break
   }
 
+  const goBack = () => {
+    const loc = currentLocation.split('/').filter(el => el)
+    const backLoc = loc.slice(0, -1).join('/')
+    if (!backLoc) {
+      history.push(`/dashboard`)
+    } else {
+      history.push(`/${backLoc}`)
+    }
+  }
 
   return (
     <S.Nav>
-      {history.location.pathname !== '/' && history.location.pathname !== '/careers'
+      {currentLocation !== '/' && currentLocation !== '/careers'
       ?
         <>
-          {history.location.pathname !== '/dashboard' &&
+          {currentLocation !== '/dashboard' &&
             <button
-              onClick={() => history.goBack()}
+              onClick={() => goBack()}
             >
               <ArrowBackIosIcon />
               Back
@@ -50,7 +63,7 @@ const Nav = ({ userAccount, history }) => {
             <Logo />
           </S.LogoContainer>
           <S.HomepageNav>
-            {history.location.pathname !== '/' && <button onClick={() => history.push('/')}>home</button> } 
+            {currentLocation !== '/' && <button onClick={() => history.push('/')}>home</button> } 
             <button onClick={() => history.push('/#about')}>about</button>
             <button onClick={() => history.push('/careers')}>careers</button>
           </S.HomepageNav>

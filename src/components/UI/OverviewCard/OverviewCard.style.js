@@ -24,9 +24,6 @@ export const CardContent = styled.div`
   h2 {
     font-size: 1.5em;
     color: ${({ theme }) => theme.hoverColor};
-    &::before {
-      content: '$';
-    }
 
     ${({ type }) => type === 'percent' &&
     css`
