@@ -46,6 +46,10 @@ const EarningFieldDetails = ({ id, investments, history }) => {
       const combinedRoi = _calcCombinedROI({ earningField: currentField, farmingFields: farming })
       setComputations({
         roi: roi,
+        relativeRoi: {
+          value: currentField.earningROI.relativeProfit.realisedProfitValue + currentField.earningROI.relativeProfit.unrealisedProfitValue,
+          roi: currentField.earningROI.relativeProfit.totalRelativeROI
+        },
         combinedROI: {
           roi: combinedRoi.roi,
           value: combinedRoi.abs
@@ -62,7 +66,7 @@ const EarningFieldDetails = ({ id, investments, history }) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentField])
-
+  console.log(computations)
   return (
     <S.Container>
       {currentField ?
@@ -100,7 +104,14 @@ const EarningFieldDetails = ({ id, investments, history }) => {
                   <h3>
                   {computations.combinedROI.roi.toLocaleString(undefined, {style: 'percent', minimumFractionDigits: 2})} ({computations.combinedROI.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })})
                   </h3>
-                  <p> Farmed: {((computations.combinedROI.roi) - Number(computations.roi.roi)).toLocaleString(undefined, {style: 'percent', minimumFractionDigits: 2})} ({(computations.combinedROI.value - Number(computations.roi.value)).toLocaleString('en-US', { style: 'currency', currency: 'USD' })})</p>
+                  <p> From Farming: {((computations.combinedROI.roi) - Number(computations.roi.roi)).toLocaleString(undefined, {style: 'percent', minimumFractionDigits: 2})} ({(computations.combinedROI.value - Number(computations.roi.value)).toLocaleString('en-US', { style: 'currency', currency: 'USD' })})</p>
+                </div>
+              </S.DetailBox>
+              <S.DetailBox>
+                <h2>Relative ROI</h2>
+                <div>
+                  <h3>{computations.relativeRoi?.roi.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2})}</h3>
+                  <p> Value: {computations.relativeRoi?.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
                 </div>
               </S.DetailBox>
               <S.DetailBox>

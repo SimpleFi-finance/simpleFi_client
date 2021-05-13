@@ -92,9 +92,7 @@ export const DataContainer = styled.div`
   width: 40%;
   padding: 10px;
   & > div {
-    &:first-child {
-      margin-bottom: 10px;
-    }
+    margin-bottom: 10px;
   }
 `;
 
