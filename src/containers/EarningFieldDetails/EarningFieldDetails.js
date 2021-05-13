@@ -107,13 +107,15 @@ const EarningFieldDetails = ({ id, investments, history }) => {
                   <p> From Farming: {((computations.combinedROI.roi) - Number(computations.roi.roi)).toLocaleString(undefined, {style: 'percent', minimumFractionDigits: 2})} ({(computations.combinedROI.value - Number(computations.roi.value)).toLocaleString('en-US', { style: 'currency', currency: 'USD' })})</p>
                 </div>
               </S.DetailBox>
-              <S.DetailBox>
-                <h2>Relative ROI</h2>
-                <div>
-                  <h3>{computations.relativeRoi?.roi.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2})}</h3>
-                  <p> Value: {computations.relativeRoi?.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
-                </div>
-              </S.DetailBox>
+              {currentField.contractAddresses[0].contractInterface.name === 'uniswap V2 earn' &&
+                <S.DetailBox>
+                  <h2>Relative ROI</h2>
+                  <div>
+                    <h3>{computations.relativeRoi?.roi.toLocaleString(undefined, { style: 'percent', minimumFractionDigits: 2})}</h3>
+                    <p> Value: {computations.relativeRoi?.value.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                  </div>
+                </S.DetailBox>
+              }
               <S.DetailBox>
                 <h2>Investment Value</h2>
                 <div>
