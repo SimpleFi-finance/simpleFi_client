@@ -20,7 +20,6 @@ const getROIs = async (userAccount, userFields, trackedFields, userTokenTransact
       const userLiquidityHistoryPromises = await getUserLiquidityHistory(trackedFields, field, trackedTokens, userTokenTransactions, userAccount);
       if (userLiquidityHistoryPromises) {
         const userLiquidityHistory = await Promise.all(userLiquidityHistoryPromises);
-        //TODO: rename variable to totalCurrInvValue
         field.investmentValue = currInvestmentValue;
         field.userTxHistory = userLiquidityHistory;
         field.earningROI = helpers.calcEarningROI(currInvestmentValue, userLiquidityHistory, field, tokenPrices);

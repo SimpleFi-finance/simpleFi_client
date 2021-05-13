@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import './FarmingFieldDetails.css';
 import DetailsPieChart from '../../components/DetailsPieChart/DetailsPieChart';
-import DetailsTable from '../../components/DetailsTable/DetailsTable';
 import { withRouter } from "react-router";
 import { connect } from 'react-redux'
 import * as S from '../EarningFieldDetails/earning.style'
+import TransactionsTable from '../../components/TableTypes/TransactionTable'
 
 //TODO: identify joint components with EarningFieldDetails container
 function _findUnderlyingFarmingTokens (currentField, userFields) {
@@ -27,7 +27,7 @@ const FarmingFieldDetails = ({id, investments, history}) => {
   if (!currentField) {
     history.push('/dashboard');
   }
-  //@dev: assumes there is a single seed/staking token
+
   useEffect(() => {
     if (currentField) {
       setUnderlyingTokens(_findUnderlyingFarmingTokens (currentField, investments));
@@ -43,8 +43,6 @@ const FarmingFieldDetails = ({id, investments, history}) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentField]);
-
-  
 
   return (
     <S.Container>
@@ -97,8 +95,15 @@ const FarmingFieldDetails = ({id, investments, history}) => {
           <S.SectionTitle>
             <h2>Transaction history</h2>
           </S.SectionTitle>
-          <DetailsTable txHistory={currentField.userFarmingTxHistory} name={currentField.name}/>
-        
+          <TransactionsTable
+            tableId={`farmingTransactions-${currentField.name}`}
+            sortable
+            filterable
+            stickyHeader
+            stickyHeaderTop='0px'
+            align="center"
+            data={currentField.userFarmingTxHistory}
+          />
         </>
         :
         <div>

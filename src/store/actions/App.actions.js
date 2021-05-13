@@ -152,8 +152,8 @@ export const getTrackedInvestments = () => {
 
 export const getTrackedData = () => {
   return dispatch => {
-    Promise.all([dispatch(getTrackedTokens()), dispatch(getTrackedInvestments())])
-    .catch(err => console.log(err))
+    dispatch(getTrackedTokens())
+    dispatch(getTrackedInvestments())
   }
 }
 // -------------------USER data---------------------
@@ -213,15 +213,10 @@ export const getUserData = () => {
     const state = getState();
     const trackedData = state.App.trackedData;
     const accounts = state.App.userAccounts;
-
-    Promise.all([
-      dispatch(getUserTransactions(accounts)),
-      dispatch(getUserTokensBalance(accounts, trackedData)),
-      dispatch(getUserUnclaimedBalance(accounts, trackedData)),
-      dispatch(getUserInvestmentsBalance(accounts, trackedData)),
-    ])
-      .then(() => { return })
-      .catch((err) => console.log(err))
+    dispatch(getUserTransactions(accounts))
+    dispatch(getUserTokensBalance(accounts, trackedData))
+    dispatch(getUserUnclaimedBalance(accounts, trackedData))
+    dispatch(getUserInvestmentsBalance(accounts, trackedData))
   }
 }
 
@@ -240,11 +235,8 @@ export const rewindHoldings = () => {
         const stakedInvestments = helpers.addStakedFieldBalances(underlyingInvestments.userFeederFieldBalances, userData.investments.data);
         const investmentsWithSuppliesAndReserves = helpers.addFieldSuppliesAndReserves(underlyingInvestments.fieldBalances, stakedInvestments)
 
-        Promise.all([
-          dispatch(_setRewoundFlag('tokens'))
-        ]).then(() => {
-          dispatch(_getTokenPrices(tokensWithUnclaimedBalance, investmentsWithSuppliesAndReserves))
-        })
+        dispatch(_setRewoundFlag('tokens'))
+        dispatch(_getTokenPrices(tokensWithUnclaimedBalance, investmentsWithSuppliesAndReserves))
     })
   }
 }
@@ -282,12 +274,10 @@ export const _getUserReturns = (userInvestments, userTokensRewound, userTokenPri
         userTokensRewound,
         userTokenPrices
       ).then(investmentsWithROI => {
-        Promise.all([
-          dispatch(_setUserData('tokens', userTokensRewound)),
-          dispatch(_setUserData('investments', investmentsWithROI)),
-          dispatch(_setUserData('tokenPrices', userTokenPrices)),
-          dispatch(_setRoiCalculated())
-        ])
+        dispatch(_setUserData('tokens', userTokensRewound))
+        dispatch(_setUserData('investments', investmentsWithROI))
+        dispatch(_setUserData('tokenPrices', userTokenPrices))
+        dispatch(_setRoiCalculated())
       })
     })
   }

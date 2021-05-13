@@ -12,7 +12,15 @@ export const Nav = styled.div`
     margin-left: 15px;
     font-size: 30px;
     letter-spacing: 2px;
-    grid-column: 1 / 7;
+    grid-column: 2 / 8;
+  }
+
+  button {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.1em;
+    margin: auto 2px;
+    cursor: pointer;
   }
 `;
 

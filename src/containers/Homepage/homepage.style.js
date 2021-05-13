@@ -5,7 +5,30 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 140px;
+  gap: 70px;
+  overflow-y: auto;
+`;
+
+export const Subscriber = styled.div`
+  position: absolute;
+  z-index: 400;
+  bottom: 15px;
+  border: 2px solid ${({ theme }) => theme.lightpurple};
+  right: ${({ isVisible }) => isVisible ? '15px' : '-700px'};
+  width: 40%;
+  height: 200px;
+  -webkit-box-shadow: 0 9px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0 9px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 9px 7px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  background-color: ${({ theme }) => theme.border};
+  color: ${({theme}) => theme.darkGrey};
+  border-radius: 4px;
+  padding: 5px;
+  div {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Landing = styled.div`
@@ -34,7 +57,7 @@ export const Landing = styled.div`
 `;
 
 export const Section = styled.div`
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 210px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -46,7 +69,6 @@ export const TitleText = styled.h2`
   display: flex;
   flex-direction: column;
   width: 50%;
-  margin: auto;
   all: unset;
   margin: auto;
   color: ${({theme}) => theme.text};
@@ -100,28 +122,6 @@ export const CheckAddressForm = styled.form`
   align-items: center;
   position:relative;
   margin: 10px;
-  div {
-    width: 100%;
-    padding: 5px 15px;
-    background-color: white;
-    border-radius: 20px;
-    display: flex;
-    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5);
-  }
-  input {
-    border-radius: 10px;
-    background-color: white;
-    font-size: 1.1em;
-    margin: auto 2px;
-    color: ${({theme})=> theme.darkGrey};
-  }
-
-  button {
-    color: ${({theme})=> theme.activeItem};
-    margin-left: 5px;
-    padding: 5px;
-    cursor: pointer;
-  }
 `;
 
 export const CheckAddress = styled.div`

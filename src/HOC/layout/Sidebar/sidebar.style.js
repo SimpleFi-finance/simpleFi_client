@@ -18,7 +18,7 @@ export const ThemeControl = styled.div`
 
 export const LogoContainer = styled.button`
   grid-row: 1 / span 1;
-  margin: 2px;
+  margin: 3px;
   cursor: pointer;
 `
 

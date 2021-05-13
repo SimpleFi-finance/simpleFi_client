@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import DetailsTable from '../../components/DetailsTable/DetailsTable';
 import DetailsBarChart from '../../components/DetailsBarChart/DetailsBarChart';
 import { connect } from 'react-redux'
 import { withRouter } from "react-router";
 import * as S from './earning.style'
+import TransactionsTable from '../../components/TableTypes/TransactionTable'
 
 function _calcCombinedROI(combinedFields) {
   const {earningField, farmingFields} = combinedFields;
@@ -120,7 +120,15 @@ const EarningFieldDetails = ({ id, investments, history }) => {
           <S.SectionTitle>
             <h2>Transaction history</h2>
           </S.SectionTitle>
-          <DetailsTable txHistory={currentField.userTxHistory} name={currentField.name}/>
+          <TransactionsTable
+            tableId={`farmingTransactions-${currentField.name}`}
+            sortable
+            filterable
+            stickyHeader
+            stickyHeaderTop='0px'
+            align="center"
+            data={currentField.userTxHistory}
+          />
         </>
         :
         <div>

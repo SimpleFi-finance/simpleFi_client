@@ -15,7 +15,6 @@ import TokenDetails from './containers/TokenDetails/TokenDetails';
 import FarmingFieldDetails from './containers/FarmingFieldDetails/FarmingFieldDetails';
 import EarningFieldDetails from './containers/EarningFieldDetails/EarningFieldDetails';
 import Careers from './containers/Careers';
-import About from './containers/AboutUs'
 import DataLoading from './containers/DataLoading'
 import TableViews from './containers/Tables'
 
@@ -40,18 +39,18 @@ const App = (props) => {
   }, [props.RoiCalculated, props.userAccounts])
 
   const hasId = props.history.location.pathname.split('/').pop()
-
-  window.ethereum.on('accountsChanged', function (accounts) {
-    if (props.userAccounts !== accounts && accounts.length) {
-      console.log('accounts changed')
-      if (props.userAccounts.length) {
-        props.setAccounts(accounts)
+  if (window.ethereum) {
+    window.ethereum.on('accountsChanged', function (accounts) {
+      if (props.userAccounts !== accounts && accounts.length) {
+        if (props.userAccounts.length) {
+          props.setAccounts(accounts)
+        }
+      } else {
+        props.setAccounts([])
+        props.history.push('/')
       }
-    } else {
-      props.setAccounts([])
-      props.history.push('/')
-    }
-  });
+    });
+  }
 
   return (
     <ThemeProvider theme={props.themeUI === 'colour' ? colourTheme : darkTheme} >
@@ -70,7 +69,6 @@ const App = (props) => {
                 <Route path='/farming' exact render={() => <TableViews />} />
                 <Route path='/farming/:id' render={() => <FarmingFieldDetails id={hasId} />} />
                 <Route path='/careers' exact render={() => <Careers />} />
-                <Route path='/about' exact render={() => <About />} />
               </Switch>
               :
               <Switch>

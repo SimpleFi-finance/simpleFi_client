@@ -17,7 +17,6 @@ async function getTokenPrices(userTokens, userFields, trackedTokens) {
     }
   })
 
-  //@dev: assumption that all crop tokens are base tokens
   userFields.forEach(userField => {
     if (userField.cropTokens.length) {
       userField.cropTokens.forEach(token => {
@@ -25,14 +24,20 @@ async function getTokenPrices(userTokens, userFields, trackedTokens) {
       })
     }
   })
-  // TODO: handle possible request error
+
+  let tokenPrices
   const baseTokenPrices = await axios.get('/prices')
-  const revertToName = Object.entries(baseTokenPrices.data.data).map(token => {
-    const targetToken = trackedTokens.find(trackedToken => trackedToken.priceApi === token[0]);
-    token[0] = targetToken.name;
-    return token;
-  })
-  const tokenPrices = Object.fromEntries(revertToName);
+  if (baseTokenPrices.status >= 200 && baseTokenPrices.status < 300) {
+    const revertToName = Object.entries(baseTokenPrices.data.data).map(token => {
+      const targetToken = trackedTokens.find(trackedToken => trackedToken.priceApi === token[0]);
+      token[0] = targetToken.name;
+      return token;
+    })
+    
+    tokenPrices = Object.fromEntries(revertToName);
+  } else {
+    throw new Error('Error getting token prices')
+  }
   // determine composite price of non-base tokens
   nonBaseTokens.forEach(token => {
     //NOTE: recursion may be required in edge cases where field's seeds are not base

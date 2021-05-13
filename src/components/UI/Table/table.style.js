@@ -7,6 +7,7 @@ export const TableContainer = styled.div`
   background-color: transparent;
   clear: both;
   overflow-x: auto;
+  overflow-y: hidden;
   margin: 0px 4px;
 
   table {

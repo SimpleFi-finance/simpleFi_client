@@ -18,7 +18,6 @@ import {
   calcEarningROI,
   calcFarmingROI
 } from './ethHelpers';
-import extractTempFieldDetailsCells from './detailsTableHelper';
 import {
   extractDetailsPieChartValues,
   extractDetailsBarChartValues,
@@ -43,7 +42,6 @@ export default {
   sortReceiptAndRelatedTxs,
   calcEarningROI,
   calcFarmingROI,
-  extractTempFieldDetailsCells,
   extractDetailsPieChartValues,
   extractDetailsBarChartValues,
   chartCallbacks

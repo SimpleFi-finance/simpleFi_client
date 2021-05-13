@@ -12,7 +12,7 @@ const Footer = ({ showLogos }) => {
 
   const socialIcons = [
     {
-      link: "https://github.com/raphael-mazet/simplefi-client",
+      link: "https://github.com/SimpleFi-finance/simpleFi_client",
       el: GithubLogo  
     },
     {

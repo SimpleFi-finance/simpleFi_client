@@ -49,7 +49,7 @@ const baseState = {
 }
 
 const initialState = {
-  userAccounts: ['0x6a634f1bec0e530c41cb81241acc74fd0e3acb11'],
+  userAccounts: [],
   trackedData: {
     tokens: {
       fetched: false,

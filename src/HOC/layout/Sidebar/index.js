@@ -9,7 +9,6 @@ import Tooltip from '@material-ui/core/Tooltip'
 import SideBarItems from './SideBarItems'
 import DescriptionOutlinedIcon from '@material-ui/icons/DescriptionOutlined'
 
-//TODO: fix styling of logo and spread of items in sidebar
 const Sidebar = (props) => {
   return (
     <S.Sidebar>

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
-import TokensTable from './TokensTable'
-import EarningsTable from './EarningsTable'
-import FarmingTable from './FarmingTable'
+import React from 'react'
+import TokensTable from '../../components/TableTypes/TokensTable'
+import EarningsTable from '../../components/TableTypes/EarningsTable'
+import FarmingTable from '../../components/TableTypes/FarmingTable'
 import { useLocation } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -41,12 +41,6 @@ const TableView = (props) => {
   const sendToDetails = (id, type) => {
     return history.push(`/${type}/${id}`)
   }
-  
-  useEffect(() => {
-    return () => {
-      console.log("cleaned up");
-    };
-  }, []);
 
   return (
     <TableContainerSt>
