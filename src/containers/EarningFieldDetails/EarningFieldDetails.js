@@ -66,7 +66,7 @@ const EarningFieldDetails = ({ id, investments, history }) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentField])
-  console.log(computations)
+  
   return (
     <S.Container>
       {currentField ?
