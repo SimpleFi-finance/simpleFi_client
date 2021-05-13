@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import './FarmingFieldDetails.css';
 import DetailsPieChart from '../../components/DetailsPieChart/DetailsPieChart';
 import { withRouter } from "react-router";
 import { connect } from 'react-redux'
