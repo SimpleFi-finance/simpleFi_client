@@ -36,9 +36,10 @@ export const HomepageNav = styled.div`
   padding: 0 10px;
   justify-content: space-evenly;
   grid-column: 8 / 10;
-
+  
   button {
     cursor: pointer;
+    margin: auto 10px;
     color:${({ theme }) => theme.text};
     text-transform: capitalize;
 

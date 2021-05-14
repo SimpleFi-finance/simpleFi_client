@@ -152,7 +152,7 @@ const Partners = () => {
       <ContactSt>
         <p>Partner with us: </p>
         <a
-          href="mailto:development@simplefi.finance"
+          href="mailto:development@simplefi.finance?Subject=Partners:%20Partnership%20Opportunities"
           target="_blank"
           rel="noreferrer noopener"
         >get in touch</a>

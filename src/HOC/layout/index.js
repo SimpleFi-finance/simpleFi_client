@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 
 export const Layout = (props) => {
 
-  const noSidebar = ['/', '/loading', '/careers', '/about'].find(path => path === props.history.location.pathname)
+  const noSidebar = ['/', '/loading', '/careers', '/about'].find(path => props.history.location.pathname.includes(path))
 
   return (
     <>

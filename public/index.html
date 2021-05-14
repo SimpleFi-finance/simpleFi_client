@@ -60,6 +60,15 @@
       }
     }
   </style>
+  <script>
+    setTimeout(function () {
+      const openEvent = new CustomEvent("kol:activate:ContestBox", {});
+      //Don't run if KOL script isn't installed. 
+      if (window._kol && window.location.pathname === '/') {
+        window._kol.container.dispatchEvent(openEvent);
+      }
+    }, 3000);
+  </script>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>

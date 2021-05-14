@@ -11,7 +11,7 @@ export const UserAddress = styled.div`
   flex-direction: row-reverse;
   align-items: center;
   margin: auto;
-
+  cursor: pointer;
   div {
     margin: auto 10px;
   }

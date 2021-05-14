@@ -38,7 +38,6 @@ const App = (props) => {
     }
   }, [props.RoiCalculated, props.userAccounts])
 
-  const hasId = props.history.location.pathname.split('/').pop()
   if (window.ethereum) {
     window.ethereum.on('accountsChanged', function (accounts) {
       if (props.userAccounts !== accounts && accounts.length) {
@@ -47,11 +46,13 @@ const App = (props) => {
         }
       } else {
         props.setAccounts([])
-        props.history.push('/')
+        if (props.history.location.pathname !== 'careers') {
+          props.history.push('/')
+        }
       }
     });
   }
-
+  //TODO: fix metamask and accounts handling
   return (
     <ThemeProvider theme={props.themeUI === 'colour' ? colourTheme : darkTheme} >
       <ModalProvider>
@@ -63,16 +64,22 @@ const App = (props) => {
                 <Route path='/loading' exact render={() => <DataLoading />} />
                 <Route path='/dashboard' exact render={() => <Dashboard />} />
                 <Route path='/tokens' exact render={() => <TableViews />} />
-                <Route path='/tokens/:id' render={() => <TokenDetails id={hasId} />} />
+                <Route path='/tokens/:id' render={(props) => <TokenDetails {...props.match.params} />} />
                 <Route path='/earning' exact render={() => <TableViews />} />
-                <Route path='/earning/:id' render={() => <EarningFieldDetails id={hasId} />} />
+                <Route path='/earning/:id' render={(props) => <EarningFieldDetails {...props.match.params} />} />
                 <Route path='/farming' exact render={() => <TableViews />} />
-                <Route path='/farming/:id' render={() => <FarmingFieldDetails id={hasId} />} />
+                <Route path='/farming/:id' render={(props) => <FarmingFieldDetails {...props.match.params} />} />
                 <Route path='/careers' exact render={() => <Careers />} />
+                <Route path='/careers/:id' exact render={(props) => <Careers {...props.match.params} />} />
+                <Route path="*" >
+                  <Redirect to="/dashboard"/>
+                </Route>
               </Switch>
               :
               <Switch>
                 <Route path='/' exact render={() => <Welcome />} />
+                <Route path='/careers' exact render={() => <Careers />} />
+                <Route path='/careers/:id' exact render={(props) => <Careers {...props.match.params} />} />
                 <Route path="*" >
                   <Redirect to="/"/>
                 </Route>

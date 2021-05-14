@@ -96,6 +96,7 @@ export const _setAccountSuccess = (accounts) => {
 
 export const setAccounts = (inputAccount = []) => {
   return dispatch => {
+    localStorage.setItem('account', inputAccount)
     dispatch(_setAccountSuccess(inputAccount))
   }
 }

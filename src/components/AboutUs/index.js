@@ -237,7 +237,7 @@ const About = () => {
       <ContactSt>
         <p>Want your protocol in SimpleFi: </p>
         <a
-          href="mailto:development@simplefi.finance"
+          href="mailto:development@simplefi.finance?Subject=Protocols:%20New%20Protocol%20Cover"
           target="_blank"
           rel="noreferrer noopener"
         >get in touch</a>

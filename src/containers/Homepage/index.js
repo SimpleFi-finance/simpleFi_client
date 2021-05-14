@@ -71,7 +71,13 @@ const Welcome = (props) => {
       }
     }
   }
-
+  const onEnterDash = () => {
+    if (props.userAccounts.length) {
+      props.history.push('/dashboard')
+    } else {
+      props.connectAccount(props.history)
+    }
+  }
   useEffect(() => {
     document.addEventListener('scroll', onScroll, true)
     return () => document.removeEventListener('scroll', onScroll, true)
@@ -90,8 +96,7 @@ const Welcome = (props) => {
           <S.ConnectWallet>
             {!checkAccount && 
               <S.ConnectWalletButton
-                onClick={() =>
-                  props.connectAccount(props.history)}
+                onClick={() => onEnterDash()}
               >
                 {props.userAccounts.length
                   ? 'Enter dashboard'

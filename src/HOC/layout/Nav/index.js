@@ -1,10 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import UserWallet from '../../../components/UI/WalletDetails'
 import Logo from '../../../components/UI/Logo'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import * as S from './navbar.style'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const Nav = ({ userAccount, history }) => {
+  const [anchorEl, setAnchorEl] = useState(null)
+
   const style = {
     gridColumn: '8 / 11'
   }
@@ -40,10 +44,22 @@ const Nav = ({ userAccount, history }) => {
       history.push(`/${backLoc}`)
     }
   }
+  const toggleMenu = (event) => {
+    if (Boolean(anchorEl)) {
+      setAnchorEl(null)
+    } else {
+      setAnchorEl(event.currentTarget)
+    }
+  }
+
+  const onClickExit = () => {
+    setAnchorEl(null)
+    history.push('/')
+  }
 
   return (
     <S.Nav>
-      {currentLocation !== '/' && currentLocation !== '/careers'
+      {currentLocation !== '/' && !currentLocation.includes('/careers')
       ?
         <>
           {currentLocation !== '/dashboard' &&
@@ -55,7 +71,16 @@ const Nav = ({ userAccount, history }) => {
             </button>
           }
           <p>{title}</p>
-          <UserWallet userAccount={userAccount} style={style} />
+          <UserWallet userAccount={userAccount} style={style} clicked={toggleMenu} />
+          <Menu
+            id='wallet-menu'
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={toggleMenu}
+          >
+            <MenuItem onClick={onClickExit}> Exit Dashboard </MenuItem>
+          </Menu>
         </>
         :
         <>
