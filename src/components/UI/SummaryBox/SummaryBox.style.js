@@ -6,7 +6,7 @@ export const Container = styled.div`
   padding: 20px;
   width: 100%;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 30px;
   margin: 10px auto;
   background-color: ${({ theme }) => theme.opaqueGrey};
 
@@ -39,15 +39,17 @@ export const Headline = styled.div`
   align-items: center;
   position: relative;
 
-  h3 {
-    padding-right: 35px;
-    font-size: 1.2em;
-  }
   & > h3 {
     &:last-child {
       padding-right: 0;
     }
   }
+`;
+
+export const HeadlineEl = styled.h3`
+  padding-right: 35px;
+  font-size: 1.2em;
+  color: ${({color, theme}) => color === 'green' ? theme.green : !color ? theme.text : theme.red};
 `;
 
 export const DropdownButton = styled.div`

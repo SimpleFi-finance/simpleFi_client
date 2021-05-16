@@ -31,7 +31,7 @@ export const DetailBox = styled.div`
   flex-direction: column;
   justify-content: center;
   max-height: 250px;
-  border-radius: 4px;
+  border-radius: 30px;
   padding: 5px;
   border: 1px solid ${({ theme }) => theme.lightpurple};
   

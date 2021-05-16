@@ -29,8 +29,19 @@ const MyAssets = (props) => {
     <S.Container>
       <S.OverflowEl>
         <S.HorizontalContainer>
-          <OverviewCard title='Total assets' amount={userData.hasROI ? Number(holdingHeadlines.totalValue.toFixed()).toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : '--'}/>
-          <OverviewCard title='Total ROI' numType='percent' amount={userData.hasROI ? (Number((totalROI.farmingROI + totalROI.earningROI) * 100).toFixed(2)).toLocaleString() : '--'}/>
+          <OverviewCard
+            title='Total assets'
+            amount={userData.hasROI
+              ? Number(holdingHeadlines.totalValue).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+              : '--'}
+          />
+          <OverviewCard
+            title='Total ROI'
+            numType='percent'
+            amount={userData.hasROI
+              ? (Number((totalROI.farmingROI + totalROI.earningROI) * 100).toFixed(2)).toLocaleString()
+              : '--'}
+          />
         </S.HorizontalContainer>
         <S.Title>
           <h1>Assets</h1>

@@ -34,9 +34,13 @@ export const TableContainer = styled.div`
       
       &:first-of-type {
         padding-left: 5%;
+        border-bottom-left-radius: 30px;
+        border-top-left-radius: 30px;
       }
       &:last-of-type {
         padding-right: 5%;
+        border-bottom-right-radius: 30px;
+        border-top-right-radius: 30px;
       }
       ${({ stickyHeader, stickyHeaderTop }) =>
         stickyHeader &&
@@ -52,27 +56,26 @@ export const TableContainer = styled.div`
       tr {
         align-items: center;
         z-index: 1;
-        &:nth-child(odd){
-          & > td {
-            background-color: ${({theme}) => theme.lightBackground};
-          }
-        }
+
         &:hover {
           & > td {
-            border-bottom: 1px solid white;
+            background-color: ${({theme}) => theme.opaqueGrey};
           }
         }
         td {
           font-size: 14px;
           padding: 0px 8px 0px 8px;
-          background-color: transparent;
           border-bottom: 1px solid transparent;
           color: ${({theme}) => theme.text};
           &:first-of-type {
             padding-left: 5%;
+            border-bottom-left-radius: 30px;
+            border-top-left-radius: 30px;
           }
           &:last-of-type {
             padding-right: 5%;
+            border-bottom-right-radius: 30px;
+            border-top-right-radius: 30px;
           }
         }
       }

@@ -7,19 +7,25 @@ const TrSt = styled.tr`
     height: 55px;
     z-index: 1;
     cursor: ${({ clickable }) => clickable ? 'pointer' : ''};
-    .visible-on-hover {
+    /* .visible-on-hover {
       visibility: hidden;
-    }
+    } */
   }
 
   &:hover td {
     &:first-child {
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
       box-shadow: inset 4px 0 0 0 ${({theme}) => theme.accent};
     }
-
-    .visible-on-hover {
-      visibility: visible;
+    &:last-child {
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      box-shadow: inset -4px 0 0 0 ${({theme}) => theme.accent};
     }
+    /* .visible-on-hover {
+      visibility: visible;
+    } */
   }
 `;
 

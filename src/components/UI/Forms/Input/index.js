@@ -8,7 +8,7 @@ const InputSt = styled.div`
   width: 100%;
   padding: 5px 20px;
   background-color: white;
-  border-radius: 20px;
+  border-radius: 30px;
   display: flex;
   box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5);
 

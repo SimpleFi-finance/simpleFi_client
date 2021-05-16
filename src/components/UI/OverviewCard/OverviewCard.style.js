@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 export const Card = styled.div`
   display: flex;
-  border-radius: 4px;
+  border-radius: 30px;
   box-shadow: 0 0px 2px 0px ${({ theme }) => theme.lightpurple};
   min-width: 220px;
   min-height: 120px;
