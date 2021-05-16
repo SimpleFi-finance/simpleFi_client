@@ -14,7 +14,8 @@ export const colourTheme = {
     lightpurple: '#BBB3E8',
     hover: '#02c2f7',
     disabled: '#D3D3D3',
-    opaqueGrey: 'hsla(0,0%,100%,.3)'
+    opaqueGrey: 'hsla(0,0%,100%,.3)',
+    borderRadius: '30px'
 }
 
 export const darkTheme = {
@@ -33,5 +34,6 @@ export const darkTheme = {
     lightpurple: '#BBB3E8',
     hover: '#02c2f7',
     disabled: '#D3D3D3',
-    opaqueGrey: 'hsla(0,0%,100%,.3)'
+    opaqueGrey: 'hsla(0,0%,100%,.3)',
+    borderRadius: '30px'
 }

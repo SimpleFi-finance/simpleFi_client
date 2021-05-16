@@ -8,12 +8,12 @@ import { connect } from 'react-redux'
 
 export const Layout = (props) => {
 
-  const noSidebar = ['loading', 'careers', 'about'].find(path => props.history.location.pathname.includes(path)) 
+  const noSidebar = ['loading', 'careers', 'about'].find(path => props.history.location.pathname.includes(path)) || props.history.location.pathname === '/'
 
   return (
     <>
       <S.Layout>
-        {!noSidebar && props.history.location.pathname !== '/' && <Sidebar history={props.history} />}
+        {!noSidebar && <Sidebar history={props.history} />}
         <S.Main location={props.history.location.pathname} noSidebar={noSidebar}>
           {props.history.location.pathname !== '/loading' &&
             <Navbar userAccount={props.userAccounts} history={props.history} />

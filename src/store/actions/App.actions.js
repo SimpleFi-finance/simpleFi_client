@@ -108,10 +108,8 @@ export const connectMetaMaskWallet = (history) => {
       if (newAccount.error) {
         if (newAccount.error.code === 4001) {
           alert('Please Connect to Metamask')
-          dispatch(_setError('Please connect to Metamask'))
         } else {
           alert('Oops, something went wrong - page will reload')
-          dispatch(_setError('Oops, something went wrong - page will reload'))
           window.location.reload();
         }
       } else if (newAccount.length) {
@@ -120,7 +118,6 @@ export const connectMetaMaskWallet = (history) => {
       }
     } else {
       alert('Please install Metamask to use SimpleFi (https://metamask.io/)')
-      dispatch(_setError('Please install Metamask to use SimpleFi (https://metamask.io/)'))
     }
   }
 }
@@ -135,6 +132,8 @@ export const getTrackedTokens = () => {
     })
     .catch(err => {
       console.log(err)
+      alert('Something went wrong retrieving tokens - please retry')
+      window.location.reload();
     })
   }
 }
@@ -147,6 +146,8 @@ export const getTrackedInvestments = () => {
     })
     .catch(err => {
       console.log(err)
+      alert('Something went wrong retrieving investments - please retry')
+      window.location.reload();
     })
   }
 }
@@ -166,7 +167,8 @@ export const getUserTransactions = (addresses) => {
       dispatch(_setUserData('transactions', response.data))
     })
     .catch(err => {
-      console.log(err)
+      alert('Something went wrong retrieving transactions - please retry')
+      window.location.reload();
     })
   }
 }
@@ -178,7 +180,7 @@ export const getUserTokensBalance = (addresses, trackedData) => {
       dispatch(_setUserData('tokens', tokensBalances))
     })
     .catch(err => {
-      console.log(err)  
+      alert('Something went wrong calculating tokens balances - please retry')
     })
   }
 }
@@ -193,7 +195,7 @@ export const getUserInvestmentsBalance = (addresses, trackedData) => {
       dispatch(_setUserData('investments', balancesWithContracts))
     })
     .catch(err => {
-      console.log(err)  
+      console.log(err)
     })
   }
 }

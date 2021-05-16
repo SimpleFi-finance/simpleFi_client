@@ -8,7 +8,6 @@ const ContainerSt = styled.div`
   display: flex;
   flex-direction: column;
   margin: auto;
-
   h2 {
     all: unset;
     margin: auto;

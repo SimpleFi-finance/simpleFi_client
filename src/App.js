@@ -28,6 +28,7 @@ const StyledApp = styled.div`
 `;
 
 const App = (props) => {
+
   useEffect(() => {
     if (!props.RoiCalculated) {
       if (!props.userAccounts.length) {
@@ -40,6 +41,7 @@ const App = (props) => {
 
   if (window.ethereum) {
     window.ethereum.on('accountsChanged', function (accounts) {
+      console.log('accounts changed', accounts)
       if (props.userAccounts !== accounts && accounts.length) {
         if (props.userAccounts.length) {
           props.setAccounts(accounts)
@@ -52,7 +54,10 @@ const App = (props) => {
       }
     });
   }
-  //TODO: fix metamask and accounts handling
+
+
+
+
   return (
     <ThemeProvider theme={props.themeUI === 'colour' ? colourTheme : darkTheme} >
       <ModalProvider>

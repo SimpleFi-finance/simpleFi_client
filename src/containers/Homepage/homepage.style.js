@@ -60,6 +60,7 @@ export const Section = styled.div`
   min-height: calc(100vh - 210px);
   width: 100%;
   display: flex;
+  background-color: ${({theme, color}) => color ? theme[color] : 'transparent'};
   flex-direction: column;
   justify-content: center;
   align-items: center;

@@ -49,7 +49,7 @@ export const Headline = styled.div`
 export const HeadlineEl = styled.h3`
   padding-right: 35px;
   font-size: 1.2em;
-  color: ${({color, theme}) => color === 'green' ? theme.green : !color ? theme.text : theme.red};
+  color: ${({colorItem, theme}) => colorItem === 'green' ? theme.green : !colorItem ? theme.text : theme.red};
 `;
 
 export const DropdownButton = styled.div`

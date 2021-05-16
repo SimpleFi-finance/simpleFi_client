@@ -15,7 +15,6 @@ const Welcome = (props) => {
   const aboutSection = useRef()
   const homepageRef = useRef()
   const partnershipSection = useRef()
-  const [y, setY] = useState(0)
   const [checkAccount, setCheckAccount] = useState(false)
   const [accountValue, setAccountValue] = useState('');
   const isLoginVis = useVisibility(loginSection)
@@ -37,40 +36,20 @@ const Welcome = (props) => {
     }
   }
 
-  const scrollDirection = (scroll) => {
-    return y < scroll.scrollTop  ? 'down' : 'up'
-  }
-
   const onScroll = () => {
-    setY(homepageRef.current.scrollTop)
-    if (scrollDirection(homepageRef.current) === 'down') {
-      if (isLoginVis
-        && homepageRef.current.scrollTop >= (aboutSection.current.clientHeight / 4)
-        && homepageRef.current.scrollTop <= (aboutSection.current.clientHeight)
-      ) {
-        props.history.push('/#about')
-        aboutSection.current.scrollIntoView({ block: 'center'})
-      } else if (isAboutVis 
-        && homepageRef.current.scrollTop >= (aboutSection.current.clientHeight / 4) + aboutSection.current.clientHeight
-        && homepageRef.current.scrollTop <= (aboutSection.current.clientHeight) * 2
-      ) {
-        props.history.push('/#partners')
-        partnershipSection.current.scrollIntoView({ block: 'center'})
-      }
+    if (isAboutVis && !isLoginVis && !isPartnerVis) {
+      props.history.push('/#about')
     } else {
-      if (isPartnerVis
-        && homepageRef.current.scrollTop <= (aboutSection.current.clientHeight) * 2 + (aboutSection.current.clientHeight / 2)
-      ) {
-        props.history.push('/#about')
-        aboutSection.current.scrollIntoView({ block: 'center'})
-      } else if (isAboutVis
-        && homepageRef.current.scrollTop <= aboutSection.current.clientHeight + (aboutSection.current.clientHeight / 3)
-      ) {
-        props.history.push('/')
-        loginSection.current.scrollIntoView({ block: 'center'})
-      }
+      props.history.push('/')
     }
   }
+
+  useEffect(() => {
+    if (props.history.location.hash.includes('about')) {
+      aboutSection.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [props.history.location.hash])
+
   const onEnterDash = () => {
     if (props.userAccounts.length) {
       props.history.push('/dashboard')
@@ -79,10 +58,10 @@ const Welcome = (props) => {
     }
   }
   useEffect(() => {
-    document.addEventListener('scroll', onScroll, true)
-    return () => document.removeEventListener('scroll', onScroll, true)
+      document.addEventListener('scroll', onScroll, true)
+      return () => document.removeEventListener('scroll', onScroll, true)
   })
-
+  
   return (
     <>
       <S.Container ref={homepageRef}>
@@ -98,7 +77,7 @@ const Welcome = (props) => {
               <S.ConnectWalletButton
                 onClick={() => onEnterDash()}
               >
-                {props.userAccounts.length
+                {props.userAccounts.length || window.ethereum.selectedAddress
                   ? 'Enter dashboard'
                   : 'Connect wallet'
                 }
@@ -121,7 +100,7 @@ const Welcome = (props) => {
             </S.CheckAddress>
           </S.ConnectWallet>
         </S.Section>
-        <S.Section ref={aboutSection} >
+        <S.Section ref={aboutSection}>
           <About />
         </S.Section>
         <S.Section ref={partnershipSection} >

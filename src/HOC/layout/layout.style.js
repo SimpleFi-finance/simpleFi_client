@@ -15,7 +15,7 @@ export const Layout = styled.div`
 
 export const Main = styled.div`
   margin: 0px;
-	padding: ${({ location }) => location !== '/loading' ? '10px' : '0px'};
+	padding: 0px;
   height: 100%;
   width: ${({ noSidebar }) => !noSidebar ? 'calc(100% - 70px)' : '100%'};
 	background-color: ${({ location }) => location !== '/loading' ? 'transparent' : 'white'};

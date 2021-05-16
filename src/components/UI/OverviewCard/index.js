@@ -6,7 +6,9 @@ export default function OverviewCard({ title, amount, numType }) {
   if (numType === 'percent') {
     roiSign = Number(amount) > 0
       ? '+'
-      : '-'
+      : Number(amount) === 0
+        ? ''  
+        : '-'
     amount = roiSign + Math.abs(amount);
   } else {
     amount = '' + amount || '--'

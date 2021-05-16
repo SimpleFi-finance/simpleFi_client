@@ -9,7 +9,7 @@ export default function SummaryBox({headlines, tableName, action}) {
       <h2>{tableName}</h2>
       <S.Headline>
         {boxHeadlines.formattedHeadlines.map((headline, index) => (
-          <S.HeadlineEl key={`${tableName}-headline-${index}`} color={boxHeadlines.perfClasses[index]}>{!headline.includes('NaN') ? headline : headline.replace('NaN', '0')}</S.HeadlineEl>
+          <S.HeadlineEl key={`${tableName}-headline-${index}`} colorItem={boxHeadlines.perfClasses[index]}>{!headline.includes('NaN') ? headline : headline.replace('NaN', '0')}</S.HeadlineEl>
         ))}
       </S.Headline>
     </S.Container>

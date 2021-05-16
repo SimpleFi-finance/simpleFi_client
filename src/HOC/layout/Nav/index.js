@@ -56,7 +56,21 @@ const Nav = ({ userAccount, history }) => {
     setAnchorEl(null)
     history.push('/')
   }
-
+  const onClickSwitch = async () => {
+    try {
+      setAnchorEl(null)
+      await window.ethereum.request({
+          method: 'wallet_requestPermissions',
+          params: [{
+            eth_accounts: {},
+          }]
+      });
+      
+    } catch (err) {
+      alert(err.message)
+    }
+  }
+  
   return (
     <S.Nav>
       {currentLocation !== '/' && !currentLocation.includes('/careers')
@@ -79,6 +93,7 @@ const Nav = ({ userAccount, history }) => {
             open={Boolean(anchorEl)}
             onClose={toggleMenu}
           >
+            <MenuItem onClick={onClickSwitch}> Switch Account </MenuItem>
             <MenuItem onClick={onClickExit}> Exit Dashboard </MenuItem>
           </Menu>
         </>
