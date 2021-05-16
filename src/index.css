@@ -1,14 +1,13 @@
-@import "./CSS/variables.css";
-
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: unset;
-  background-color: var(--lilac);
   font-family: -apple-system,system-ui,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
   position: relative;
+  letter-spacing: 1px;
+  scroll-behavior: smooth;
 }
 
 a, button, input {

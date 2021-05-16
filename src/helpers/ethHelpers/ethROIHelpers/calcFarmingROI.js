@@ -1,14 +1,4 @@
-/** 
- * @param {Array} userTokens - all tokens the user currently holds either directly or indirectly (via a field)
- * @param {Array} tokenPrices - current price in fiat of user tokens
- * @param {Object} field - currently analysed field from which are extracted the user's field transactions
- * @dev - the term "value" refers to fiat value. "Amount" refers to actual token amount
- * @return {Object} - all data used for presentation in field details page, incl.
- *                      - ROI(%)
- *                      - return value($)
- *                      - avg historical investment value ($)
- *                      - breakdown of (un)claimed tokens
- */
+
 function calcFarmingROI (userTokens, tokenPrices, field) {
   const {cropTokens, fieldId} = field;
   const unclaimed = {};

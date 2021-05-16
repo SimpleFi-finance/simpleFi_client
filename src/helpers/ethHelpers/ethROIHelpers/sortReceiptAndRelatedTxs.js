@@ -1,13 +1,3 @@
-/**
- * 
- * @param {Array} userReceiptTokenTxs all user tx of the target earning field's receipt tokens
- * @param {Array} relatedFarmReceiptTokenTxs all user tx of related farm field receipt tokens
- * @dev this assumes that
- *        - at least one of the two input arrays will have a length
- *        - Etherscan will always return a properly date-ordered list of user ERC20 txs
- * @returns {Array} - a combined array of both token transactions ordered by date / blockNumber
- *                    where relatedFarmReceiptTokenTxs are flagged for processing by sortLiquidityTxs()
- */
 export default function sortReceiptAndRelatedTxs (userReceiptTokenTxs, relatedFarmReceiptTokenTxs) {
   let sortedReceiptAndRelatedTxs = [];
 

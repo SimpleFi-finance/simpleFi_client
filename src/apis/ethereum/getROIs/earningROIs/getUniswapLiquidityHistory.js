@@ -2,8 +2,7 @@ import { getUniswapBalanceHistory } from '../../protocolQueries';
 import helpers from '../../../../helpers';
 
 async function getUniswapLiquidityHistory (field, userReceiptTokenTxs, userAccount, whitelist) {
-
-  const rawData = await getUniswapBalanceHistory(userAccount);
+  const rawData = await getUniswapBalanceHistory(userAccount)
   const fieldBalanceHistory = rawData.data.liquidityPositionSnapshots.filter(snapshot => snapshot.pair.id === field.contractAddresses[0].address.toLowerCase());
   const liquidityHistory = userReceiptTokenTxs.map(tx => {
     const txDate = new Date(Number(tx.timeStamp) * 1000);

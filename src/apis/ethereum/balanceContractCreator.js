@@ -1,11 +1,6 @@
 import { ethers } from 'ethers';
-import provider from './ethProvider';
+import provider from './../../utils/ethProvider';
 
-/**
- * @func createContract creates an instance of a new ethers contract interface
- * @param {collection} array of tracked tokens or fields
- * @returns {object} collection with new contract interfaces
- */
 function createBalanceContracts (collection) {
   const collectionWithContracts = [];
   
@@ -14,7 +9,6 @@ function createBalanceContracts (collection) {
     //for Fields
     if (element.fieldId) {
       const { contractAddresses } = element;
-      //TODO: enforce unicity of filter here?
       let balanceAddress = contractAddresses.filter(address => address.addressTypes.includes('balance'));
       if (balanceAddress.length === 1) {
         balanceAddress = balanceAddress[0]

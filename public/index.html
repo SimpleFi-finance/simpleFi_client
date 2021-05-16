@@ -9,6 +9,14 @@
       name="SimpleFi"
       content="Decentralised finance portfolio tracker"
     />
+    
+    <!-- Social card -->
+    <meta property="og:title" content="SimpleFi">
+    <meta property="og:description" content="Invest and track your DeFi ROI in one click">
+    <meta property="og:image" content="https://drive.google.com/uc?id=157Vp3HPPsh-iqWsX56_TweznIoSAtNxD">
+    <meta property="og:url" content="https://simplefi.finance/">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>SimpleFi</title>
 
@@ -23,8 +31,44 @@
         a.appendChild(r);
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
     </script>
-
+    <!-- kickoffLabs campaign -->
+    <script src="https://cdn.kickoffpages.com/2.0.0/kol.js" id="koljs" data-campaign-id="150497" async></script>
   </head>
+  <!-- Copy and paste this style block into pages with the contest box if you want it left aligned. -->
+  <style>
+    #kol_contestbox_container {
+      right: 0px !important;
+      left: auto !important;
+      bottom: 160px !important;
+    }
+  
+    .kol-contestbox-button-frame-holder {
+      right: 20px !important;
+      left: auto !important;
+      bottom: 100px !important;
+    }
+  
+    #kol-contestbox-button-frame {
+      float: right !important;
+    }
+  
+    @media (min-width: 768px) {
+      .kol-contestbox-contest-frame-holder {
+        right: 20px !important;
+        left: auto !important;
+        bottom: 160px !important;
+      }
+    }
+  </style>
+  <script>
+    setTimeout(function () {
+      const openEvent = new CustomEvent("kol:activate:ContestBox", {});
+      //Don't run if KOL script isn't installed. 
+      if (window._kol && window.location.pathname === '/') {
+        window._kol.container.dispatchEvent(openEvent);
+      }
+    }, 3000);
+  </script>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>

@@ -1,20 +1,17 @@
 import { ethers } from 'ethers';
-import provider from './ethProvider';
-import helpers from '../../helpers';
+import provider from './../../utils/ethProvider';
+import unclaimedBalanceInterfaceTypes from '../../data/fieldData/unclaimedBalanceTypes';
 
+function _findUnclaimedBalanceType (fieldId, tokenId) {
+  for (const type in unclaimedBalanceInterfaceTypes) {
+    const targetInterface = unclaimedBalanceInterfaceTypes[type].find(contractInt => contractInt.tokenId === tokenId && contractInt.fieldId === fieldId)
+    if (targetInterface) {
+      return type;
+    }
+  }
+  return null;
+}
 
-/**
- * 
- * @param {String} userAccount - currently analysed user account
- * @param {Array} trackedFields - all fields tracked by SimpleFi
- * @dev - we assume that the same contract address is used to check the balance of multiple
- *        crop tokens (albeit with different methods saved in the cropToken DB table)
- *      - most methods to check unclaimed balances will only require one argument (the userAccount)
- *        but others will require more (e.g. the token address), hence the necessity of the switch statement
- *      - note that the method name for checking balances varies from contract to contract
- *        (and/or token to token when multiple crops) and is stored in the SimpleFi DB
- * @returns {Array} - array of objects containing the field, tokenId, and unclaimedBalance
- */
 async function getUnclaimedRewards(userAccount, trackedFields) {
   const unclaimedCropBalances = [];
   const farmFields = trackedFields.filter(field => field.cropTokens.length)
@@ -23,7 +20,7 @@ async function getUnclaimedRewards(userAccount, trackedFields) {
     const { cropTokens, fieldId } = field;
     for (let cropToken of cropTokens) {
       const { tokenId } = cropToken;
-      const balanceInterface = helpers.findUnclaimedBalanceType(fieldId, tokenId)
+      const balanceInterface = _findUnclaimedBalanceType(fieldId, tokenId)
 
       //identify the contract used for checking unclaimed balances and create an ethers.js contract interface
       try {

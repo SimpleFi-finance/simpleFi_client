@@ -14,7 +14,6 @@ import getCurveFarmingAPY from './getCurveFarmingAPY';
 //TODO: ¿refactor to add secondary Farming APY - already provided in sub functions (e.g. getCurveFarmingAPY)?
 async function getFarmingAPYs (field, userTokenPrices) {
   const rewardRateAddress = field.contractAddresses.find(address => address.addressTypes.includes('rewardRate'));
-
   let APY;
   
   switch (rewardRateAddress.contractInterface.name) {

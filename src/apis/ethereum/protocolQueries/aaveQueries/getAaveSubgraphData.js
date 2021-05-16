@@ -9,7 +9,6 @@ async function getAaveReserveLiquidityRate(reserveId) {
     })
 }
 
-//TODO: add cache - getAaveBH only needs to be called once
 async function getAaveBalanceHistory(userAccount) {
   return await apollo.aaveClient.query(
     {

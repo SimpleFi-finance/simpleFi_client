@@ -14,8 +14,7 @@ export default function extractSummaryHoldingValues (userTokens, userTokenPrices
     let unclaimedBalance = 0;
     let combinedBalance = 0;
     let lockedPercent = 0;
-    const tokenPrice = userTokenPrices[token.name].usd;
-    const formatter = new Intl.NumberFormat("en-US", {style: 'percent'});
+    const tokenPrice = userTokenPrices[token.name];
 
     if (token.lockedBalance) {
       lockedBalance = token.lockedBalance.reduce((acc, curr) => acc + curr.balance, 0);
@@ -25,32 +24,42 @@ export default function extractSummaryHoldingValues (userTokens, userTokenPrices
     }
     if (token.userBalance) {
       combinedBalance = token.userBalance + lockedBalance + unclaimedBalance;
-      lockedPercent = formatter.format((lockedBalance + unclaimedBalance) / combinedBalance);
+      lockedPercent = (lockedBalance + unclaimedBalance) / combinedBalance;
     } else {
       combinedBalance = lockedBalance + unclaimedBalance;
-      lockedPercent = formatter.format(1);
+      lockedPercent = 1;
     }
 
     if (token.isBase) {
-      summaryTableValues.baseTokens.push([
-        token.name,
-        Number(combinedBalance.toFixed(2)).toLocaleString(),
-        lockedPercent,
-        Number(tokenPrice.toFixed(2)).toLocaleString(),
-        Number((combinedBalance * tokenPrice).toFixed(2)).toLocaleString()
-      ]);
-      overviewValues.totalInvested += lockedBalance * tokenPrice;
-      overviewValues.totalUnclaimed += unclaimedBalance * tokenPrice;
-      overviewValues.totalValue += combinedBalance * tokenPrice
+      summaryTableValues.baseTokens.push({
+        id: token.tokenId,
+        name: token.name,
+        priceApi: token.priceApi,
+        userBalance: Number(combinedBalance.toFixed(2)),
+        lockedpercent: lockedPercent,
+        tokenPrice: {
+          usd: Number(tokenPrice.usd.toFixed(2)),
+          eur: Number(tokenPrice.eur.toFixed(2)),
+          gbp: Number(tokenPrice.gbp.toFixed(2)),
+        }
+      });
+      overviewValues.totalInvested += lockedBalance * tokenPrice.usd;
+      overviewValues.totalUnclaimed += unclaimedBalance * tokenPrice.usd;
+      overviewValues.totalValue += combinedBalance * tokenPrice.usd
       
     } else {
-      summaryTableValues.receiptTokens.push([
-        token.name,
-        Number(combinedBalance.toFixed(2)).toLocaleString(),
-        lockedPercent,
-        Number(tokenPrice.toFixed(2)).toLocaleString(),
-        Number((combinedBalance * tokenPrice).toFixed(2)).toLocaleString()
-      ]);
+      summaryTableValues.receiptTokens.push({
+        id: token.tokenId,
+        priceApi: token.priceApi,
+        name: token.name,
+        userBalance: Number(combinedBalance.toFixed(2)),
+        lockedpercent: lockedPercent,
+        tokenPrice: {
+          usd: Number(tokenPrice.usd.toFixed(2)),
+          eur: Number(tokenPrice.eur.toFixed(2)),
+          gbp: Number(tokenPrice.gbp.toFixed(2)),
+        }
+      });
     }
   });
 
