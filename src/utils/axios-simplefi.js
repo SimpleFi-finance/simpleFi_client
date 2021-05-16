@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const nodeEnv = process.env.NODE_ENV;
+const nodeEnv = process.env.REACT_APP_NODE_ENV;
 let baseUrl = 'http://localhost:3020';
 if (nodeEnv === 'production') {
   baseUrl = 'https://api.simplefi.finance.com'
