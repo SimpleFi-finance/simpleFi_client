@@ -20,7 +20,7 @@ const extractHistoricalPrices = async (token, firstTransaction) => {
   let transactionPriceHist = localCache[priceApi].find(el => el.timestamp === timestamp)
 
   if (!transactionPriceHist) {
-    transactionPriceHist = await axios.post(`/prices`, { timestamp: timestamp, token: { priceApi: token.priceApi, tokenId: token.tokenId } })
+    transactionPriceHist = await axios.post(`/prices/historic`, { timestamp: timestamp, token: { priceApi: token.priceApi, tokenId: token.tokenId } })
       .then(response => {
         if (response.status >= 200 && response.status < 300) {
           localCache[priceApi].push({
