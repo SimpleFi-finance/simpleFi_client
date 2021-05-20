@@ -51,5 +51,6 @@ export const HomepageNav = styled.div`
 
 export const LogoContainer = styled.div`
   height: 100%;
-  grid-column: 2/3;
+  min-width: 130px;
+  grid-column: 2;
 `;
