@@ -30,6 +30,8 @@ const Welcome = (props) => {
     checkAccount && setCheckAccount(false)
     if (ethers.utils.isAddress(accountValue)) {
       props.setAccount([accountValue.toLowerCase()]);
+      // TODO: add call to backend for userdata tracking
+      props.accountLogging(accountValue.toLowerCase(), false)
       props.history.push('/loading');
     } else {
       alert('Please enter a valid Ethereum address  ----- homepage')
@@ -119,7 +121,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     setAccount: (accounts) => dispatch(actions.setAccounts(accounts)),
-    connectAccount: (history) => dispatch(actions.connectMetaMaskWallet(history))
+    connectAccount: (history) => dispatch(actions.connectMetaMaskWallet(history)),
+    accountLogging: (account, signed) => dispatch(actions.accountLogging({account: account, signed: signed}))
   }
 }
 

@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes.actions';
-import axios from '../../utils/axios-simplefi'
+import axios from '../../utils/axiosInstances/axios-backend'
+import axiosUserData from '../../utils/axiosInstances/axios-userdata'
 import apis from '../../apis';
 import getTokenPrices from '../../utils/getTokenPrices';
 import helpers from '../../helpers'
@@ -93,6 +94,13 @@ export const _setAccountSuccess = (accounts) => {
   }
 }
 // ---------------------------------------------------
+export const accountLogging = ({account, signed}) => {
+  return dispatch => {
+    axiosUserData.post(`/accounts/${account}`, {
+      signed: signed
+    })
+  }
+}
 
 export const setAccounts = (inputAccount = []) => {
   return dispatch => {
@@ -113,6 +121,8 @@ export const connectMetaMaskWallet = (history) => {
           window.location.reload();
         }
       } else if (newAccount.length) {
+        // TODO: add call to backend for userdata tracking
+        dispatch(accountLogging({ account: newAccount[0], signed: true }))
         dispatch(setAccounts(newAccount))
         history.push('/loading');
       }

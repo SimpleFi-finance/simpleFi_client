@@ -14,5 +14,6 @@ export {
   getUserTokensBalance,
   getUserInvestmentsBalance,
   getUserUnclaimedBalance,
-  rewindHoldings
+  rewindHoldings,
+  accountLogging
 } from './App.actions'

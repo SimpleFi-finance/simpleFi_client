@@ -1,4 +1,4 @@
-import axios from './axios-simplefi'
+import axios from './axiosInstances/axios-backend'
 
 let localCache = {}
 const extractHistoricalPrices = async (token, firstTransaction) => {

@@ -1,4 +1,4 @@
-import axios from '../utils/axios-simplefi'
+import axios from '../utils/axiosInstances/axios-backend'
 import { supportedCurrencies } from './generalData';
 
 async function getTokenPrices(userTokens, userFields, trackedTokens) {
