@@ -41,7 +41,7 @@ function addLockedTokenBalances(rewoundTokens, userTokens) {
     //otherwise: create a new user Token
     else {
       //CHECK: check this is necessary
-      const newUserToken = JSON.parse(JSON.stringify(rewoundToken.token));
+      const newUserToken = { ...rewoundToken.token };
       const lockedBalanceObj = {balance: rewoundToken.userTokenBalance, field: rewoundToken.investment};
       if (rewoundToken.via) lockedBalanceObj.via = rewoundToken.via;
       newUserToken.lockedBalance = [lockedBalanceObj]
@@ -72,7 +72,7 @@ function addStakedFieldBalances (rewoundFields, userFields) {
       //otherwise: create a new user Field
       else {
         //CHECK: check this is necessary
-        const newUserField = JSON.parse(JSON.stringify(rewoundField.feederField));
+        const newUserField = { ...rewoundField.feederField };
         newUserField.stakedBalance = [{balance: rewoundField.userFieldBalance, parentField: rewoundField.parentField}]
         updatedUserFields.push(newUserField);
       }
