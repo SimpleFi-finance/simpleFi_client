@@ -44,8 +44,8 @@ export default function Careers ({setSplash}) {
           </div>
 
           <button className='position-button' onClick={(e) => togglePosition(e, smartContEngRef)}>Blockchain Engineer</button>
-          <button className='position-button' onClick={(e) => togglePosition(e, frontendDevRef)}>Lead frontend Engineer</button>
-          <button className='position-button' onClick={(e) => togglePosition(e, frontendDevRef)}>Fullstack Engineer</button>
+          <button className='position-button' onClick={(e) => togglePosition(e, frontendDevRef)}>Lead Frontend Engineer</button>
+          <button className='position-button' onClick={(e) => togglePosition(e, frontendDevRef)}>Lead Fullstack Engineer</button>
           
           <div className="position-details" ref={smartContEngRef}>
             <button onClick={(e) => togglePosition(e, smartContEngRef)}>X</button>
