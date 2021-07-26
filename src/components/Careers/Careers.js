@@ -45,7 +45,7 @@ export default function Careers ({setSplash}) {
 
           <button className='position-button' onClick={(e) => togglePosition(e, smartContEngRef)}>Blockchain Engineer</button>
           <button className='position-button' onClick={(e) => togglePosition(e, frontendDevRef)}>Lead Frontend Engineer</button>
-          <button className='position-button' onClick={(e) => togglePosition(e, frontendDevRef)}>Lead Fullstack Engineer</button>
+          <button className='position-button' onClick={(e) => togglePosition(e, fullstackDevRef)}>Lead Fullstack Engineer</button>
           
           <div className="position-details" ref={smartContEngRef}>
             <button onClick={(e) => togglePosition(e, smartContEngRef)}>X</button>
@@ -56,7 +56,7 @@ export default function Careers ({setSplash}) {
             <p>We’re looking for great developers who love DeFi, and encourage candidates of all races, creeds, genders, age, and sexual orientation to apply.</p>
             <h3>What We’re Looking For</h3>
             <p>We’re looking for a developer to join our smart contracts and data engineering team.</p>
-            <p>You will work on <a>Tesser</a>, our award-winning decentralized DeFi migration tool, on our indexing infrastructure and on our token, governance and curation smart contracts.</p>
+            <p>You will work on <a href="https://showcase.ethglobal.co/hackmoney2021/tesser" target="_blank" rel="noreferrer">Tesser</a>, our award-winning decentralized DeFi migration tool, on our indexing infrastructure and on our token, governance and curation smart contracts.</p>
             <p>Help us make SimpleFi the most user-friendly and powerful DeFi dashboard out there!</p>
             <h3>Responsibilities</h3>
             <ul>
