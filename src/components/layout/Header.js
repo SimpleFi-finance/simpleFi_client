@@ -126,9 +126,6 @@ class Header extends React.Component {
                       <li>
                         <a href="https://github.com/SimpleFi-finance" onClick={this.closeMenu} target="_blank" rel="noopener noreferrer">Github</a>
                       </li>
-                      <li>
-                        <Link href="/careers" onClick={this.closeMenu}>Careers</Link>
-                      </li>
                     </ul>
                   </div>
                 </nav>
