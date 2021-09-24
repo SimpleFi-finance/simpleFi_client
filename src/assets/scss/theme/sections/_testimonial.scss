@@ -1,0 +1,87 @@
+$testimonial-item-image--size: 56px;
+
+.testimonial {
+
+	.tiles-item-inner {
+		padding-top: $testimonial-item-image--size / 2 + 24px;
+		background: get-color(light, 1);
+	}
+
+	.tiles-item {
+		position: relative;
+		padding-top: $tiles-items--padding__mobile / 2 + $testimonial-item-image--size / 2;
+		@if ( $testimonial-items--padding__mobile != null ) {
+			padding-top: $testimonial-items--padding__mobile / 2 + $testimonial-item-image--size / 2;
+		}
+	}
+
+	.testimonial-item-image {
+		position: absolute;
+		top: $tiles-items--padding__mobile / 2;
+		@if ( $testimonial-items--padding__mobile != null ) {
+			top: $testimonial-items--padding__mobile / 2;
+		}
+
+		img {
+			width: $testimonial-item-image--size;
+			height: $testimonial-item-image--size;
+			border-radius: 50%;
+			box-shadow: 0 16px 24px rgba(get-color(dark, 1), .24);
+		}
+	}
+}
+
+@if ( $testimonial-items--padding__desktop != null or $tiles-items--padding__desktop !=null ) {
+
+	@include media( '>medium' ) {
+
+		.testimonial {
+
+			.tiles-item {
+				@if ( $tiles-items--padding__desktop != null ) {
+					padding-top: $tiles-items--padding__desktop / 2 + $testimonial-item-image--size / 2;
+				}
+				@if ( $testimonial-items--padding__desktop != null ) {
+					padding-top: $testimonial-items--padding__desktop / 2 + $testimonial-item-image--size / 2;
+				}
+			}
+
+			.testimonial-item-image {
+				@if ( $tiles-items--padding__desktop != null ) {
+					top: $tiles-items--padding__desktop / 2;
+				}
+				@if ( $testimonial-items--padding__desktop != null ) {
+					top: $testimonial-items--padding__desktop / 2;
+				}
+			}
+		}
+	}
+}
+
+
+.testimonial-item-name {
+    position: relative;
+    padding-left: 30px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: calc(50% - 8px);
+        left: 0;
+        width: 18px;
+        height: 14px;
+        background-image: inline-svg('<svg width="18" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M0 10.117c0-1.732.465-3.55 1.395-5.455C2.325 2.757 3.527 1.203 5.004 0l3.418 2.133c-.82 1.221-1.445 2.47-1.873 3.746-.429 1.276-.643 2.68-.643 4.21v3.802H0v-3.774zm9.215 0c0-1.732.465-3.55 1.394-5.455.93-1.905 2.133-3.459 3.61-4.662l3.418 2.133c-.82 1.221-1.445 2.47-1.873 3.746-.429 1.276-.643 2.68-.643 4.21v3.802H9.215v-3.774z" fill="#D9E0F0" fill-rule="nonzero"/></svg>');
+        background-repeat: no-repeat;
+    }
+}
+
+.testimonial-item-link {
+
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}

@@ -1,0 +1,79 @@
+.pricing {
+    
+	&.has-bg-color {
+		position: relative;
+		background-color: transparent;
+		z-index: auto;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0%;
+			width: 100%;
+			height: calc(100% - 160px);
+			background: get-color(dark, 1);
+			z-index: -3;
+		}
+	}
+
+	.tiles-item-inner {
+		background: get-color(light, 1);
+	}
+}
+
+.pricing-item-header {
+	@include divider(after);
+
+	&::after {
+		max-width: 64px;
+	}
+}
+
+ul.pricing-item-features-list {
+	@include divider(after);
+
+	li {
+		margin-bottom: 0;
+		padding: 14px 0;
+		@include divider(before);
+
+		&::after {
+			content: '';
+			display: block;
+			width: 24px;
+			height: 24px;
+			margin-right: 12px;
+			background-image: inline-svg(
+				'<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="#FFDDF7" cx="12" cy="12" r="12"/><path fill-opacity=".8" fill="#FF55D8" fill-rule="nonzero" d="M7 11h10v2H7z"/></g></svg>'
+			);
+			background-repeat: no-repeat;
+			order: -1;
+		}
+
+		&.is-checked {
+			&::after {
+				background-image: inline-svg(
+					'<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="' +
+						get-color(primary, 4) +
+						'" cx="12" cy="12" r="12"/><path fill="' +
+						get-color(primary, 3) +
+						'" fill-rule="nonzero" d="M10.5 12.267l-2.5-1.6-1 1.066L10.5 16 17 9.067 16 8z"/></g></svg>'
+				);
+			}
+		}
+	}
+}
+
+@include media('>medium') {
+    
+	.pricing {
+
+		&.has-bg-color {
+
+			&::before {
+				height: calc(100% - 200px);
+			}
+		}
+    }
+}

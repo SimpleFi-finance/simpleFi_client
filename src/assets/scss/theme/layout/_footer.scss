@@ -1,0 +1,7 @@
+.site-footer-inner {
+    color: get-color(dark, 3);
+    
+    .invert-color & {
+        color: get-color(dark, 2);
+    }
+}
