@@ -21,9 +21,9 @@ const Logo = ({
       <h1 className="m-0">
         <Link to="/">
           <Image
-            src={require('./../../../assets/images/logoSimplefi.svg')}
+            src={require('./../../../assets/images/logoSimplefiLong.png')}
             alt="simplefi"
-            width={64}
+            width={200}
             height={64} />
         </Link>
       </h1>
