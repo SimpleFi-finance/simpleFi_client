@@ -22,7 +22,7 @@ const FooterNav = ({
           <a href="https://discord.gg/CJKE9wmGkk" target="_blank" rel="noopener noreferrer">Contact</a>
         </li>
         <li>
-          <a href="https://docs.simplefi.finance" target="_blank" rel="noopener noreferrer">FAQ's</a>
+          <a href="https://faq.simplefi.finance" target="_blank" rel="noopener noreferrer">FAQ's</a>
         </li>
       </ul>
     </nav>
