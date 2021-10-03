@@ -1,0 +1,20 @@
+.button {
+    @include font-family(heading);
+}
+
+@include media( '<=medium' ) {
+
+	.header-nav {
+
+        .button {
+            color: color(button-light);
+            background-color: color-bg(button-light);
+            border-color: color-border(button-light);
+        
+            &:hover {
+                background-color: color-bg(button-light-hover);
+                border-color: color-border(button-light-hover);
+            }
+        }
+    }
+}

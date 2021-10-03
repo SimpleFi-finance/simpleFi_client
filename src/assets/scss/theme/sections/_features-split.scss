@@ -1,0 +1,19 @@
+@include media( '<=medium' ) {
+
+    .features-split {
+
+        .split-wrap {
+    
+            &.invert-mobile {
+    
+                .split-item {
+    
+                    .split-item-image[class*=illustration-] {
+                        // Give more padding to images with illustration
+                        margin-bottom: 40px;
+                    }
+                }
+            }
+        }
+    }
+}
