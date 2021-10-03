@@ -16,7 +16,7 @@
 
 // Hero illustration
 .illustration-section-01::after {
-	@include illustration('illustration-section-01.svg', 100%, 778px, top);
+	@include illustration('dashboardSketch.png', 100%, 100%, top);
 }
 
 // Hero illustration v2
@@ -61,13 +61,13 @@
 }
 
 // Behind features split image
-.illustration-element-01::after {
-	@include illustration('illustration-element-01.svg', 200%, 200%);
-}
+// .illustration-element-01::after {
+// 	@include illustration('oblongLeftLarge.svg', 100%, 100%);
+// }
 
-.illustration-element-02::after {
-	@include illustration('illustration-element-02.svg', 200%, 200%);
-}
+// .illustration-element-02::after {
+// 	@include illustration('oblongRightLarge.svg', 100%, 100%);
+// }
 
 // Behind team
 .illustration-element-03::after {
