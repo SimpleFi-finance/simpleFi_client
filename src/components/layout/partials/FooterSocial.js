@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import {GithubLogo, DiscordLogo, TelegramLogo, TwitterLogo, LinkedinLogo} from '../../../assets/socials';
+import {GithubLogo, DiscordLogo, TwitterLogo} from '../../../assets/socials';
 
 const FooterSocial = ({
   className,
@@ -31,16 +31,6 @@ const FooterSocial = ({
         <li>
           <a href="https://github.com/SimpleFi-finance/">
             <GithubLogo style={{width: 32, height: 32 }} />
-          </a>
-        </li>
-        <li>
-          <a href="https://t.me/joinchat/N7ShvG5lsAwyZmM0">
-            <TelegramLogo style={{width: 32, height: 32 }} />
-          </a>
-        </li>
-        <li>
-          <a href="https://www.linkedin.com/company/simplefi-finance/">
-            <LinkedinLogo style={{width: 32, height: 32 }} />
           </a>
         </li>
       </ul>
