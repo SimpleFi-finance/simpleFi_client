@@ -17,7 +17,7 @@
 // Hero illustration
 //@mixin illustration($file, $width, $height, $vpos: null, $hoffset: null, $voffset: null)
 .illustration-section-01::after {
-	@include illustration('dashboardSketch3.png', 100%, 100%, top, 650px, -120px);
+	@include illustration('dashboardSketch.png', 100%, 100%, top, 500px, -35px);
 }
 
 // Hero illustration v2

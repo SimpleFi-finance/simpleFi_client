@@ -72,10 +72,10 @@ class HeroSplit extends React.Component {
                   <h1 className="mt-0 mb-16 reveal-from-top" data-reveal-delay="150">
                     DeFi made simple
                   </h1>
-                  <p className="mt-0 mb-32 reveal-from-top" data-reveal-delay="300">
+                  <p className="mt-32 mb-32 reveal-from-top" data-reveal-delay="300">
                     Everything you need to make better investments in decentralized finance
                   </p>
-                  <div className="reveal-from-top" data-reveal-delay="450">
+                  <div className="mt-16 reveal-from-top" data-reveal-delay="450">
                     <Button tag="a" color="primary" wideMobile disabled>
                       Enter Dashboard
                     </Button>
