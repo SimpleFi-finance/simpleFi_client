@@ -93,7 +93,7 @@ class HeroSplit extends React.Component {
 // inline style
 const inlineCss = {
   alignItems: 'flex-start',
-  minHeight: '492px'
+  minHeight: '450px'
 }
 
 const inlineStyle = function () {
