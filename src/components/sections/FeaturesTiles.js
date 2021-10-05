@@ -45,7 +45,7 @@ class FeaturesTiles extends React.Component {
 
     const sectionHeader = {
       title: 'Easy integration',
-      paragraph: 'Our open infrastructure makes it easy for DeFi developers to integrate with SimpleFi. Give your users access to powerful analytics without waiting for a centralised team to feature your protocol.'
+      paragraph: 'Our open infrastructure makes it easy for DeFi developers to build on SimpleFi. Give your users powerful analytics without waiting for a centralised team to integrate your protocol.'
     };
 
     return (
