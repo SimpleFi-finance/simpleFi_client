@@ -97,6 +97,10 @@
 			}
 		}
 
+    .split-item-special {
+      margin-bottom: 100px;
+    }
+
 		&:not(.invert-desktop) .split-item:nth-child(even),
 		&.invert-desktop .split-item:nth-child(odd) {
 			justify-content: flex-end;
