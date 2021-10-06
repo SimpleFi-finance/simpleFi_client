@@ -26,6 +26,13 @@
 	}
 }
 
+@include media( '<=medium' ) {
+
+  .partner-logo {
+    width: 110px;
+  }
+}
+
 @include media( '>medium' ) {
 
 	.clients {
