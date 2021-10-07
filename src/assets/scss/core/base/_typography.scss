@@ -66,6 +66,10 @@ small,
 	@include font-size(xxs);
 }
 
+p {
+	font-size: 1rem;
+}
+
 figcaption {
 	@include font-size(figcap);
 	@include font-weight(figcap);
