@@ -45,8 +45,17 @@
 		.split-item {
 
 			.split-item-content {
+        margin-top: 25px;
 				margin-bottom: $split-item--inner-padding-v_mobile;
 			}
+
+      .split-item-middle-mobile {
+        margin-top: 110px;
+      }
+
+      .split-item-last-mobile {
+        margin-top: 70px;
+      }
 		}
 
 		&.invert-mobile {
@@ -96,6 +105,10 @@
 				min-width: ($container--width-sm / 2) - $split-item-image--padding-h;
 			}
 		}
+
+    .split-item-special {
+      margin-top: 80px;
+    }
 
 		&:not(.invert-desktop) .split-item:nth-child(even),
 		&.invert-desktop .split-item:nth-child(odd) {

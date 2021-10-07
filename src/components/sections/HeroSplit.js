@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { SectionSplitProps } from '../../utils/SectionProps';
 import Button from '../elements/Button';
+import Image from '../elements/Image';
 
 const propTypes = {
   ...SectionSplitProps.types
@@ -65,25 +66,26 @@ class HeroSplit extends React.Component {
         className={outerClasses}
       >
         <div className="container">
-          <div className={innerClasses}>
-            <div className={splitClasses}>
-              <div className="split-item" style={inlineStyle()}>
-                <div className="hero-content split-item-content center-content-mobile">
-                  <h1 className="mt-0 mb-16 reveal-from-top" data-reveal-delay="150">
-                    DeFi made simple
-                  </h1>
-                  <p className="mt-0 mb-32 reveal-from-top" data-reveal-delay="300">
-                    Everything you need to make better investments in decentralized finance
-                  </p>
-                  <div className="reveal-from-top" data-reveal-delay="450">
-                    <Button tag="a" color="primary" wideMobile disabled>
-                      Enter Dashboard
-                    </Button>
+          <div className="mobile-splash-image"></div>
+            <div className={innerClasses}>
+              <div className={splitClasses}>
+                <div className="split-item" style={inlineStyle()}>
+                  <div className="hero-content split-item-content center-content-mobile">
+                    <h1 className="mt-0 mb-16 reveal-from-top" data-reveal-delay="150">
+                      DeFi made simple
+                    </h1>
+                    <p className="mt-32 mb-32 reveal-from-top" data-reveal-delay="300">
+                      Everything you need to make better investments in decentralized finance
+                    </p>
+                    <div className="mt-16 reveal-from-top" data-reveal-delay="450">
+                      <Button tag="a" color="primary" wideMobile disabled>
+                        Enter Dashboard
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </section>
     );
@@ -93,7 +95,7 @@ class HeroSplit extends React.Component {
 // inline style
 const inlineCss = {
   alignItems: 'flex-start',
-  minHeight: '492px'
+  minHeight: '450px'
 }
 
 const inlineStyle = function () {

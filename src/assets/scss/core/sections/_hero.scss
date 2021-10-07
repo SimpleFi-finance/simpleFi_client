@@ -25,6 +25,10 @@
 	}
 }
 
+.mobile-splash-image {
+  display: none;
+}
+
 @include media( '<=medium' ) {
 
 	.hero {
@@ -49,6 +53,12 @@
 			}
 		}
 	}
+
+  .mobile-splash-image {
+    display: block;
+    height: 250px;
+  }
+
 }
 
 @include media( '>medium' ) {
