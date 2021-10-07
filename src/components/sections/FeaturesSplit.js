@@ -61,7 +61,7 @@ class FeaturesSplit extends React.Component {
           <div className={innerClasses}>
             <div className={splitClasses}>
 
-              <div className="split-item  split-item-special reveal-from-top">
+              <div className="split-item reveal-from-top">
                 <div className="split-item-content center-content-mobile">
                   <h3 className="mt-0 mb-16">
                     Track your ROI
@@ -82,7 +82,7 @@ class FeaturesSplit extends React.Component {
                     height={396} />
                   <div style={imgEvenStyle}>
                     <Image
-                      src={require('./../../assets/images/roiSketch2.png')}
+                      src={require('./../../assets/images/roiSketch.png')}
                       alt="Features split top 01"
                       width={624}
                       height={512} />
@@ -90,8 +90,8 @@ class FeaturesSplit extends React.Component {
                 </div>
               </div>
 
-              <div className="split-item reveal-from-top">
-                <div className="split-item-content center-content-mobile">
+              <div className="split-item split-item-special reveal-from-top">
+                <div className="split-item-content split-item-middle-mobile center-content-mobile">
                   <h3 className="mt-0 mb-16">
                     Invest in 1 click
                   </h3>
@@ -111,7 +111,7 @@ class FeaturesSplit extends React.Component {
                     height={512} />
                 <div style={imgOddStyle}>
                   <Image
-                    src={require('./../../assets/images/swapSketch2.png')}
+                    src={require('./../../assets/images/swapSketch.png')}
                     alt="Features split top 01"
                     width={624}
                     height={512} />
@@ -120,7 +120,7 @@ class FeaturesSplit extends React.Component {
               </div>
 
               <div className="split-item reveal-from-top">
-                <div className="split-item-content center-content-mobile">
+                <div className="split-item-content split-item-last-mobile center-content-mobile">
                   <h3 className="mt-0 mb-16">
                     Optimize your portfolio
                   </h3>
@@ -140,7 +140,7 @@ class FeaturesSplit extends React.Component {
                     height={512} />
                   <div style={imgEvenStyle}>
                     <Image
-                      src={require('./../../assets/images/optimizerSketch2.png')}
+                      src={require('./../../assets/images/optimizerSketch.png')}
                       alt="Features split top 01"
                       width={624}
                       height={512} />

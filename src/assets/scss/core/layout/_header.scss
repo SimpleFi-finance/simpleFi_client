@@ -132,6 +132,10 @@
 			}
 		}
 	}
+
+  .mobile-header-logo {
+    width: 160px;
+  }
 }
 
 @include media( '>medium' ) {

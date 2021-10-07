@@ -20,6 +20,11 @@
 	@include illustration('dashboardSketch.png', 100%, 100%, top, 500px, -35px);
 }
 
+// Additional mobile illustration
+.mobile-splash-image::after{
+  @include illustration('dashboardSketch.png', 130%, 130%, top, 100px, 10px);
+}
+
 // Hero illustration v2
 .illustration-section-02::after {
 	@include illustration('illustration-section-02.svg', 100%, 778px, top);
