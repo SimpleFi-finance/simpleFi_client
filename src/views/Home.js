@@ -4,7 +4,6 @@ import Clients from '../components/sections/Clients';
 import FeaturesSplit from '../components/sections/FeaturesSplit';
 import FeaturesTiles from '../components/sections/FeaturesTiles';
 import Cta from '../components/sections/Cta';
-import Input from '../components/elements/Input';
 
 class Home extends React.Component {
   render() {
