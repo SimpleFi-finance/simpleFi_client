@@ -61,7 +61,7 @@ class Cta extends React.Component {
                 Sign up for early access
               </h3>
             </div>
-            <div className="cta-action">
+            <div className="cta-action" ref={this.props.accessRef}>
               <WaitlistForm/>
             </div>
           </div>

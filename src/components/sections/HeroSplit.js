@@ -78,8 +78,8 @@ class HeroSplit extends React.Component {
                       Everything you need to make better investments in decentralized finance
                     </p>
                     <div className="mt-16 reveal-from-top" data-reveal-delay="450">
-                      <Button tag="a" color="primary" wideMobile disabled>
-                        Enter Dashboard
+                      <Button tag="a" color="primary" wideMobile onClick={() => this.props.executeScroll()}>
+                        Join waitlist
                       </Button>
                     </div>
                   </div>
