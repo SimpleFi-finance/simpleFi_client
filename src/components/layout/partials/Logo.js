@@ -18,7 +18,7 @@ const Logo = ({
       {...props}
       className={classes}
     >
-      <h1 className="m-0">
+      <h1 className="m-0 is-revealed">
         <Link to="/">
           <Image
             src={require('./../../../assets/images/logoSimplefiLongBlue.png')}

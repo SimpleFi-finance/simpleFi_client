@@ -11,6 +11,7 @@ const Logo = ({
   const classes = classNames(
     'brand',
     'mobile-header-logo',
+    'is-revealed',
     className
   );
 
