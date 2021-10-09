@@ -93,6 +93,7 @@ class Header extends React.Component {
           <div className={
             classNames(
               'site-header-inner',
+              'is-revealed',
               bottomDivider && 'has-bottom-divider'
             )}>
             <MobileHeaderLogo />
@@ -112,16 +113,16 @@ class Header extends React.Component {
                   ref={this.nav}
                   className={
                     classNames(
-                      'header-nav',
+                      'header-nav is-revealed',
                       this.state.isActive && 'is-active'
                     )}>
-                  <div className="header-nav-inner">
+                  <div className="header-nav-inner is-revealed">
                     <ul className={
                       classNames(
-                        'list-reset text-xxs',
+                        'list-reset text-xxs is-revealed',
                         navPosition && `header-nav-${navPosition}`
                       )}>
-                      <li>
+                      <li className='is-revealed'>
                         <a href="https://docs.simplefi.finance" onClick={this.closeMenu}  target="_blank" rel="noopener noreferrer">Documentation</a>
                       </li>
                       <li>
