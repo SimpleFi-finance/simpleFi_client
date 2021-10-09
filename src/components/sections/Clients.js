@@ -26,7 +26,7 @@ class Clients extends React.Component {
     } = this.props;
 
     const outerClasses = classNames(
-      'clients section reveal-fade',
+      'clients section reveal-fade is-revealed',
       topOuterDivider && 'has-top-divider',
       bottomOuterDivider && 'has-bottom-divider',
       hasBgColor && 'has-bg-color',
@@ -35,7 +35,7 @@ class Clients extends React.Component {
     );
 
     const innerClasses = classNames(
-      'clients-inner section-inner',
+      'clients-inner section-inner is-revealed',
       topDivider && 'has-top-divider',
       bottomDivider && 'has-bottom-divider'
     );
@@ -49,11 +49,11 @@ class Clients extends React.Component {
           <div
             className={innerClasses}
           >
-            <p className="mb-32">
+            <p className="mb-32 is-revealed">
               Ecosystem partners and integrations
             </p>
             <ul className="list-reset" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}>
-              <li className="reveal-rotate-from-left partner-logo">
+              <li className="reveal-rotate-from-left partner-logo is-revealed">
                 <a href="https://curve.fi/" target="_blank" rel="noopener noreferrer">
                   <Image
                     src={require('./../../assets/integrations/curve_logo.png')}
@@ -62,7 +62,7 @@ class Clients extends React.Component {
                     height={30} />
                 </a>
               </li>
-              <li className="reveal-rotate-from-left partner-logo" data-reveal-delay="150">
+              <li className="reveal-rotate-from-left partner-logo is-revealed" data-reveal-delay="150">
                 <a href="https://mstable.org/" target="_blank" rel="noopener noreferrer">
                   <Image
                     src={require('./../../assets/integrations/MTA_logo.png')}
@@ -71,7 +71,7 @@ class Clients extends React.Component {
                     height={30} />
                 </a>
               </li>
-              <li className="reveal-rotate-from-left partner-logo" data-reveal-delay="300">
+              <li className="reveal-rotate-from-left partner-logo is-revealed" data-reveal-delay="300">
                 <a href="https://sushi.com/" target="_blank" rel="noopener noreferrer">
                   <Image
                     src={require('./../../assets/integrations/SUSHI_logo.png')}
@@ -80,7 +80,7 @@ class Clients extends React.Component {
                     height={30} />
                 </a>
               </li>
-              <li className="reveal-rotate-from-left partner-logo" data-reveal-delay="450">
+              <li className="reveal-rotate-from-left partner-logo is-revealed" data-reveal-delay="450">
                 <a href="https://thegraph.com/" target="_blank" rel="noopener noreferrer">
                   <Image
                     src={require('./../../assets/partnerships/THEGRAPH_logo.png')}
@@ -91,7 +91,7 @@ class Clients extends React.Component {
                   />
                 </a>
               </li>
-              <li className="reveal-rotate-from-left partner-logo" data-reveal-delay="600">
+              <li className="reveal-rotate-from-left partner-logo is-revealed" data-reveal-delay="600">
                 <a href="https://uniswap.org/" target="_blank" rel="noopener noreferrer">
                   <Image
                     src={require('./../../assets/partnerships/uniswap_pink.png')}
@@ -100,7 +100,7 @@ class Clients extends React.Component {
                     height={30} />
                 </a>
               </li>
-              <li className="reveal-rotate-from-left partner-logo" data-reveal-delay="600">
+              <li className="reveal-rotate-from-left partner-logo is-revealed" data-reveal-delay="600">
                 <a href="https://stakedao.org/" target="_blank" rel="noopener noreferrer">
                   <Image
                     src={require('./../../assets/integrations/STAKEDAO-logo.png')}
@@ -109,7 +109,7 @@ class Clients extends React.Component {
                     height={30} />
                 </a>
               </li>
-              <li className="reveal-rotate-from-left partner-logo" data-reveal-delay="600">
+              <li className="reveal-rotate-from-left partner-logo is-revealed" data-reveal-delay="600">
                 <a href="https://rari.capital/" target="_blank" rel="noopener noreferrer">
                   <Image
                     src={require('./../../assets/integrations/RARI_logo.png')}

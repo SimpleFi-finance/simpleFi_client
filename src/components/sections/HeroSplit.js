@@ -48,7 +48,7 @@ class HeroSplit extends React.Component {
     );
 
     const innerClasses = classNames(
-      'hero-inner section-inner',
+      'hero-inner section-inner is-revealed',
       topDivider && 'has-top-divider',
       bottomDivider && 'has-bottom-divider'
     );
@@ -70,16 +70,16 @@ class HeroSplit extends React.Component {
             <div className={innerClasses}>
               <div className={splitClasses}>
                 <div className="split-item" style={inlineStyle()}>
-                  <div className="hero-content split-item-content center-content-mobile">
-                    <h1 className="mt-0 mb-16 reveal-from-top" data-reveal-delay="150">
+                  <div className="hero-content split-item-content center-content-mobile is-revealed">
+                    <h1 className="mt-0 mb-16 reveal-from-top is-revealed" data-reveal-delay="150">
                       DeFi made simple
                     </h1>
-                    <p className="mt-32 mb-32 reveal-from-top" data-reveal-delay="300">
+                    <p className="mt-32 mb-32 reveal-from-top is-revealed" data-reveal-delay="300">
                       Everything you need to make better investments in decentralized finance
                     </p>
-                    <div className="mt-16 reveal-from-top" data-reveal-delay="450">
-                      <Button tag="a" color="primary" wideMobile disabled>
-                        Enter Dashboard
+                    <div className="mt-16 reveal-from-top is-revealed" data-reveal-delay="450">
+                      <Button tag="a" color="primary" wideMobile onClick={() => this.props.executeScroll()}>
+                        Join waitlist
                       </Button>
                     </div>
                   </div>
