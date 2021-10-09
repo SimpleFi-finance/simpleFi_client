@@ -18,7 +18,11 @@ const propTypes = {
   size: PropTypes.string,
   placeholder: PropTypes.string,
   rows: PropTypes.number,
-  hint: PropTypes.string
+  hint: PropTypes.string,
+  id: PropTypes.string,
+  onChange: PropTypes.func,
+  autoCapitalize: PropTypes.string,
+  autoCorrect: PropTypes.string
 }
 
 const defaultProps = {
@@ -35,7 +39,8 @@ const defaultProps = {
   size: '',
   placeholder: '',
   rows: 3,
-  hint: null
+  hint: null,
+  id: '',
 }
 
 const Input = ({
@@ -54,6 +59,7 @@ const Input = ({
   placeholder,
   rows,
   hint,
+  id,
   ...props
 }) => {
 
