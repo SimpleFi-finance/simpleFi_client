@@ -78,7 +78,7 @@ class HeroSplit extends React.Component {
                       Everything you need to make better investments in decentralized finance
                     </p>
                     <div className="mt-16 reveal-from-top is-revealed" data-reveal-delay="450">
-                      <Button tag="a" color="primary" wideMobile onClick={() => window.open("https://app.simplefi.finance/", "_blank")}>
+                      <Button tag="a" color="primary" wideMobile onClick={() => window.open("https://app.simplefi.finance/", "_blank", "noopener")}>
                         Launch app
                       </Button>
                     </div>
