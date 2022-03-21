@@ -43,29 +43,29 @@ class Careers extends React.Component {
 
     const jobOpenings = [
       {
-        jobTitle: "Blockchain engineer (remote)",
-        link: "https://drive.google.com/file/d/1A_CXyDf8aLsZjSLV5UjT_7zQQ4dXtqjl/view?usp=sharing",
+        jobTitle: "Blockchain Engineer (remote)",
+        link: "https://drive.google.com/file/d/1Gc5MTI1eV_U4e3t2XWNypogVdHNLRqeg/view?usp=sharing",
       },
       {
         jobTitle: "Data Engineer (remote)",
-        link: "https://drive.google.com/file/d/1LEgFZtqfe6jM_EHG5JhhowiXm2F5GFKa/view?usp=sharing",
+        link: "https://drive.google.com/file/d/1JByob3sZVTnz8iR9-jqczFey61nAemDi/view?usp=sharing",
       },
       {
         jobTitle: "DevOps Engineer (remote)",
-        link: "https://drive.google.com/file/d/1yZk5gV2gJZz6bNcwXjcZi4zao7JPgdGk/view?usp=sharing",
+        link: "https://drive.google.com/file/d/1qVQnbUirPIQEBUm8YI0uB3G9g5lZ_3vB/view?usp=sharing",
       },
 
       {
         jobTitle: "Full Stack Developer (remote)",
-        link: "https://drive.google.com/file/d/1keRi9_amSKF22Yq8P1pPFCmNfy3DI-0J/view?usp=sharing",
+        link: "https://drive.google.com/file/d/1l2xV052LFjdBwpuUmr8EMOhA6OmBv-_I/view?usp=sharing",
       },
       {
         jobTitle: "Marketing and Community Lead (remote)",
-        link: "https://drive.google.com/file/d/1US0ruJ1g5lcPKK1if8HovmDcHTv7mndN/view?usp=sharing",
+        link: "https://drive.google.com/file/d/1xwx8lEGnYB31vhoM7pW4IOLgvc9BCpHy/view?usp=sharing",
       },
       {
         jobTitle: "Product Manager (remote)",
-        link: "https://drive.google.com/file/d/17cfVWXAD2pr7Ioo2pgBUOjGR2i4Wn7D8/view?usp=sharing",
+        link: "https://drive.google.com/file/d/1sT-tmfjO6-y1eCxVohdINX5c30fyYo49/view?usp=sharing",
       },
     ];
 
