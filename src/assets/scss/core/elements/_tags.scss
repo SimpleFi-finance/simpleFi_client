@@ -1,0 +1,28 @@
+.tags-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.tag-outer {
+  display: flex;
+  background-color: get-color(light, 3);
+  flex-direction: column;
+  margin: 20px;
+  width: 100%;
+}
+
+.tag-outer {
+  a:link,
+  a:visited,
+  a:hover,
+  a:active {
+    text-decoration: none;
+    color: get-color(dark, 2);
+  }
+}
+
+.tag-inner {
+  margin: 20px;
+}

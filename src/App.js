@@ -1,21 +1,18 @@
-import React from 'react';
-import { withRouter, Switch } from 'react-router-dom';
-import AppRoute from './utils/AppRoute';
-import ScrollReveal from './utils/ScrollReveal';
+import React from "react";
+import { withRouter, Switch } from "react-router-dom";
+import AppRoute from "./utils/AppRoute";
+import ScrollReveal from "./utils/ScrollReveal";
 
 // Layouts
-import LayoutDefault from './layouts/LayoutDefault';
-import LayoutSignin from './layouts/LayoutSignin';
+import LayoutDefault from "./layouts/LayoutDefault";
 
-// Views 
-import Home from './views/Home';
-import Login from './views/Login';
-import Signup from './views/Signup';
+// Views
+import Home from "./views/Home";
+import Careers from "./views/Careers";
 
 class App extends React.Component {
-
   componentDidMount() {
-    document.body.classList.add('is-loaded')
+    document.body.classList.add("is-loaded");
     this.refs.scrollReveal.init();
   }
 
@@ -33,13 +30,17 @@ class App extends React.Component {
         children={() => (
           <Switch>
             <AppRoute exact path="/" component={Home} layout={LayoutDefault} />
-            <AppRoute exact path="/careers" component={Home} layout={LayoutDefault} />
-            {/* <AppRoute exact path="/login" component={Login} layout={LayoutSignin} />
-            <AppRoute exact path="/signup" component={Signup} layout={LayoutSignin} /> */}
+            <AppRoute
+              exact
+              path="/careers"
+              component={Careers}
+              layout={LayoutDefault}
+            />
           </Switch>
-        )} />
+        )}
+      />
     );
   }
 }
 
-export default withRouter(props => <App {...props} />);
+export default withRouter((props) => <App {...props} />);
